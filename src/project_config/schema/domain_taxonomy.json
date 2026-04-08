@@ -1,0 +1,360 @@
+{
+  "meta": {
+    "version": "1.0",
+    "title": "Financial domain taxonomy (Level-1 knowledge anchors)",
+    "scope": "Universal banking: retail, corporate, transaction banking, global markets, investment banking, treasury, risk, and compliance as practiced at institutions such as international commercial/investment banks (e.g. Standard Chartered–style universal bank). Not limited to a single IT system or geography.",
+    "design_principle": "Level-1 domains describe **what exists in the financial world** (objects, events, measures). Legacy `system_profiles` entries (crm / trading / credit) are **deployment bundles** that cherry-pick concepts from multiple domains; they are not substitutes for this taxonomy.",
+    "level2_policy": "Level-2 themes are **illustrative** and intentionally incomplete. Extend themes as you add concepts; do not require full coverage before shipping.",
+    "future_binding": "Planned: tag each `concepts.json` entry with `primary_domain_id` (optional) and optional `theme_ids`; validate references against this file."
+  },
+  "level1_domains": [
+    {
+      "domain_id": "party_legal_relationship",
+      "title_en": "Party, legal entity & relationship network",
+      "title_zh": "参与方、法律主体与关系网络",
+      "summary": "Who transacts: natural/legal persons, roles (borrower, issuer, clearing member), group structures, beneficial ownership, LEI-style identity, distribution and RM coverage.",
+      "typical_artifacts": [
+        "party / counterparty master",
+        "legal entity & branch",
+        "group & relationship graph",
+        "party role & segment"
+      ],
+      "signal_keywords": [
+        "customer",
+        "client",
+        "party",
+        "counterparty",
+        "borrower",
+        "relationship manager",
+        "beneficial owner",
+        "group",
+        "corporate",
+        "retail",
+        "private bank"
+      ],
+      "level2_themes": [
+        {
+          "theme_id": "retail_wealth",
+          "title_zh": "零售与财富管理",
+          "notes": "Individual/HNW; RM books; optional private banking overlays.",
+          "signal_keywords": ["wealth", "private banking", "retail", "hnw"]
+        },
+        {
+          "theme_id": "corporate_institutional",
+          "title_zh": "公司与同业机构",
+          "notes": "Corporate, FI, sovereign, NBFI; often multi-entity and cross-border.",
+          "signal_keywords": ["corporate", "institutional", "wholesale", "fi client"]
+        },
+        {
+          "theme_id": "client_acquisition_lifecycle",
+          "title_zh": "客户获客与线索",
+          "notes": "Lead capture, scoring, nurture, campaign attribution; universal retail/corporate acquisition.",
+          "signal_keywords": ["lead scoring", "nurture", "drip", "conversion funnel", "campaign attribution"]
+        },
+        {
+          "theme_id": "distribution_coverage",
+          "title_zh": "分销与管户覆盖",
+          "notes": "Relationship manager coverage, portfolio assignment; wealth, corporate, and branch distribution.",
+          "signal_keywords": ["relationship manager", "rm coverage", "portfolio assignment", "管户"]
+        }
+      ]
+    },
+    {
+      "domain_id": "agreement_product_schedule",
+      "title_en": "Agreement, product & cashflow schedule",
+      "title_zh": "协议、产品与现金流条款",
+      "summary": "What is contracted: products, legal agreements, facilities, limits-as-contracts, amortisation and coupon schedules, covenants, product features (not the market quote itself).",
+      "typical_artifacts": [
+        "loan / credit facility",
+        "deposit / CASA agreement",
+        "ISDA/GMRA-style master + confirmations",
+        "product catalog & eligibility"
+      ],
+      "signal_keywords": [
+        "account",
+        "agreement",
+        "product",
+        "facility",
+        "loan",
+        "deposit",
+        "contract",
+        "limit",
+        "casa"
+      ],
+      "level2_themes": [
+        {
+          "theme_id": "lending_structured",
+          "title_zh": "授信与结构化条款",
+          "notes": "Term loan, revolver, trade finance, project finance skeletons.",
+          "signal_keywords": [
+            "term loan",
+            "revolver",
+            "trade finance",
+            "covenant",
+            "facility",
+            "loan",
+            "lending"
+          ]
+        },
+        {
+          "theme_id": "markets_product_wrapper",
+          "title_zh": "市场类产品包装",
+          "notes": "Wrappers linking client-facing product to internal books.",
+          "signal_keywords": ["structured product", "wrapper"]
+        }
+      ]
+    },
+    {
+      "domain_id": "instrument_reference_market_data",
+      "title_en": "Instrument, identifier & reference / market data",
+      "title_zh": "金融工具、标识与参考/市场数据",
+      "summary": "What is traded or referenced: securities, derivatives, FX pairs, rates, indices, listings, identifiers (ISIN etc.), calendars and static reference. Distinct from **positions** (state) and **events** (flows).",
+      "typical_artifacts": [
+        "security / instrument master",
+        "derivative definition",
+        "FX & rates curve anchors",
+        "corporate action reference"
+      ],
+      "signal_keywords": [
+        "security",
+        "bond",
+        "equity",
+        "derivative",
+        "fx",
+        "instrument",
+        "isin",
+        "listed"
+      ],
+      "level2_themes": [
+        {
+          "theme_id": "cash_equities_fi",
+          "title_zh": "现金股票与固收",
+          "notes": "Cash bonds, equities, listed instruments.",
+          "signal_keywords": ["equity", "fixed income", "bond"]
+        },
+        {
+          "theme_id": "derivatives_fx_mm",
+          "title_zh": "衍生品与资金市场工具",
+          "notes": "IRS/CCS, options, structured notes; MM instruments.",
+          "signal_keywords": ["irs", "option", "swap", "forward"]
+        }
+      ]
+    },
+    {
+      "domain_id": "transaction_event_settlement",
+      "title_en": "Transaction, market event & settlement chain",
+      "title_zh": "交易事件、市场事件与结算链路",
+      "summary": "What happened: orders and instructions, market executions, payments, settlement legs, nostro/vostro activity, corporate actions processing, lifecycle events. Immutable or append-only **facts** (contrast ledger state).",
+      "typical_artifacts": [
+        "order & execution",
+        "payment / transfer",
+        "settlement instruction & status",
+        "corporate action election / entitlement event"
+      ],
+      "signal_keywords": [
+        "payment",
+        "transfer",
+        "order",
+        "execution",
+        "settlement",
+        "transaction",
+        "interaction",
+        "case",
+        "ticket",
+        "trade",
+        "channel"
+      ],
+      "level2_themes": [
+        {
+          "theme_id": "electronic_payments",
+          "title_zh": "电子支付与清算",
+          "notes": "RTGS, ACH-style flows; cross-border payment chains.",
+          "signal_keywords": ["rtgs", "wire", "ach", "remittance"]
+        },
+        {
+          "theme_id": "markets_execution",
+          "title_zh": "市场交易执行",
+          "notes": "Brokerage, DMA, algo order lifecycle; trade booking handoff to positions.",
+          "signal_keywords": ["brokerage", "dma", "algo", "fill"]
+        },
+        {
+          "theme_id": "client_servicing_retention",
+          "title_zh": "客户服务与留存",
+          "notes": "Appointments, entitlements, reminders, churn-style servicing; not tied to a single system.",
+          "signal_keywords": ["appointment", "entitlement", "fee waiver", "churn risk", "birthday reminder"]
+        }
+      ]
+    },
+    {
+      "domain_id": "ledger_position_pnl_valuation",
+      "title_en": "Ledger, position, P&L & valuation",
+      "title_zh": "账务、头寸、损益与估值",
+      "summary": "State of books: chart of accounts, balances, sub-ledger, trading/banking book positions, accruals, marks, PV/FV, performance and P&L attribution. Bridges **events** to **reporting**.",
+      "typical_artifacts": [
+        "GL / sub-ledger balance",
+        "trading position & cost basis",
+        "accrual & amortisation schedule state",
+        "mark-to-market / model valuation output"
+      ],
+      "signal_keywords": [
+        "balance",
+        "ledger",
+        "position",
+        "valuation",
+        "mark to market",
+        "pnl",
+        "accrual"
+      ],
+      "level2_themes": [
+        {
+          "theme_id": "banking_book",
+          "title_zh": "银行账簿",
+          "notes": "Accrual accounting, NII-related balances.",
+          "signal_keywords": ["banking book", "nii", "accrual"]
+        },
+        {
+          "theme_id": "trading_book",
+          "title_zh": "交易账簿",
+          "notes": "Mark-to-market, desk positions, day P&L.",
+          "signal_keywords": ["trading book", "desk", "mark-to-market"]
+        }
+      ]
+    },
+    {
+      "domain_id": "risk_limit_rating_collateral",
+      "title_en": "Risk, limit, rating & collateral",
+      "title_zh": "风险、限额、评级与押品",
+      "summary": "How much risk and against what: credit/market/operational measures, limits and utilisation, internal/external ratings, collateral and haircut, EAD/EAD-style exposure, regulatory capital overlays (as **measures**, not raw contracts).",
+      "typical_artifacts": [
+        "exposure measure & limit headroom",
+        "rating & scoring outcome",
+        "collateral agreement & valuation",
+        "stress / scenario result (summary)"
+      ],
+      "signal_keywords": [
+        "risk",
+        "exposure",
+        "limit",
+        "rating",
+        "collateral",
+        "stress test",
+        "var",
+        "pd",
+        "lgd"
+      ],
+      "level2_themes": [
+        {
+          "theme_id": "credit_risk",
+          "title_zh": "信用风险",
+          "notes": "PD/LGD-style stacks; wholesale & retail credit.",
+          "signal_keywords": ["credit risk", "default", "npl", "exposure"]
+        },
+        {
+          "theme_id": "market_risk",
+          "title_zh": "市场风险",
+          "notes": "Sensitivities, VaR-like summaries at desk level.",
+          "signal_keywords": ["market risk", "sensitivity", "greeks"]
+        }
+      ]
+    },
+    {
+      "domain_id": "treasury_alm_funding_liquidity",
+      "title_en": "Treasury, ALM, funding & liquidity",
+      "title_zh": "司库、ALM、融资与流动性",
+      "summary": "How the firm funds itself and manages liquidity: FTP, liquidity buffers, interbank and own issuance, ALM mismatch, LCR/NSFR-style **management** views (distinct from every operational payment in transaction domain).",
+      "typical_artifacts": [
+        "liquidity position & ladder",
+        "funding deal / certificate",
+        "internal funds transfer price curve usage",
+        "HQLA inventory (conceptual)"
+      ],
+      "signal_keywords": [
+        "treasury",
+        "liquidity",
+        "funding",
+        "alm",
+        "ftp",
+        "interbank",
+        "lcr",
+        "nsfr"
+      ],
+      "level2_themes": [
+        {
+          "theme_id": "interbank_mm",
+          "title_zh": "同业与货币市场",
+          "notes": "Placements, repos at treasury level.",
+          "signal_keywords": ["interbank", "money market", "repo"]
+        },
+        {
+          "theme_id": "alm_policy",
+          "title_zh": "ALM 与转移定价",
+          "notes": "Mismatch buckets; FTP allocation concepts.",
+          "signal_keywords": ["alm", "ftp", "transfer pricing"]
+        }
+      ]
+    },
+    {
+      "domain_id": "compliance_surveillance_regulatory_reporting",
+      "title_en": "Compliance, surveillance & regulatory reporting",
+      "title_zh": "合规、监控与监管报送",
+      "summary": "How the firm stays within law and policy: KYC/AML, sanctions screening results, market conduct surveillance, regulatory returns and reconciliation to internal ledgers. Often **cross-cuts** party and transaction domains with dedicated **reporting** artefacts.",
+      "typical_artifacts": [
+        "KYC / CDD record",
+        "AML alert & case",
+        "sanctions screening outcome",
+        "regulatory report line / submission pack"
+      ],
+      "signal_keywords": [
+        "kyc",
+        "aml",
+        "cdd",
+        "sanction",
+        "compliance",
+        "regulatory",
+        "surveillance",
+        "screening"
+      ],
+      "level2_themes": [
+        {
+          "theme_id": "financial_crime",
+          "title_zh": "反洗钱与金融犯罪",
+          "notes": "Transaction monitoring, STR/SAR-style case concepts (jurisdiction-specific naming avoided).",
+          "signal_keywords": ["aml", "suspicious", "str", "monitoring", "financial crime"]
+        },
+        {
+          "theme_id": "prudential_returns",
+          "title_zh": "审慎监管报表",
+          "notes": "Capital, liquidity, large exposures — as reporting facts.",
+          "signal_keywords": ["basel", "capital adequacy", "large exposure"]
+        },
+        {
+          "theme_id": "kyc_due_diligence_screening",
+          "title_zh": "尽调与筛查作业",
+          "notes": "CDD/EDD case workflow, sanctions runs; applies across onboarding and ongoing monitoring.",
+          "signal_keywords": ["cdd case", "edd", "ubo declaration", "sanctions screening", "consent record"]
+        }
+      ]
+    }
+  ],
+  "legacy_bundle_to_domains": {
+    "description": "Non-exclusive mapping from current `system_profiles` bundle ids to primary Level-1 domains they draw from. Used for documentation and future concept tagging; not a runtime dependency for schema generation today.",
+    "crm": [
+      "party_legal_relationship",
+      "agreement_product_schedule",
+      "transaction_event_settlement",
+      "compliance_surveillance_regulatory_reporting"
+    ],
+    "trading": [
+      "instrument_reference_market_data",
+      "transaction_event_settlement",
+      "ledger_position_pnl_valuation",
+      "risk_limit_rating_collateral"
+    ],
+    "credit": [
+      "party_legal_relationship",
+      "agreement_product_schedule",
+      "risk_limit_rating_collateral",
+      "ledger_position_pnl_valuation"
+    ]
+  }
+}

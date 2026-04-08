@@ -1,0 +1,41 @@
+{
+  "description": "Normalize status-like values into canonical tokens for lifecycle checks.",
+  "rules": [
+    {
+      "table_name": "accounts",
+      "column_name": "status",
+      "canonical_values": {
+        "open": ["open", "opened"],
+        "pending": ["pending", "onboarding", "initiated"],
+        "active": ["active", "approved", "live"],
+        "dormant": ["dormant", "inactive"],
+        "frozen": ["frozen", "blocked", "hold"],
+        "closed": ["closed", "terminated"]
+      }
+    },
+    {
+      "table_name": "servicing_cases",
+      "column_name": "status",
+      "canonical_values": {
+        "open": ["open", "new"],
+        "in_progress": ["in_progress", "working", "processing"],
+        "resolved": ["resolved", "solution_provided"],
+        "closed": ["closed", "archived"]
+      }
+    },
+    {
+      "table_name": "kyc_cases",
+      "column_name": "case_status",
+      "canonical_values": {
+        "pending_doc": ["pending_doc", "doc_pending"],
+        "doc_received": ["doc_received", "document_received"],
+        "under_review": ["under_review", "reviewing"],
+        "edd_required": ["edd_required"],
+        "cdd_approved": ["cdd_approved", "approved"],
+        "kyc_active": ["kyc_active", "active"],
+        "suspended": ["suspended", "hold"],
+        "rejected": ["rejected", "declined"]
+      }
+    }
+  ]
+}

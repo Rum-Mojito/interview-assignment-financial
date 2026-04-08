@@ -1,0 +1,74 @@
+{
+  "profiles": {
+    "crm": {
+      "default_concepts": [
+        "customer",
+        "customer_segment",
+        "lead",
+        "marketing_campaign",
+        "kyc_case",
+        "customer_identification",
+        "sanctions_screening",
+        "party_relationship",
+        "employee",
+        "relationship_assignment",
+        "bank_product",
+        "account",
+        "investment_holding",
+        "external_account_link",
+        "transaction",
+        "sales_opportunity",
+        "customer_interaction",
+        "client_task",
+        "appointment",
+        "servicing_case",
+        "customer_entitlement",
+        "consent_record",
+        "audit_log",
+        "regulatory_submission"
+      ],
+      "required_concepts": [
+        "customer",
+        "account",
+        "transaction"
+      ]
+    },
+    "trading": {
+      "default_concepts": [
+        "trading_account",
+        "order",
+        "execution",
+        "position",
+        "valuation",
+        "pnl_snapshot",
+        "trading_limit",
+        "risk_alert",
+        "trade_reconciliation"
+      ],
+      "required_concepts": [
+        "trading_account",
+        "order",
+        "execution"
+      ]
+    },
+    "credit": {
+      "default_concepts": [
+        "obligor",
+        "facility",
+        "exposure",
+        "drawdown_event",
+        "repayment_event",
+        "overdue_snapshot",
+        "collection_task",
+        "asset_classification",
+        "provision_entry",
+        "collateral_link"
+      ],
+      "required_concepts": [
+        "obligor",
+        "facility",
+        "exposure"
+      ]
+    }
+  }
+}

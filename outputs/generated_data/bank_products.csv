@@ -1,0 +1,301 @@
+bank_product_id,product_name,product_category,risk_tier
+d2ea6298-a406-8504-b97a-7a6ab90864d2,Platinum Rewards Card,deposit,r2
+4f75d487-c0ab-c7eb-e71c-efec57054d5e,Junior Savings Starter,lending,r1
+7aa0d97c-d365-407b-1de7-f9cb0b0e13ce,Retail Mortgage Prime,wealth,r4
+f0978521-604f-5d12-e27e-a47e67da8839,FX Forward Contract Pack,wealth,r1
+d2dd87f6-a477-57f7-3ab3-2bb4f53d935a,Retail Mortgage Prime,wealth,r2
+ee472891-1fe4-7a10-45b0-35baa96fa2fd,Revolving Working Capital Line,deposit,r1
+6fab0eb3-7ca4-bebf-48fd-09563f375edf,Junior Savings Starter,wealth,r2
+8140ef6f-bd1e-a5c1-ea0e-45162a33c674,Step-Up Time Deposit 12M,deposit,r1
+e5544f5c-0b6f-ec37-9ac4-a15402032664,Revolving Working Capital Line,cards,r1
+cb86be51-c231-5f96-838b-95f6e34f8d51,Step-Up Time Deposit 12M,deposit,r1
+8b6726c4-27bc-97ae-d818-e37c868ba834,Step-Up Time Deposit 12M,wealth,r4
+2c4d270a-4a71-3f1d-8ec6-563befa9eb2e,Junior Savings Starter,deposit,r3
+a2317f7d-96c7-1493-0af4-41050c100dff,Step-Up Time Deposit 12M,insurance,r1
+cf81277a-0d1c-f125-9863-055306773103,Structured Deposit Series A,wealth,r2
+1e4f24db-6e3e-45a6-0385-f4087efc4ae8,Money Market Liquidity Fund,cards,r2
+60ede26e-b562-3b5f-b6e6-f76acb31099a,Custody Omnibus Service,lending,r1
+bc95cee4-c4ba-38d6-aa00-e381cf535388,FX Forward Contract Pack,wealth,r4
+2d977609-6a7f-0ff8-6373-9a5a70df636d,Custody Omnibus Service,insurance,r2
+6860a858-e0ec-bb99-520a-e619edebd44e,FX Forward Contract Pack,lending,r1
+392eeb22-da4e-e0ba-3886-b43f3ed6b583,FX Forward Contract Pack,cards,r1
+d48c83ee-0a5f-b673-591e-124fb9a9e690,Money Market Liquidity Fund,cards,r1
+12e17b6d-000f-6e3d-6971-0ccc0c660879,Classic Demand Deposit,lending,r4
+3c35e0c1-7186-94cf-a54d-eb1b04517e47,Revolving Working Capital Line,lending,r1
+62b0538c-ee07-0175-123a-34a7ecb38f74,Retail Mortgage Prime,wealth,r4
+ac4db5c5-131c-3efe-41c9-b06aa3793fed,Custody Omnibus Service,deposit,r2
+c24a36ae-a747-28b0-4c98-e0fb71cd8b06,Platinum Rewards Card,wealth,r5
+565e6037-9ea5-492c-bf29-168df2ee9ebd,Step-Up Time Deposit 12M,lending,r1
+6ef1093f-1515-c7ad-8ab9-8517faa93ca7,Wealth Dual-Currency Note,deposit,r1
+3da66942-2958-2a71-c5ec-80a80f176900,Retail Mortgage Prime,lending,r2
+cc7522a0-c12d-3b0b-b7f8-2ae124b00d65,Classic Demand Deposit,cards,r3
+57b2eb75-f2be-7ea8-d6a1-25edb2c9567a,Money Market Liquidity Fund,wealth,r3
+bfe56cee-1796-5fad-a975-44b67553afb7,Trade Finance Import LC,deposit,r4
+55f04fea-145b-d663-b980-def0e786003f,Classic Demand Deposit,wealth,r1
+4a357ed0-899c-ed20-0521-81499905fce1,Money Market Liquidity Fund,wealth,r1
+a13efe82-054a-94f2-76e6-e5694111d05b,Step-Up Time Deposit 12M,cards,r4
+fe6fbadf-ca9f-da3c-d3b5-070770f44b29,Structured Deposit Series A,lending,r5
+b7aeaaf8-1fff-5733-e0fa-c7ea399e14f8,Platinum Rewards Card,cards,r2
+52e956eb-de90-5148-6371-105a27acc111,Money Market Liquidity Fund,insurance,r1
+ed247419-b7f5-dd8e-bb59-0dcd78397db4,Money Market Liquidity Fund,lending,r1
+3fa3c763-57a9-f0c2-cb2e-ef2acb66b30a,Retail Mortgage Prime,deposit,r2
+5a752003-222e-2ec0-ba76-aa4c79e22dda,Money Market Liquidity Fund,wealth,r4
+7e29bfa9-97f8-92c8-df0e-0c6ec19caebc,Retail Mortgage Prime,wealth,r1
+068b6a12-43a1-513a-b0cd-98d46232e13a,Custody Omnibus Service,deposit,r1
+ed63f381-ee4e-23c8-19af-66c205ac692f,Custody Omnibus Service,deposit,r2
+521d80aa-9b48-cec3-ee8e-843fdc23471a,Retail Mortgage Prime,deposit,r2
+c683b68e-5924-601d-ec93-17274b0069bf,Step-Up Time Deposit 12M,insurance,r1
+9f552bef-30b1-2923-0518-aeaccb3e43ab,Wealth Dual-Currency Note,insurance,r1
+8a3f224d-dbd7-e06d-917f-7fe2a22ee617,Custody Omnibus Service,insurance,r1
+b49b1b84-57cc-efca-768d-18f25caf4dc9,Wealth Dual-Currency Note,wealth,r1
+08f56c0e-0520-e73a-2331-f354ffeb1b07,Junior Savings Starter,cards,r2
+8a564d24-a3c3-0373-0b6a-3dcba5fd1036,Wealth Dual-Currency Note,cards,r1
+5422f3f7-b658-2f82-c0ea-7ea0d6f7b114,Step-Up Time Deposit 12M,cards,r2
+e7fbb018-175d-3830-193e-ca63f195b8f9,Structured Deposit Series A,cards,r2
+f1650e6b-d37a-c6f8-9344-f7e5184f044d,Structured Deposit Series A,cards,r2
+5fd844de-9bc3-3d68-6cf1-a117f6176fe1,Bancassurance Term Life,wealth,r1
+ff3a4a9b-d7ca-fa45-533a-205ff0945903,Trade Finance Import LC,deposit,r4
+8db8162f-9a0e-bbfb-1b2f-2d792fa91297,Trade Finance Import LC,wealth,r1
+96b3487a-ab14-b695-e2d5-206ea6a0ce73,Custody Omnibus Service,other,r3
+a91e5423-dda4-1d39-8a13-5c9832d2526d,Trade Finance Import LC,deposit,r1
+89d217fe-7d6a-e6e3-8a83-b97e78a6204d,Retail Mortgage Prime,deposit,r1
+cbdecd63-dedf-e305-a4e9-b28bb3d923a1,Platinum Rewards Card,lending,r1
+fe83a2c9-af9e-dd42-6fa0-c4e9d40a29b3,Retail Mortgage Prime,deposit,r2
+02e243e2-5fd6-3419-57bb-15c44fb722a9,FX Forward Contract Pack,deposit,r3
+aa5216bf-ddd4-5fb5-8318-7e66e22908be,Private Banking Cash Sweep,wealth,r3
+c90694c5-994f-bc1b-b021-02d9b8fe447b,Platinum Rewards Card,deposit,r1
+94399b2e-da31-7f78-e451-81957570303b,Structured Deposit Series A,deposit,r4
+71c42631-0bc4-f571-3a41-98c50709e1fb,FX Forward Contract Pack,insurance,r1
+c4346932-89f3-aba9-d357-7c40a4d246ad,Platinum Rewards Card,cards,r4
+bd1b6389-b04b-ffb4-1536-1082a7d858b4,Step-Up Time Deposit 12M,deposit,r1
+1ce5e2de-a952-5181-5c38-5e9afcc5f305,Money Market Liquidity Fund,cards,r2
+a80bd4dc-cda5-1ad7-c3f6-c71d7e7b8c9f,Platinum Rewards Card,deposit,r4
+82c72b1f-511f-2d14-35e8-8e1db33ff228,Junior Savings Starter,deposit,r4
+71a527c3-e730-5aff-8d12-5687316d48c8,FX Forward Contract Pack,lending,r2
+8f2509fc-d41a-c0dd-f955-508b5bb48354,Retail Mortgage Prime,wealth,r3
+f7fb7b85-3d6b-70b4-d77b-d99aa68e02b2,Step-Up Time Deposit 12M,deposit,r3
+083be400-a1ed-a011-9306-d70588ae6e52,Platinum Rewards Card,lending,r4
+740d9480-970f-16c6-82d1-3b4fd1d6c871,Wealth Dual-Currency Note,lending,r1
+d17f6363-cd4d-937d-3eea-4f1277560426,Retail Mortgage Prime,lending,r2
+dd7dc454-fa63-6f30-6b62-91d48bf67ef7,Junior Savings Starter,lending,r1
+1eaee3fa-6c25-a4f1-faa0-90c64e9f377e,Private Banking Cash Sweep,wealth,r4
+2e14f970-b16b-629b-28b2-3bb5e3bab937,FX Forward Contract Pack,deposit,r4
+0a76406c-a725-3a3a-c9d4-7a8e7f203795,Junior Savings Starter,lending,r3
+776e15c6-d70a-cb05-1fc7-981af41d807f,Structured Deposit Series A,lending,r4
+bfe819af-4aa3-29b3-d681-909581c40597,Custody Omnibus Service,wealth,r1
+60cea990-76f1-7add-fa92-ffbf21dc4d14,FX Forward Contract Pack,wealth,r4
+af5b2258-9ee6-fea6-2065-d20ec7224d8d,FX Forward Contract Pack,lending,r1
+e6267fd1-ce17-1ef5-6597-54cfc9664638,Classic Demand Deposit,cards,r1
+b661d000-b28f-5851-ed16-c1779004c123,Revolving Working Capital Line,wealth,r3
+d9635713-7fb8-59a4-4a5e-4e7672ac9fb4,Custody Omnibus Service,cards,r3
+df943b74-298b-a189-4532-0954f1c6f311,Retail Mortgage Prime,cards,r1
+fc7600cc-d153-f7e6-f253-4a03d6dca933,Trade Finance Import LC,deposit,r3
+64936d43-2400-3652-38f8-94599ef97b15,Platinum Rewards Card,lending,r1
+13eb7720-5ef7-c617-3ee9-acb294a22241,Private Banking Cash Sweep,wealth,r4
+f9070ab4-beca-d93f-1552-4d02b269516b,Trade Finance Import LC,deposit,r1
+ddcb0db4-6d6f-3a76-3cf5-d0fb34416a62,Structured Deposit Series A,cards,r1
+6249713a-bbef-ded0-1ed2-a2ea03962690,Private Banking Cash Sweep,other,r2
+72e92ef9-d5b1-c07c-b13f-33216d27c053,Revolving Working Capital Line,deposit,r2
+ebefa047-e430-fc2b-a84a-8845ba6e18f7,Private Banking Cash Sweep,insurance,r1
+dd0bcbdb-dbfe-c937-863c-e4ef18190054,Green Loan Facility,wealth,r3
+1b396424-072c-f53f-42c2-09f04b3b3479,Step-Up Time Deposit 12M,cards,r2
+cfa01a1a-3e42-7dd3-aabc-c6b679f20bc7,Retail Mortgage Prime,insurance,r1
+9615f959-d6f2-6f2b-6591-4480b935ad32,Wealth Dual-Currency Note,wealth,r1
+f19ffd60-9667-acd3-48c3-7f5ca601cd2b,Classic Demand Deposit,insurance,r2
+e5f96746-d2a9-29e7-1644-4f8eb1c980be,Green Loan Facility,deposit,r3
+739e34d5-2741-8adf-e68f-adceebe305bb,Classic Demand Deposit,lending,r1
+af8559a9-e49f-22dd-a551-5a1cbf94814c,Wealth Dual-Currency Note,insurance,r3
+8bb1f972-5d88-ed34-2e3b-7363edfe6b94,Revolving Working Capital Line,wealth,r2
+6d9738be-c3ae-daea-f271-e62acdbe92f0,Structured Deposit Series A,lending,r2
+3009531a-0647-e2cd-e2a8-dcb10f29baae,Private Banking Cash Sweep,cards,r2
+06e152d3-84c3-e6d3-9fef-6a1eb2dfaa58,FX Forward Contract Pack,wealth,r4
+6c88a68c-8f83-2a8a-bd42-f991a0e2a2b3,Classic Demand Deposit,cards,r3
+590c77aa-c5be-503d-7916-9350d9a3a6c6,Bancassurance Term Life,lending,r3
+d7bc4080-77d5-d415-b305-59d3a819aa66,Platinum Rewards Card,deposit,r4
+d3836861-324a-3214-55cb-ea2278dc1e87,Structured Deposit Series A,deposit,r2
+c95712d1-8706-c0e6-fefd-958f66f76ba5,Wealth Dual-Currency Note,cards,r1
+37df8be1-4270-c2e5-021b-72d682c8f276,Wealth Dual-Currency Note,wealth,r1
+9a20e741-82e5-95d0-8190-3cca8cbe11d5,Structured Deposit Series A,deposit,r2
+93676b91-7761-035a-f8ed-69443788b3dd,Private Banking Cash Sweep,wealth,r2
+c3a947f3-f635-f607-3ddc-bbb11e93d608,Green Loan Facility,wealth,r4
+b9e07dd1-54a9-1c5d-fcff-5a1aa7d11c9b,FX Forward Contract Pack,deposit,r2
+833c7d80-cbb4-657a-03b3-c47321c2250d,Wealth Dual-Currency Note,deposit,r2
+23c4183d-fc8f-6c16-bb5b-ed7f0ab5c26b,Wealth Dual-Currency Note,deposit,r1
+863cf4cd-2e73-b573-3795-734f8fc80735,Junior Savings Starter,cards,r1
+bc02255a-f021-f21b-1e05-e057a158625c,Bancassurance Term Life,cards,r1
+3a9cb455-dc08-ed3b-1ae1-f66ef96ffa22,FX Forward Contract Pack,deposit,r3
+68049505-dec3-59ad-8248-f88a7dc8686a,Retail Mortgage Prime,deposit,r2
+a8f8fa2f-cc8c-f35c-c230-e5f5c618bf80,Wealth Dual-Currency Note,lending,r3
+488fdc29-ce3d-1203-1409-6e9561959054,Revolving Working Capital Line,deposit,r2
+db1394e7-b438-6a0e-8f48-64212e141e45,Money Market Liquidity Fund,cards,r3
+fdf13ca5-6d3a-1522-50ba-824b0152c45a,Structured Deposit Series A,lending,r3
+5b009854-a6bb-9eb4-5a6e-fc559a8812e0,Structured Deposit Series A,lending,r5
+de137f76-9625-53b5-a63e-b5544cfc7834,Custody Omnibus Service,lending,r1
+bd2af981-cb4a-d8ca-b164-4405f6062d6f,Retail Mortgage Prime,wealth,r4
+fa952a88-0430-74af-fa00-44b8b27d090a,Revolving Working Capital Line,deposit,r1
+ce2199fb-bdf0-9192-2242-fc404ece9766,Classic Demand Deposit,wealth,r2
+073cef92-78b7-9ada-432e-513e80b1fff3,Junior Savings Starter,lending,r3
+b32a3c8a-3c2a-e6ac-960d-19c6689a5e12,Retail Mortgage Prime,deposit,r5
+cb969228-69e7-4d88-dfdb-685babff4777,Revolving Working Capital Line,wealth,r4
+99289347-05ff-c5a3-b7eb-08b9a10c1307,Junior Savings Starter,insurance,r1
+ef78da5a-3f3e-c0e6-c594-4e286952d84d,Bancassurance Term Life,deposit,r3
+0ccf68b4-9d89-fd71-03e8-b33820a41e59,Retail Mortgage Prime,deposit,r2
+64004850-aeae-3f46-6705-aa2db929906c,Junior Savings Starter,insurance,r2
+6cd5ffd2-30f4-6cf6-ffcd-ea00dffd5f02,Money Market Liquidity Fund,deposit,r1
+522d2649-5e1f-caf1-b357-8d6d2f1adeb5,Step-Up Time Deposit 12M,lending,r3
+bedfeee2-0e63-6fc2-da9a-db6406b78256,Classic Demand Deposit,wealth,r5
+d1bed090-d5b6-8681-a262-b9b04408a54a,Wealth Dual-Currency Note,lending,r5
+0b596ddb-b189-467b-9cf7-f11b09848bbb,Platinum Rewards Card,deposit,r1
+ddcc44f9-5b6a-b4c6-5cb1-eccd40eb34d7,Green Loan Facility,wealth,r4
+7c80d4f0-f702-abeb-e9a8-c67aba0b64d7,Step-Up Time Deposit 12M,deposit,r5
+3c9ef494-2ed5-744d-430d-841b36a5f0c5,Platinum Rewards Card,wealth,r1
+283d52df-3eb1-742f-d235-acb2f559bd66,Classic Demand Deposit,wealth,r3
+ba1cf505-b735-ed4f-d172-9b6379215e96,Revolving Working Capital Line,deposit,r4
+559e58b3-59c7-b004-5bcb-8a3e6764e0a5,Structured Deposit Series A,wealth,r3
+d4ca9733-2dff-cf8b-5096-c8f3dcddc5a0,Money Market Liquidity Fund,deposit,r2
+e31d94d1-ffc6-6658-d4cb-767f510f2963,Wealth Dual-Currency Note,insurance,r3
+5804bf6a-c488-253a-51d1-07f105e91fed,Green Loan Facility,deposit,r1
+f5c79099-72ea-af3d-7d0b-6d4e2346a540,Structured Deposit Series A,wealth,r1
+5e4fd306-e14c-6d31-7639-185a4a36a755,Money Market Liquidity Fund,deposit,r4
+8088db5d-7445-a83d-2ed1-9f48bc8a6de6,Money Market Liquidity Fund,lending,r3
+f8af6ec0-c78a-6e1d-46ec-ddc1977d47e2,Retail Mortgage Prime,deposit,r1
+6c143754-b3ee-4b69-8399-e97c53e14d02,Revolving Working Capital Line,insurance,r1
+ca4294ea-32d6-67ba-cbd1-4b03ba09a4c9,Retail Mortgage Prime,deposit,r2
+fd5a149f-8021-c350-0da7-3629eef34ecb,Private Banking Cash Sweep,deposit,r2
+c2e23e02-c275-6d38-bc13-05500797bbcb,Trade Finance Import LC,wealth,r3
+cf9cec84-f0aa-816b-1c88-024d0d29fb86,Platinum Rewards Card,wealth,r1
+486e3391-6075-1eca-7fe4-205d360e364d,Wealth Dual-Currency Note,lending,r2
+772cd215-71a5-d8e3-7760-9e8e0c0030e8,Green Loan Facility,wealth,r1
+97dc0188-7b8e-11fd-d188-a7dc458c74aa,Platinum Rewards Card,deposit,r2
+c1ce3e9b-5bb7-97b4-f721-01fa0a46ef1f,Trade Finance Import LC,insurance,r1
+0197f14e-5374-058c-268c-bec414f9cb7b,Retail Mortgage Prime,insurance,r2
+97e64d7c-14e1-4409-c3bd-06fe73e760a1,Trade Finance Import LC,insurance,r5
+c095560f-b634-b60d-8f7f-f503aff58ffa,Retail Mortgage Prime,wealth,r1
+2928758d-f26f-0aa0-ff30-08cadff9b562,Private Banking Cash Sweep,lending,r2
+1b79b7e1-2cd0-71be-c40e-55b196f65dd3,Custody Omnibus Service,deposit,r5
+1b460f4e-6125-d981-7d2a-aa8f230a81af,Step-Up Time Deposit 12M,lending,r4
+9a851f87-a217-940c-4884-19f20a0d1b1d,Trade Finance Import LC,deposit,r4
+c5fbc558-0ebf-5c9c-327b-6f79c413c4c6,Bancassurance Term Life,lending,r1
+96142122-7ab9-49bd-76cd-89621d18ec36,Trade Finance Import LC,deposit,r2
+07ce364a-57a3-1b5c-d402-57cd5b1c2ba8,Revolving Working Capital Line,deposit,r2
+8a2b0727-bc12-a2c2-bd3b-3a5fbe539b56,Platinum Rewards Card,deposit,r3
+9bc42aa8-5a7e-3287-5efa-6f2f2463ad53,Green Loan Facility,lending,r1
+2c1b141b-3805-d884-36d6-502ab95726d4,Bancassurance Term Life,wealth,r2
+8d6675ed-617c-189e-0e47-34fd01ce4318,Step-Up Time Deposit 12M,wealth,r2
+927ca8fe-dbd1-1456-bad4-d6e53e31fc7e,Trade Finance Import LC,other,r1
+e2094748-1451-4211-813e-918bc8b04551,Step-Up Time Deposit 12M,deposit,r1
+6060f9d0-f4b1-075f-8fb3-27c0880bf747,FX Forward Contract Pack,lending,r1
+5b4d6a6b-3db0-cd4b-e877-39bdeb5053a8,Junior Savings Starter,deposit,r3
+9c586a96-60dc-abdf-619b-9060d2b9240a,Revolving Working Capital Line,insurance,r1
+a44f52f8-4e88-d575-8911-e7b9065afe49,Step-Up Time Deposit 12M,insurance,r1
+2416abfd-9028-72f5-1d73-baa026189715,Platinum Rewards Card,deposit,r1
+812e015b-d89f-2590-4212-78f3ad54ac5c,Retail Mortgage Prime,lending,r1
+a24c4f5d-705f-f899-f85b-c6ffce4fc0db,Wealth Dual-Currency Note,wealth,r4
+65c8fb68-fb59-2d4a-25c0-a4f29628b6e8,Platinum Rewards Card,deposit,r3
+d3f0f8a1-28d5-54e0-45e6-f9ef0d6c1c15,Bancassurance Term Life,lending,r2
+ba1470ea-053a-41d6-3ea0-c4fc33830cb6,Bancassurance Term Life,cards,r3
+817c3189-f383-e8f8-e8a4-868b678562d6,Private Banking Cash Sweep,wealth,r1
+e533eb11-c0bb-59c0-c993-86361c6f4d4a,Structured Deposit Series A,wealth,r2
+e57dc4de-9db6-1905-41ac-36b13aca8f7f,Step-Up Time Deposit 12M,cards,r3
+917832aa-3f85-3841-c1fb-8957130884bc,Private Banking Cash Sweep,other,r4
+fd12093c-77e2-38ee-4184-21a79ca62924,FX Forward Contract Pack,deposit,r1
+11edb20f-e379-f422-f9ae-34083956a6a6,Custody Omnibus Service,wealth,r1
+13ca83d3-6e59-9843-1ab4-871c48b554d4,FX Forward Contract Pack,insurance,r3
+7d5b40d0-6c43-96b7-64ed-c83edd2ec7eb,Retail Mortgage Prime,other,r1
+2ecb308d-3e62-a618-a4df-eb928a418463,Money Market Liquidity Fund,deposit,r3
+3ddbc508-3b28-dce0-2427-b53001f6e1ae,Classic Demand Deposit,wealth,r3
+ddd591a1-e078-6a15-8e6d-8e45ebd94d8d,Custody Omnibus Service,cards,r4
+aa03b14c-c68f-e6ac-600c-aff80470fd50,Private Banking Cash Sweep,cards,r1
+4ebb15e7-4b9f-a598-6826-f83041f8e663,Custody Omnibus Service,wealth,r2
+12e82f6b-86d8-2261-232b-f351dfd610d1,Step-Up Time Deposit 12M,other,r2
+523eda1f-03d9-5e17-bf8a-67a7c5fc68d6,Step-Up Time Deposit 12M,wealth,r4
+29424d2f-7156-6dc7-f719-d2592b684376,Retail Mortgage Prime,deposit,r5
+9590469f-b5e5-57b5-afe4-c356c15a6904,Retail Mortgage Prime,wealth,r1
+c9a79b83-2b7d-cbe5-4413-efc98c859c27,Trade Finance Import LC,lending,r2
+0c610c11-015b-ed6a-8e8c-4529fa0bb524,Green Loan Facility,wealth,r3
+47d99c93-c4c3-e691-55a6-928c5a0eef9a,Wealth Dual-Currency Note,lending,r2
+b293332b-3967-aafc-f87a-de0b586138c7,Private Banking Cash Sweep,wealth,r4
+4c5d4e24-2d75-1051-fc08-38cd38c67912,Junior Savings Starter,wealth,r1
+0cb07e48-43be-ac9a-41e8-e3630c15df59,Wealth Dual-Currency Note,wealth,r3
+4f47501e-9161-0f74-501a-50b9cedcfd08,Retail Mortgage Prime,deposit,r1
+25ee8444-0672-6ddb-175c-ded803260209,Bancassurance Term Life,insurance,r1
+bf9c05d5-227f-8f11-c4f0-be32d4545c7c,Private Banking Cash Sweep,wealth,r3
+b4f4e000-da40-29c0-3d1c-5186cdf77e6e,Structured Deposit Series A,deposit,r1
+b3d5240f-4595-4164-0aa0-ad56884ec42b,Classic Demand Deposit,deposit,r3
+eb5ec62d-410a-5191-1212-b5b0aeb28add,Revolving Working Capital Line,lending,r1
+e7829485-c9c9-a14d-e88f-61fe85fa6b72,Bancassurance Term Life,wealth,r1
+c16d8916-7366-675c-044d-bd1e52f08c55,Step-Up Time Deposit 12M,lending,r1
+4a3dd03e-f2cc-c019-9a0f-d08c2d415dcf,FX Forward Contract Pack,deposit,r3
+0432aaf9-01ca-6e06-e3d2-153fdece76c9,Classic Demand Deposit,deposit,r1
+e6a60f8b-b163-4f44-888d-3ed7afe3a3ab,Revolving Working Capital Line,wealth,r2
+2824ba03-27b3-266b-a3ce-996a11bc7890,Platinum Rewards Card,wealth,r2
+e2a98fc8-f77d-d391-c709-cd13d2cffa79,Revolving Working Capital Line,cards,r3
+87b66f9d-a3c1-48d7-217c-2231512db9f1,Custody Omnibus Service,wealth,r2
+8a6c813e-1eed-fac5-fff4-9f7fd50cdd23,Structured Deposit Series A,wealth,r3
+1754fb30-7ba1-f276-a200-b3b0299af681,Money Market Liquidity Fund,wealth,r1
+f26431e4-890b-1e50-f3e9-91098dc543a7,Classic Demand Deposit,wealth,r2
+d78f54a1-83c6-d563-a14f-170e94435075,Bancassurance Term Life,lending,r2
+b18cc1c3-17eb-99a8-bf15-31546d2492ad,Classic Demand Deposit,lending,r3
+89ddceb4-8df0-68fa-754c-46b4a2e0f1aa,Private Banking Cash Sweep,deposit,r1
+ef3619ee-b8d8-9380-218e-0483201b8341,Wealth Dual-Currency Note,deposit,r2
+0b9dccfe-0d2a-c40e-4102-4b765150b892,Platinum Rewards Card,lending,r4
+e330a928-3af1-cf34-a669-2fc411406843,Platinum Rewards Card,cards,r3
+c3f70fcb-e571-211a-bc52-d3d9ad44989b,Platinum Rewards Card,lending,r2
+9b6b363c-b7f1-bca4-3e15-e210793068c2,Trade Finance Import LC,deposit,r1
+3f6e22dc-42e2-104e-08b2-950fb06f4e64,Trade Finance Import LC,wealth,r5
+99ccbd70-ebc1-7841-c1ec-1401c7ffd3f9,Custody Omnibus Service,wealth,r3
+f304075a-128d-d8f6-bb17-dd603929d90a,Custody Omnibus Service,insurance,r4
+c5433d61-f356-5f72-56c3-39969f94340a,Trade Finance Import LC,lending,r1
+768ad397-ea08-34e4-f559-2c1cf79a97d7,Wealth Dual-Currency Note,wealth,r2
+b61be5cf-62e4-72ac-0005-f8eacb1dd033,Junior Savings Starter,deposit,r5
+c765b0de-a0eb-065e-7c1e-ca21ba3c1d51,Trade Finance Import LC,cards,r3
+24b7e269-e684-c3b5-5419-b95cf9148f9e,Platinum Rewards Card,wealth,r1
+8856120b-9a03-9c06-9750-59fab4d00058,Junior Savings Starter,deposit,r3
+d06fc07c-2aa1-ca75-4781-bb4064f9adc3,Retail Mortgage Prime,cards,r5
+c077830b-1d08-ae6d-b306-27199abeda08,Retail Mortgage Prime,insurance,r4
+0774cbc1-c2cc-107d-f6e6-619f90e41042,Classic Demand Deposit,lending,r2
+67ae126e-cea9-4fc1-be46-058689313a0e,Classic Demand Deposit,deposit,r1
+95c811a1-e861-c7c7-ab53-a196ea9b681b,Trade Finance Import LC,deposit,r3
+caa9e5a3-267c-6b25-2d3d-ac464dcece65,Revolving Working Capital Line,deposit,r1
+73314a52-2ea2-d7a8-6d4e-b3643cdf214d,Trade Finance Import LC,deposit,r1
+cf2445f6-5c67-9a29-e576-40c9146996f9,FX Forward Contract Pack,deposit,r1
+bbdce41e-6aa3-0e82-b648-d937e1b8763b,Revolving Working Capital Line,wealth,r2
+3b9433af-8cad-6f85-aaad-e137ac035d43,Retail Mortgage Prime,lending,r1
+75eec5b0-191b-ebb7-df05-603962292254,Bancassurance Term Life,lending,r1
+6e000162-3641-c52f-d155-61670a250d85,Money Market Liquidity Fund,insurance,r1
+d6667373-b9da-755b-04ca-2f33797d2aed,Revolving Working Capital Line,wealth,r1
+c7f8ab96-953a-7ea8-5653-419983e4d5ad,Money Market Liquidity Fund,cards,r2
+f09330b3-4123-cd70-79c9-677ef47af944,Revolving Working Capital Line,wealth,r1
+12245738-45f8-c76c-82b2-fa67188fcbbc,FX Forward Contract Pack,deposit,r2
+328fcb12-9bcd-c425-9d6d-1c512180bd4e,Trade Finance Import LC,cards,r1
+5043ad76-8844-1e69-448a-3dcb9d951a1e,Junior Savings Starter,deposit,r1
+c3d21c40-01d0-4c52-939c-debc13fcac65,Revolving Working Capital Line,cards,r1
+c6bd36dc-51a4-e987-a38c-9ddbc578ef5d,FX Forward Contract Pack,insurance,r3
+bb024e4c-768f-538c-ab59-909c993e523b,Money Market Liquidity Fund,insurance,r1
+038ec226-70b5-eb11-8bd9-0e263240ad84,Platinum Rewards Card,wealth,r4
+4ff59f49-6a53-dca9-18d4-5bf96d46003e,Structured Deposit Series A,lending,r1
+425981d9-0d56-d836-c8bd-65967810668c,Platinum Rewards Card,cards,r4
+988254bc-7335-0a93-a445-19dc8c853424,Classic Demand Deposit,deposit,r1
+3af470dc-bf79-c28a-4d61-272e626d37c6,Revolving Working Capital Line,deposit,r2
+ab1fa07a-ce83-9e6e-f1e7-2a978a18d4e1,Bancassurance Term Life,deposit,r3
+da1dbe32-595e-fe33-6d3a-e83701307c6c,Platinum Rewards Card,lending,r2
+6a9d4309-bf3a-cc9f-2c7a-f06090721846,Platinum Rewards Card,lending,r3
+be35bc6a-2b94-9c40-9535-240932208ce0,Platinum Rewards Card,other,r1
+db4fb395-7382-6815-5b0a-29814343fa69,Private Banking Cash Sweep,cards,r5
+3bc5e014-b8a3-a02b-a965-99ce9a3b8bb9,Platinum Rewards Card,wealth,r1
+6a849cb9-cfb1-e661-f1a6-09857947bce1,Platinum Rewards Card,wealth,r2
+556d8087-b6d3-ae4c-4d91-31dbac64c0ff,Platinum Rewards Card,insurance,r1
+560313dd-6ebf-e984-36ef-6602220675d8,Green Loan Facility,cards,r3
+e6865c2d-98f4-81b9-a61d-cf500d1745c1,Classic Demand Deposit,other,r3
+9aab36b2-e07c-bd55-0a5f-8f086dabf521,Platinum Rewards Card,deposit,r5
+15ccc2e0-f3c4-6374-64ac-e6b53ec54b90,Retail Mortgage Prime,other,r2
+225eb134-5e4e-f909-473a-fce118bf4cca,FX Forward Contract Pack,deposit,r1
+d185ca39-a301-f9af-fcf5-247e83ddc4a2,Platinum Rewards Card,cards,r3
+e72baa08-cca8-b297-0ef5-6686f84d6415,Money Market Liquidity Fund,wealth,r1
+7c6ac512-93ab-61b7-a2e6-7e18cebbeb72,Wealth Dual-Currency Note,deposit,r2
+5ffc98b3-7732-86a1-f9d8-525bd78f5b64,Revolving Working Capital Line,wealth,r4
+6892b8b3-2e22-c362-8356-9d8cf10d3374,Private Banking Cash Sweep,deposit,r2
+3e8ad859-e80e-336e-8211-37b7bb67d316,Junior Savings Starter,lending,r1
+09df8168-86ab-0b47-46de-6654985fae53,Step-Up Time Deposit 12M,deposit,r4
+4eaed735-329e-55aa-6747-18ab7304b9a8,Money Market Liquidity Fund,other,r3
+27d9135d-aeaf-689c-ef54-86d1b1c75cb9,Money Market Liquidity Fund,lending,r1

@@ -1,0 +1,383 @@
+{
+  "description": "R2 business scenario overlays: scenario-specific allowed_values, weights, and constraints.",
+  "selection_defaults": {
+    "retail_fallback_scenario_id": "retail_deposit_standard",
+    "credit_fallback_scenario_id": "retail_deposit_standard",
+    "customer_age_section_key": "customer_age_buckets_by_country",
+    "account_status_section_key": "account_status_by_account_type",
+    "account_status_by_journey_stage_section_key": "account_status_by_journey_stage",
+    "account_status_by_kyc_status_section_key": "account_status_by_kyc_status",
+    "account_status_history_source_system_section_key": "account_status_history_source_system_distribution",
+    "transaction_currency_section_key": "transaction_currency_by_country_account_type",
+    "exposure_ratio_section_key": "exposure_limit_ratio_by_segment",
+    "transaction_amount_section_key": "transaction_amount_mixture_by_account_type",
+    "customer_total_aum_section_key": "customer_total_aum_mixture_by_segment_tier"
+  },
+  "scenarios": {
+    "retail_deposit_standard": {
+      "activation_conditions": {
+        "requires_tables": [
+          "customers",
+          "accounts",
+          "transactions"
+        ],
+        "requires_lending_signal": false,
+        "domain_ids": [
+          "party_legal_relationship",
+          "agreement_product_schedule"
+        ],
+        "concept_path_ids": [
+          "crm_deposit_graph"
+        ],
+        "table_feature_flags": [
+          "has_customers",
+          "has_accounts",
+          "has_transactions"
+        ],
+        "requires_columns": [
+          "transactions.amount",
+          "transactions.currency"
+        ]
+      },
+      "account_type_distributions": {
+        "default": {
+          "allowed_values": [
+            "savings",
+            "checking",
+            "investment",
+            "other"
+          ],
+          "weights": {
+            "savings": 0.6,
+            "checking": 0.36,
+            "investment": 0.03,
+            "other": 0.01
+          }
+        },
+        "young": {
+          "weights": {
+            "savings": 0.4,
+            "checking": 0.56,
+            "investment": 0.03,
+            "other": 0.01
+          }
+        },
+        "young_urban": {
+          "weights": {
+            "savings": 0.34,
+            "checking": 0.62,
+            "investment": 0.03,
+            "other": 0.01
+          }
+        },
+        "senior": {
+          "weights": {
+            "savings": 0.76,
+            "checking": 0.2,
+            "investment": 0.03,
+            "other": 0.01
+          }
+        }
+      },
+      "customer_age_buckets_by_country": {
+        "CN": [
+          {
+            "min": 18,
+            "max": 30,
+            "weight": 0.28
+          },
+          {
+            "min": 31,
+            "max": 50,
+            "weight": 0.48
+          },
+          {
+            "min": 51,
+            "max": 85,
+            "weight": 0.24
+          }
+        ],
+        "US": [
+          {
+            "min": 18,
+            "max": 34,
+            "weight": 0.34
+          },
+          {
+            "min": 35,
+            "max": 54,
+            "weight": 0.44
+          },
+          {
+            "min": 55,
+            "max": 85,
+            "weight": 0.22
+          }
+        ],
+        "default": [
+          {
+            "min": 18,
+            "max": 32,
+            "weight": 0.3
+          },
+          {
+            "min": 33,
+            "max": 52,
+            "weight": 0.46
+          },
+          {
+            "min": 53,
+            "max": 85,
+            "weight": 0.24
+          }
+        ]
+      },
+      "transaction_currency_by_country_account_type": {
+        "CN": {
+          "default": {
+            "CNY": 0.82,
+            "USD": 0.07,
+            "HKD": 0.05,
+            "EUR": 0.02,
+            "SGD": 0.04
+          }
+        },
+        "US": {
+          "default": {
+            "USD": 0.8,
+            "EUR": 0.07,
+            "CNY": 0.05,
+            "HKD": 0.03,
+            "SGD": 0.05
+          }
+        },
+        "default": {
+          "default": {
+            "CNY": 0.46,
+            "USD": 0.23,
+            "HKD": 0.12,
+            "EUR": 0.08,
+            "SGD": 0.11
+          }
+        }
+      },
+      "account_status_by_account_type": {
+        "savings": {
+          "active": 0.72,
+          "open": 0.06,
+          "pending": 0.05,
+          "dormant": 0.09,
+          "frozen": 0.03,
+          "closed": 0.05
+        },
+        "checking": {
+          "active": 0.62,
+          "open": 0.07,
+          "pending": 0.09,
+          "dormant": 0.06,
+          "frozen": 0.03,
+          "closed": 0.13
+        },
+        "default": {
+          "active": 0.64,
+          "open": 0.06,
+          "pending": 0.07,
+          "dormant": 0.06,
+          "frozen": 0.03,
+          "closed": 0.14
+        }
+      },
+      "account_status_by_journey_stage": {
+        "onboarding": {
+          "pending": 0.44,
+          "open": 0.34,
+          "active": 0.2,
+          "closed": 0.02
+        },
+        "activation": {
+          "active": 0.66,
+          "open": 0.16,
+          "pending": 0.1,
+          "dormant": 0.04,
+          "closed": 0.04
+        },
+        "growth": {
+          "active": 0.74,
+          "open": 0.08,
+          "dormant": 0.08,
+          "frozen": 0.02,
+          "closed": 0.08
+        },
+        "retention": {
+          "active": 0.62,
+          "dormant": 0.2,
+          "frozen": 0.04,
+          "closed": 0.14
+        },
+        "advocacy": {
+          "active": 0.82,
+          "dormant": 0.06,
+          "frozen": 0.02,
+          "closed": 0.1
+        },
+        "default": {
+          "active": 0.64,
+          "open": 0.08,
+          "pending": 0.08,
+          "dormant": 0.08,
+          "frozen": 0.02,
+          "closed": 0.1
+        }
+      },
+      "account_status_by_kyc_status": {
+        "verified": {
+          "active": 0.74,
+          "open": 0.2,
+          "pending": 0.04,
+          "closed": 0.02
+        },
+        "pending_review": {
+          "pending": 0.8,
+          "frozen": 0.14,
+          "closed": 0.06
+        },
+        "expired": {
+          "frozen": 0.64,
+          "pending": 0.16,
+          "closed": 0.2
+        },
+        "missing": {
+          "pending": 0.72,
+          "frozen": 0.16,
+          "closed": 0.12
+        },
+        "default": {
+          "pending": 0.7,
+          "frozen": 0.16,
+          "closed": 0.14
+        }
+      },
+      "account_status_history_source_system_distribution": {
+        "core_banking": 0.72,
+        "deposit_gateway": 0.18,
+        "crm_status_bus": 0.1
+      },
+      "exposure_limit_ratio_by_segment": {
+        "default": {
+          "min_ratio": 0.55,
+          "max_ratio": 0.85
+        },
+        "senior": {
+          "min_ratio": 0.45,
+          "max_ratio": 0.72
+        },
+        "young": {
+          "min_ratio": 0.58,
+          "max_ratio": 0.88
+        }
+      },
+      "transaction_amount_mixture_by_account_type": {
+        "savings": {
+          "components": [
+            {
+              "min_base": 10,
+              "max_base": 1000,
+              "weight": 0.18
+            },
+            {
+              "min_base": 1000,
+              "max_base": 3000,
+              "weight": 0.22
+            },
+            {
+              "min_base": 3000,
+              "max_base": 10000,
+              "weight": 0.24
+            },
+            {
+              "min_base": 10000,
+              "max_base": 50000,
+              "weight": 0.2
+            },
+            {
+              "min_base": 50000,
+              "max_base": 1000000,
+              "weight": 0.12
+            },
+            {
+              "min_base": 1000000,
+              "max_base": 3000000,
+              "weight": 0.04
+            }
+          ]
+        },
+        "checking": {
+          "components": [
+            {
+              "min_base": 10,
+              "max_base": 1000,
+              "weight": 0.18
+            },
+            {
+              "min_base": 1000,
+              "max_base": 3000,
+              "weight": 0.22
+            },
+            {
+              "min_base": 3000,
+              "max_base": 10000,
+              "weight": 0.24
+            },
+            {
+              "min_base": 10000,
+              "max_base": 50000,
+              "weight": 0.2
+            },
+            {
+              "min_base": 50000,
+              "max_base": 1000000,
+              "weight": 0.12
+            },
+            {
+              "min_base": 1000000,
+              "max_base": 3000000,
+              "weight": 0.04
+            }
+          ]
+        }
+      },
+      "customer_total_aum_mixture_by_segment_tier": {
+        "TIER_1": {
+          "components": [
+            { "min_base": 3000000, "max_base": 15000000, "weight": 0.65 },
+            { "min_base": 15000000, "max_base": 60000000, "weight": 0.35 }
+          ]
+        },
+        "TIER_2": {
+          "components": [
+            { "min_base": 800000, "max_base": 5000000, "weight": 0.72 },
+            { "min_base": 5000000, "max_base": 18000000, "weight": 0.28 }
+          ]
+        },
+        "TIER_3": {
+          "components": [
+            { "min_base": 120000, "max_base": 1200000, "weight": 0.74 },
+            { "min_base": 1200000, "max_base": 5000000, "weight": 0.26 }
+          ]
+        },
+        "TIER_4": {
+          "components": [
+            { "min_base": 5000, "max_base": 200000, "weight": 0.82 },
+            { "min_base": 200000, "max_base": 900000, "weight": 0.18 }
+          ]
+        },
+        "default": {
+          "components": [
+            { "min_base": 50000, "max_base": 800000, "weight": 0.7 },
+            { "min_base": 800000, "max_base": 4000000, "weight": 0.3 }
+          ]
+        }
+      }
+    }
+  }
+}

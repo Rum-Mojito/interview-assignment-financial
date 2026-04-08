@@ -1,0 +1,20 @@
+{
+  "description": "After domain_extension_rules and relation closure, append concepts when inferred_system_name (same id as system_profiles.json) matches a line and when_matched_contains_all is satisfied.",
+  "lines": {
+    "crm": {
+      "when_matched_contains_all": ["customer", "account"],
+      "append_concepts": ["customer_interaction"],
+      "business_rationale": "Servicing and channel interaction history is commonly modeled for the CRM deployment profile once both party master and product account are in scope."
+    },
+    "trading": {
+      "when_matched_contains_all": ["trading_account", "order"],
+      "append_concepts": ["execution"],
+      "business_rationale": "For trading deployment bundles, account+order minimally requires explicit fill facts; deeper controls are inferred by additional signal/extension rules."
+    },
+    "credit": {
+      "when_matched_contains_all": ["obligor", "facility"],
+      "append_concepts": ["exposure"],
+      "business_rationale": "For credit deployment bundles, obligor+facility minimally requires explicit exposure rows; lifecycle and governance tables are inferred incrementally."
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "description": "Focused R2 suite manifest for customer->lead->opportunity->account->transaction with account_status_scd.",
+  "cases": [
+    {
+      "case_id": "R2-CHAIN-001",
+      "schema_path": "examples/test_schemas/r2_customer_lead_opportunity_account_txn_scd.sql",
+      "domain_ids": [
+        "party_legal_relationship",
+        "agreement_product_schedule",
+        "transaction_event_settlement"
+      ],
+      "schema_count": 8,
+      "record_count": 120,
+      "seed": 20260407,
+      "data_mode": "clean",
+      "hard_rule_policy": "block",
+      "graph_path_id": "crm_customer_lifecycle_event_story"
+    }
+  ]
+}

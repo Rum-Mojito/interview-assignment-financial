@@ -1,0 +1,457 @@
+{
+  "description": "Declarative lifecycle state-machine and temporal constraints for Requirement2.",
+  "state_machine_rules": [
+    {
+      "rule_id": "HARD_ACCOUNT_STATUS_LIFECYCLE",
+      "severity": "hard",
+      "table_name": "accounts",
+      "entity_key_columns": ["account_id"],
+      "status_column": "status",
+      "sequence_time_column": "event_time",
+      "initial_states": ["open"],
+      "singleton_allowed_states": ["open", "pending", "active", "dormant", "frozen", "closed"],
+      "allowed_transitions": {
+        "open": ["open", "pending", "closed"],
+        "pending": ["pending", "active", "closed"],
+        "active": ["active", "dormant", "frozen", "closed"],
+        "dormant": ["active", "closed"],
+        "frozen": ["active", "closed"],
+        "closed": ["closed"]
+      }
+    },
+    {
+      "rule_id": "HARD_KYC_CASE_STATUS_LIFECYCLE",
+      "severity": "hard",
+      "table_name": "kyc_cases",
+      "entity_key_columns": ["kyc_case_id"],
+      "status_column": "case_status",
+      "sequence_time_column": "case_opened_time",
+      "initial_states": ["pending_doc", "doc_received", "under_review"],
+        "singleton_allowed_states": ["pending_doc", "doc_received", "under_review", "edd_required", "cdd_approved", "kyc_active", "suspended", "rejected"],
+      "allowed_transitions": {
+        "pending_doc": ["doc_received", "rejected"],
+        "doc_received": ["under_review", "edd_required"],
+        "under_review": ["cdd_approved", "edd_required", "rejected"],
+        "edd_required": ["under_review", "rejected"],
+        "cdd_approved": ["kyc_active", "suspended"],
+        "kyc_active": ["suspended", "kyc_active"],
+        "suspended": ["kyc_active", "rejected"],
+        "rejected": ["rejected"]
+      }
+    },
+    {
+      "rule_id": "HARD_ACCOUNT_STATUS_SCD_LIFECYCLE",
+      "severity": "hard",
+      "table_name": "account_status_scd",
+      "entity_key_columns": ["account_id"],
+      "status_column": "status",
+      "sequence_time_column": "status_time",
+      "history_status_event_id_template": "evt_{account_id}_{sequence:03d}",
+      "history_trace_id_template": "audit_{account_id}_{sequence:03d}",
+      "history_source_system_value": "core_banking",
+      "initial_states": ["open"],
+      "singleton_allowed_states": ["open", "pending", "active", "dormant", "frozen", "closed"],
+      "allowed_transitions": {
+        "open": ["open", "pending", "closed"],
+        "pending": ["pending", "active", "closed"],
+        "active": ["active", "dormant", "frozen", "closed"],
+        "dormant": ["active", "closed"],
+        "frozen": ["active", "closed"],
+        "closed": ["closed"]
+      }
+    },
+    {
+      "rule_id": "HARD_SERVICING_CASE_STATUS_LIFECYCLE",
+      "severity": "hard",
+      "table_name": "servicing_cases",
+      "entity_key_columns": ["servicing_case_id"],
+      "status_column": "status",
+      "sequence_time_column": "opened_time",
+      "initial_states": ["open", "in_progress"],
+        "singleton_allowed_states": ["open", "in_progress", "resolved", "closed"],
+      "allowed_transitions": {
+        "open": ["in_progress", "resolved", "closed"],
+        "in_progress": ["in_progress", "resolved", "closed"],
+        "resolved": ["closed", "resolved"],
+        "closed": ["closed"]
+      }
+    },
+    {
+      "rule_id": "HARD_LEAD_STATUS_LIFECYCLE",
+      "severity": "hard",
+      "table_name": "leads",
+      "entity_key_columns": ["lead_id"],
+      "status_column": "lead_status",
+      "sequence_time_column": "captured_time",
+      "initial_states": ["new", "contacted"],
+      "singleton_allowed_states": ["new", "contacted", "qualified", "lost", "recycled", "converted"],
+      "allowed_transitions": {
+        "new": ["contacted", "qualified", "lost", "recycled"],
+        "contacted": ["qualified", "lost", "recycled"],
+        "qualified": ["converted", "lost", "recycled"],
+        "converted": ["converted"],
+        "lost": ["lost", "recycled"],
+        "recycled": ["contacted", "qualified", "lost", "converted"]
+      }
+    },
+    {
+      "rule_id": "HARD_CLIENT_TASK_STATUS_LIFECYCLE",
+      "severity": "hard",
+      "table_name": "client_tasks",
+      "entity_key_columns": ["client_task_id"],
+      "status_column": "task_status",
+      "sequence_time_column": "due_time",
+      "initial_states": ["open"],
+      "allowed_transitions": {
+        "open": ["done", "cancelled", "open"],
+        "done": ["done"],
+        "cancelled": ["cancelled"]
+      }
+    },
+    {
+      "rule_id": "HARD_COLLECTION_TASK_STATUS_LIFECYCLE",
+      "severity": "hard",
+      "table_name": "collection_tasks",
+      "entity_key_columns": ["collection_task_id"],
+      "status_column": "task_status",
+      "sequence_time_column": "due_time",
+      "initial_states": ["open"],
+      "allowed_transitions": {
+        "open": ["done", "cancelled", "open"],
+        "done": ["done"],
+        "cancelled": ["cancelled"]
+      }
+    },
+    {
+      "rule_id": "HARD_APPOINTMENT_STATUS_LIFECYCLE",
+      "severity": "hard",
+      "table_name": "appointments",
+      "entity_key_columns": ["appointment_id"],
+      "status_column": "appointment_status",
+      "sequence_time_column": "start_time",
+      "initial_states": ["scheduled"],
+      "allowed_transitions": {
+        "scheduled": ["completed", "no_show", "cancelled", "scheduled"],
+        "completed": ["completed"],
+        "no_show": ["no_show", "scheduled"],
+        "cancelled": ["cancelled"]
+      }
+    }
+  ],
+  "temporal_order_rules": [
+    {
+      "rule_id": "HARD_ACCOUNT_OPENED_TIME_NOT_AFTER_EVENT_TIME",
+      "severity": "hard",
+      "table_name": "accounts",
+      "constraints": [
+        {
+          "left_column": "opened_time",
+          "operator": "<=",
+          "right_column": "event_time"
+        }
+      ]
+    },
+    {
+      "rule_id": "HARD_KYC_CASE_OPEN_BEFORE_CLOSE",
+      "severity": "hard",
+      "table_name": "kyc_cases",
+      "constraints": [
+        {
+          "left_column": "case_opened_time",
+          "operator": "<=",
+          "right_column": "case_closed_time"
+        }
+      ]
+    },
+    {
+      "rule_id": "HARD_SERVICING_CASE_OPEN_BEFORE_CLOSE",
+      "severity": "hard",
+      "table_name": "servicing_cases",
+      "constraints": [
+        {
+          "left_column": "opened_time",
+          "operator": "<=",
+          "right_column": "closed_time"
+        }
+      ]
+    },
+    {
+      "rule_id": "HARD_LEAD_CREATED_BEFORE_ASSIGNED",
+      "severity": "hard",
+      "table_name": "leads",
+      "constraints": [
+        {
+          "left_column": "captured_time",
+          "operator": "<=",
+          "right_column": "assigned_time"
+        }
+      ]
+    },
+    {
+      "rule_id": "HARD_OPPORTUNITY_EXPECTED_CLOSE_NOT_AFTER_ACTUAL_CLOSE",
+      "severity": "hard",
+      "table_name": "sales_opportunities",
+      "constraints": [
+        {
+          "left_column": "expected_close_date",
+          "operator": "<=",
+          "right_column": "actual_close_time",
+          "apply_when_column": "opportunity_stage",
+          "apply_when_in": ["closed_won", "closed_lost"]
+        }
+      ]
+    },
+    {
+      "rule_id": "HARD_APPOINTMENT_START_BEFORE_END",
+      "severity": "hard",
+      "table_name": "appointments",
+      "constraints": [
+        {
+          "left_column": "start_time",
+          "operator": "<=",
+          "right_column": "end_time"
+        }
+      ]
+    },
+    {
+      "rule_id": "HARD_FUNDING_START_BEFORE_MATURITY",
+      "severity": "hard",
+      "table_name": "funding_deals",
+      "constraints": [
+        {
+          "left_column": "start_time",
+          "operator": "<=",
+          "right_column": "maturity_time"
+        }
+      ]
+    },
+    {
+      "rule_id": "HARD_RELATIONSHIP_ASSIGNMENT_EFFECTIVE_FROM_NOT_AFTER_UNTIL",
+      "severity": "hard",
+      "table_name": "relationship_assignments",
+      "constraints": [
+        {
+          "left_column": "effective_from",
+          "operator": "<=",
+          "right_column": "effective_until"
+        }
+      ]
+    },
+    {
+      "rule_id": "HARD_ENTITLEMENT_VALID_FROM_NOT_AFTER_UNTIL",
+      "severity": "hard",
+      "table_name": "customer_entitlements",
+      "constraints": [
+        {
+          "left_column": "valid_from",
+          "operator": "<=",
+          "right_column": "valid_until"
+        }
+      ]
+    },
+    {
+      "rule_id": "HARD_CORPORATE_ACTION_EX_NOT_AFTER_RECORD",
+      "severity": "hard",
+      "table_name": "corporate_action_events",
+      "constraints": [
+        {
+          "left_column": "ex_date",
+          "operator": "<=",
+          "right_column": "record_date"
+        }
+      ]
+    },
+    {
+      "rule_id": "HARD_CORPORATE_ACTION_RECORD_NOT_AFTER_PAY",
+      "severity": "hard",
+      "table_name": "corporate_action_events",
+      "constraints": [
+        {
+          "left_column": "record_date",
+          "operator": "<=",
+          "right_column": "pay_date"
+        }
+      ]
+    }
+  ],
+  "cross_table_temporal_rules": [
+    {
+      "rule_id": "HARD_ORDER_TIME_BEFORE_EXECUTION_TIME",
+      "severity": "hard",
+      "left_table_name": "orders",
+      "left_key_columns": ["order_id"],
+      "left_time_column": "order_time",
+      "right_table_name": "executions",
+      "right_foreign_key_columns": ["order_id"],
+      "right_time_column": "execution_time",
+      "operator": "<="
+    },
+    {
+      "rule_id": "HARD_EXECUTION_TIME_BEFORE_POSITION_SNAPSHOT",
+      "severity": "hard",
+      "left_table_name": "executions",
+      "left_key_columns": ["execution_id"],
+      "left_time_column": "execution_time",
+      "right_table_name": "positions",
+      "right_foreign_key_columns": ["execution_id"],
+      "right_time_column": "snapshot_time",
+      "operator": "<="
+    },
+    {
+      "rule_id": "HARD_LEAD_CAPTURED_BEFORE_OPPORTUNITY_EXPECTED_CLOSE",
+      "severity": "hard",
+      "left_table_name": "leads",
+      "left_key_columns": ["lead_id"],
+      "left_time_column": "captured_time",
+      "right_table_name": "sales_opportunities",
+      "right_foreign_key_columns": ["lead_id"],
+      "right_time_column": "expected_close_date",
+      "operator": "<="
+    },
+    {
+      "rule_id": "HARD_OPPORTUNITY_EXPECTED_CLOSE_BEFORE_ACCOUNT_OPEN",
+      "severity": "hard",
+      "left_table_name": "sales_opportunities",
+      "left_key_columns": ["sales_opportunity_id"],
+      "left_time_column": "expected_close_date",
+      "right_table_name": "accounts",
+      "right_foreign_key_columns": ["sales_opportunity_id"],
+      "right_time_column": "opened_time",
+      "operator": "<="
+    },
+    {
+      "rule_id": "HARD_ACCOUNT_OPEN_BEFORE_TRANSACTION_TIME",
+      "severity": "hard",
+      "left_table_name": "accounts",
+      "left_key_columns": ["account_id"],
+      "left_time_column": "opened_time",
+      "right_table_name": "transactions",
+      "right_foreign_key_columns": ["account_id"],
+      "right_time_column": "transaction_time",
+      "operator": "<="
+    },
+    {
+      "rule_id": "HARD_ACCOUNT_OPEN_BEFORE_STATUS_SCD_TIME",
+      "severity": "hard",
+      "left_table_name": "accounts",
+      "left_key_columns": ["account_id"],
+      "left_time_column": "opened_time",
+      "right_table_name": "account_status_scd",
+      "right_foreign_key_columns": ["account_id"],
+      "right_time_column": "status_time",
+      "operator": "<="
+    }
+  ],
+  "business_conservation_rules": [
+    {
+      "rule_id": "HARD_FACILITY_AVAILABLE_NOT_EXCEED_APPROVED",
+      "severity": "hard",
+      "type": "intra_row_numeric_compare",
+      "table_name": "facilities",
+      "left_column": "available_amount",
+      "operator": "<=",
+      "right_column": "approved_amount"
+    },
+    {
+      "rule_id": "HARD_FUNDING_PRINCIPAL_POSITIVE",
+      "severity": "hard",
+      "type": "intra_row_numeric_range",
+      "table_name": "funding_deals",
+      "column_name": "principal_amount",
+      "min_value": 0.01
+    },
+    {
+      "rule_id": "HARD_FUNDING_RATE_REASONABLE_RANGE",
+      "severity": "hard",
+      "type": "intra_row_numeric_range",
+      "table_name": "funding_deals",
+      "column_name": "rate_percent",
+      "min_value": -2.0,
+      "max_value": 30.0
+    },
+    {
+      "rule_id": "HARD_SALES_CLOSED_REQUIRES_ACTUAL_CLOSE_TIME",
+      "severity": "hard",
+      "type": "state_requires_non_null_time",
+      "table_name": "sales_opportunities",
+      "state_column": "opportunity_stage",
+      "required_states": ["closed_won", "closed_lost"],
+      "time_column": "actual_close_time"
+    },
+    {
+      "rule_id": "HARD_LEAD_SCORE_REASONABLE_RANGE",
+      "severity": "hard",
+      "type": "intra_row_numeric_range",
+      "table_name": "leads",
+      "column_name": "lead_score",
+      "min_value": 0.0,
+      "max_value": 100.0
+    },
+    {
+      "rule_id": "HARD_OPPORTUNITY_VALUE_POSITIVE",
+      "severity": "hard",
+      "type": "intra_row_numeric_range",
+      "table_name": "sales_opportunities",
+      "column_name": "expected_value",
+      "min_value": 100.0,
+      "max_value": 200000000.0
+    },
+    {
+      "rule_id": "HARD_OPPORTUNITY_WIN_PROBABILITY_RANGE",
+      "severity": "hard",
+      "type": "intra_row_numeric_range",
+      "table_name": "sales_opportunities",
+      "column_name": "win_probability",
+      "min_value": 0.0,
+      "max_value": 1.0
+    },
+    {
+      "rule_id": "HARD_FACILITY_DRAWDOWN_SUM_NOT_EXCEED_APPROVED",
+      "severity": "hard",
+      "type": "aggregate_child_amount_le_parent_limit",
+      "parent_table_name": "facilities",
+      "parent_key_column": "facility_id",
+      "parent_limit_column": "approved_amount",
+      "child_table_name": "drawdown_events",
+      "child_fk_column": "facility_id",
+      "child_amount_column": "drawdown_amount"
+    },
+    {
+      "rule_id": "HARD_ACCOUNT_STATUS_SCD_CURRENT_MATCH",
+      "severity": "hard",
+      "type": "current_state_matches_parent_status",
+      "parent_table_name": "accounts",
+      "parent_key_column": "account_id",
+      "parent_status_column": "status",
+      "history_table_name": "account_status_scd",
+      "history_fk_column": "account_id",
+      "history_status_column": "status",
+      "history_current_flag_column": "is_current",
+      "history_current_flag_value": "Y"
+    },
+    {
+      "rule_id": "HARD_ACCOUNT_STATUS_SCD_CURRENT_IS_LATEST",
+      "severity": "hard",
+      "type": "current_flag_must_be_latest_time",
+      "table_name": "account_status_scd",
+      "entity_key_column": "account_id",
+      "time_column": "status_time",
+      "current_flag_column": "is_current",
+      "current_flag_value": "Y"
+    },
+    {
+      "rule_id": "HARD_ACCOUNT_OPEN_OR_ACTIVE_REQUIRES_VERIFIED_KYC",
+      "severity": "hard",
+      "type": "child_state_requires_parent_json_value_in",
+      "parent_table_name": "customers",
+      "parent_key_column": "customer_id",
+      "parent_json_column": "profile_json",
+      "parent_json_path": "kyc_status",
+      "child_table_name": "accounts",
+      "child_fk_column": "customer_id",
+      "child_state_column": "status",
+      "restricted_child_states": ["open", "active"],
+      "allowed_parent_values": ["VERIFIED"]
+    }
+  ]
+}

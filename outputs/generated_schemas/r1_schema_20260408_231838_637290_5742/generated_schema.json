@@ -1,0 +1,259 @@
+{
+  "tables": [
+    {
+      "name": "obligors",
+      "columns": [
+        {
+          "name": "obligor_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "obligor_name",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "risk_grade",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "country",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "profile_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "facilities",
+      "columns": [
+        {
+          "name": "facility_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "obligor_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "obligors",
+            "referenced_column": "obligor_id"
+          }
+        },
+        {
+          "name": "approved_amount",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "available_amount",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "facility_status",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "effective_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "exposures",
+      "columns": [
+        {
+          "name": "exposure_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "facility_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "facilities",
+            "referenced_column": "facility_id"
+          }
+        },
+        {
+          "name": "ead_amount",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "currency",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "as_of_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "exposure_note_text",
+          "type": "text",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "drawdown_events",
+      "columns": [
+        {
+          "name": "drawdown_event_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "facility_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "facilities",
+            "referenced_column": "facility_id"
+          }
+        },
+        {
+          "name": "drawdown_amount",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "drawdown_currency",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "drawdown_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "drawdown_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "repayment_events",
+      "columns": [
+        {
+          "name": "repayment_event_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "facility_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "facilities",
+            "referenced_column": "facility_id"
+          }
+        },
+        {
+          "name": "principal_amount",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "interest_amount",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "repayment_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "repayment_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "collateral_links",
+      "columns": [
+        {
+          "name": "collateral_link_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "facility_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "facilities",
+            "referenced_column": "facility_id"
+          }
+        },
+        {
+          "name": "collateral_type",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "collateral_value",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "haircut_percent",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "valuation_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    }
+  ]
+}

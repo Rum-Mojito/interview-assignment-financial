@@ -1,0 +1,15 @@
+{
+  "alias_weights": {
+    "customer": 1.15,
+    "crm": 1.25,
+    "transaction": 1.1,
+    "obligor": 1.2,
+    "facility": 1.15
+  },
+  "concept_bias": {
+    "customer": 0.35,
+    "account": 0.2,
+    "transaction": 0.15
+  },
+  "updated_at": "2026-04-09T12:00:00+00:00"
+}

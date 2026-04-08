@@ -1,0 +1,6 @@
+# financial_data_synthesizer_interview_package
+# Install: pip install -r requirements.txt
+# Python: 3.11+ recommended (core pipeline is stdlib + this file)
+
+# Streamlit Web UI (src/interfaces/streamlit_app.py, streamlit_config_editor.py)
+streamlit>=1.28.0,<2

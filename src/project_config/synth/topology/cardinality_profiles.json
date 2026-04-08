@@ -1,0 +1,80 @@
+{
+  "default_rowwise_profile_id": "rowwise_default",
+  "profiles": {
+    "rowwise_default": {
+      "description": "Matches previous hard-coded row counts: transactions table name *5, any FK child *2, roots *1.",
+      "type": "rule_list",
+      "base_param": "record_count",
+      "rules": [
+        {
+          "if": {
+            "has_foreign_keys": true
+          },
+          "formula": "2 * base"
+        },
+        {
+          "if": {},
+          "formula": "base"
+        }
+      ]
+    },
+    "party_deposit_ledger": {
+      "description": "CRM retail deposit chain: N customers, 2N accounts, 5N transactions (base = record_count).",
+      "type": "per_concept",
+      "base_param": "record_count",
+      "per_concept": {
+        "customer": "base",
+        "account": "2 * base",
+        "transaction": "5 * base",
+        "account_status_event": "3 * base"
+      }
+    },
+    "trading_order_exec": {
+      "description": "Trading chain: N trading accounts, 3N orders, 10N executions (base = record_count).",
+      "type": "per_concept",
+      "base_param": "record_count",
+      "per_concept": {
+        "trading_account": "base",
+        "order": "3 * base",
+        "execution": "10 * base"
+      }
+    },
+    "trading_exec_position_story": {
+      "description": "Trading execution-position story: N orders, 3N executions, 2N positions.",
+      "type": "per_concept",
+      "base_param": "record_count",
+      "per_concept": {
+        "order": "base",
+        "execution": "3 * base",
+        "position": "2 * base"
+      }
+    },
+    "credit_obligor_facility_exposure_story": {
+      "description": "Credit obligor-facility-exposure story: N obligors, 2N facilities, 4N exposures.",
+      "type": "per_concept",
+      "base_param": "record_count",
+      "per_concept": {
+        "obligor": "base",
+        "facility": "2 * base",
+        "exposure": "4 * base"
+      }
+    },
+    "crm_customer_lifecycle_event_story": {
+      "description": "CRM lifecycle story: customer lead opportunity account transaction interaction task appointment servicing.",
+      "type": "per_concept",
+      "base_param": "record_count",
+      "per_concept": {
+        "customer": "base",
+        "account": "2 * base",
+        "transaction": "5 * base",
+        "account_status_event": "3 * base",
+        "lead": "2 * base",
+        "sales_opportunity": "2 * base",
+        "customer_interaction": "3 * base",
+        "client_task": "2 * base",
+        "appointment": "base",
+        "servicing_case": "base"
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "tables": [
+    {
+      "name": "customers",
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "age",
+          "type": "integer"
+        },
+        {
+          "name": "country",
+          "type": "categorical"
+        },
+        {
+          "name": "profile_json",
+          "type": "json"
+        }
+      ]
+    },
+    {
+      "name": "accounts",
+      "columns": [
+        {
+          "name": "account_id",
+          "type": "string"
+        },
+        {
+          "name": "customer_id",
+          "type": "string"
+        },
+        {
+          "name": "account_type",
+          "type": "categorical"
+        },
+        {
+          "name": "balance",
+          "type": "float"
+        },
+        {
+          "name": "metadata_json",
+          "type": "json"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "description": "Unified topology config: graph_event_paths + fallback chains.",
+  "config_version": "stable",
+  "graph_event_paths": [
+    {
+      "path_id": "crm_customer_lifecycle_event_story",
+      "edge_ids": [
+        "customer_to_lead",
+        "lead_to_sales_opportunity",
+        "sales_opportunity_to_account",
+        "account_to_transaction",
+        "transaction_to_customer_interaction",
+        "customer_interaction_to_client_task",
+        "client_task_to_appointment",
+        "appointment_to_servicing_case"
+      ],
+      "cardinality_profile_id": "crm_customer_lifecycle_event_story",
+      "engine": "event_first",
+      "confidence_threshold": 0.45
+    },
+    {
+      "path_id": "crm_deposit_graph",
+      "edge_ids": [
+        "customer_to_account",
+        "account_to_transaction"
+      ],
+      "cardinality_profile_id": "party_deposit_ledger",
+      "engine": "event_first",
+      "confidence_threshold": 0.45
+    },
+    {
+      "path_id": "trading_order_exec_from_graph",
+      "edge_ids": [
+        "trading_account_to_order",
+        "order_to_execution"
+      ],
+      "cardinality_profile_id": "trading_order_exec",
+      "engine": "event_first",
+      "confidence_threshold": 0.45
+    },
+    {
+      "path_id": "trading_exec_position_story",
+      "edge_ids": [
+        "order_to_execution",
+        "execution_to_position"
+      ],
+      "cardinality_profile_id": "trading_exec_position_story",
+      "engine": "event_first",
+      "confidence_threshold": 0.45
+    },
+    {
+      "path_id": "credit_obligor_facility_exposure_story",
+      "edge_ids": [
+        "obligor_to_facility",
+        "facility_to_exposure"
+      ],
+      "cardinality_profile_id": "credit_obligor_facility_exposure_story",
+      "engine": "event_first",
+      "confidence_threshold": 0.45
+    }
+  ],
+  "chains": [
+    {
+      "chain_id": "party_deposit_ledger",
+      "profile_tags": [
+        "crm"
+      ],
+      "concept_path": [
+        "customer",
+        "account",
+        "transaction"
+      ],
+      "fk_expectations": [
+        {
+          "child_concept": "account",
+          "parent_concept": "customer",
+          "preferred_child_column_tokens": [
+            "customer"
+          ]
+        },
+        {
+          "child_concept": "transaction",
+          "parent_concept": "account",
+          "preferred_child_column_tokens": [
+            "account"
+          ]
+        }
+      ],
+      "cardinality_profile_id": "party_deposit_ledger",
+      "engine": "event_first",
+      "confidence_threshold": 0.45
+    },
+    {
+      "chain_id": "trading_exec_position_story",
+      "profile_tags": [
+        "trading"
+      ],
+      "concept_path": [
+        "order",
+        "execution",
+        "position"
+      ],
+      "fk_expectations": [
+        {
+          "child_concept": "execution",
+          "parent_concept": "order",
+          "preferred_child_column_tokens": [
+            "order"
+          ]
+        },
+        {
+          "child_concept": "position",
+          "parent_concept": "execution",
+          "preferred_child_column_tokens": [
+            "execution"
+          ]
+        }
+      ],
+      "cardinality_profile_id": "trading_exec_position_story",
+      "engine": "event_first",
+      "confidence_threshold": 0.45
+    },
+    {
+      "chain_id": "credit_obligor_facility_exposure_story",
+      "profile_tags": [
+        "credit"
+      ],
+      "concept_path": [
+        "obligor",
+        "facility",
+        "exposure"
+      ],
+      "fk_expectations": [
+        {
+          "child_concept": "facility",
+          "parent_concept": "obligor",
+          "preferred_child_column_tokens": [
+            "obligor"
+          ]
+        },
+        {
+          "child_concept": "exposure",
+          "parent_concept": "facility",
+          "preferred_child_column_tokens": [
+            "facility"
+          ]
+        }
+      ],
+      "cardinality_profile_id": "credit_obligor_facility_exposure_story",
+      "engine": "event_first",
+      "confidence_threshold": 0.45
+    }
+  ]
+}

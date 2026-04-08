@@ -1,0 +1,39 @@
+{
+  "config_version": "stable",
+  "description": "Minimal generation manifest: defaults and domain profile mapping.",
+  "column_semantics_profile_apply_all": true,
+  "column_semantics_profile_id_default": "main_profile",
+  "currency_decimal_default_scale": 2,
+  "currency_decimal_scale_map": {
+    "KRW": 0,
+    "CNY": 2,
+    "USD": 2,
+    "EUR": 2,
+    "HKD": 2,
+    "SGD": 2,
+    "KWD": 3,
+    "BHD": 3
+  },
+  "fx_rate_profile": {
+    "base_currency": "CNY",
+    "rates": {
+      "USD": 7.1,
+      "EUR": 7.75,
+      "HKD": 0.91,
+      "SGD": 5.25,
+      "KRW": 0.0053,
+      "KWD": 23.1,
+      "BHD": 18.8
+    }
+  },
+  "column_semantics_profile_by_domain": {
+    "party_legal_relationship": "main_profile",
+    "agreement_product_schedule": "main_profile",
+    "instrument_reference_market_data": "instrument_story",
+    "transaction_event_settlement": "main_profile",
+    "ledger_position_pnl_valuation": "ledger_story",
+    "risk_limit_rating_collateral": "risk_story",
+    "treasury_alm_funding_liquidity": "treasury_story",
+    "compliance_surveillance_regulatory_reporting": "compliance_story"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "description": "Physical config partition under src/project_config/{common,schema,synth}.",
+  "common_config": [
+    "common/concepts.json",
+    "common/concept_relation_graph.json",
+    "common/field_packs.json",
+    "schema/system_profiles.json"
+  ],
+  "schema_config": [
+    "schema/business_lines.json",
+    "schema/feedback_weights.json",
+    "schema/domain_extension_rules.json",
+    "schema/domain_signal_inference_rules.json",
+    "schema/domain_taxonomy.json"
+  ],
+  "synth_config": [
+    "synth/topology/generation_config_manifest.json",
+    "synth/topology/generation_topology.json",
+    "synth/topology/cardinality_profiles.json",
+    "synth/column_semantics/column_profiles_unified.json",
+    "synth/behavior/generation_rules.json",
+    "synth/column_semantics/json_object_packs.json",
+    "synth/compliance/lifecycle_constraints.json",
+    "synth/compliance/status_value_normalization.json",
+    "synth/behavior/scenario_overlays.json"
+  ]
+}

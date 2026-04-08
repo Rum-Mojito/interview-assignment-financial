@@ -1,0 +1,360 @@
+{
+  "description": "Pack-driven JSON templates; may reference existing field_packs allowed_values for consistency.",
+  "packs": {
+    "customer_profile_pack": {
+      "description": "Customer profile JSON with reusable enums.",
+      "fields": [
+        {
+          "path": "kyc_status",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "VERIFIED": 0.82,
+              "PENDING_REVIEW": 0.14,
+              "EXPIRED": 0.04
+            }
+          }
+        },
+        {
+          "path": "risk_profile",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "LOW": 0.52,
+              "MODERATE": 0.36,
+              "HIGH": 0.12
+            }
+          }
+        },
+        {
+          "path": "occupation.type",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "EMPLOYED": 0.62,
+              "SELF_EMPLOYED": 0.16,
+              "RETIRED": 0.15,
+              "STUDENT": 0.07
+            }
+          }
+        },
+        {
+          "path": "occupation.employer",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "TechCorp Inc": 0.25,
+              "GlobalTrade Ltd": 0.3,
+              "CityHospital": 0.2,
+              "MetroBank": 0.25
+            }
+          }
+        },
+        {
+          "path": "occupation.industry",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "SOFTWARE": 0.3,
+              "FINANCE": 0.28,
+              "HEALTHCARE": 0.2,
+              "MANUFACTURING": 0.22
+            }
+          }
+        },
+        {
+          "path": "contact_prefs.email",
+          "generator": {
+            "type": "bool_probability",
+            "p_true": 0.88
+          }
+        },
+        {
+          "path": "contact_prefs.sms",
+          "generator": {
+            "type": "bool_probability",
+            "p_true": 0.42
+          }
+        },
+        {
+          "path": "contact_prefs.language",
+          "generator": {
+            "type": "conditional_map",
+            "source_key": "country",
+            "map": {
+              "CN": "zh-CN",
+              "HK": "zh-CN",
+              "SG": "en-US",
+              "US": "en-US",
+              "GB": "en-GB"
+            },
+            "default": "en-US"
+          }
+        },
+        {
+          "path": "tags",
+          "generator": {
+            "type": "enum_list_sample",
+            "pool": [
+              "VIP",
+              "ESG_INVESTOR",
+              "MASS_AFFLUENT",
+              "DIGITAL_ONLY"
+            ],
+            "k": 2
+          }
+        },
+        {
+          "path": "custom_fields.referral_source",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "WEB_AD": 0.35,
+              "BRANCH": 0.25,
+              "PARTNER": 0.2,
+              "REFERRAL": 0.2
+            }
+          }
+        },
+        {
+          "path": "custom_fields.onboarding_date",
+          "generator": {
+            "type": "row_index_date",
+            "start_date": "2024-01-01",
+            "modulo_days": 365
+          }
+        }
+      ]
+    },
+    "account_metadata_pack": {
+      "description": "Account metadata JSON reusing account type enums from field packs.",
+      "fields": [
+        {
+          "path": "product_family",
+          "generator": {
+            "type": "conditional_map",
+            "source_key": "account_type",
+            "map": {
+              "credit_line": "LENDING"
+            },
+            "default": "DEPOSIT"
+          }
+        },
+        {
+          "path": "service_channel",
+          "generator": {
+            "type": "from_field_pack_allowed_values",
+            "field_pack_id": "interaction_core",
+            "field_name": "channel",
+            "weights": {
+              "mobile_app": 0.33,
+              "branch": 0.24,
+              "call_center": 0.13,
+              "web": 0.22,
+              "atm": 0.08
+            }
+          }
+        },
+        {
+          "path": "fee_plan",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "STANDARD": 0.52,
+              "PREMIUM": 0.32,
+              "PRIVATE_BANKING": 0.16
+            }
+          }
+        },
+        {
+          "path": "interest_tier",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "TIER_1": 0.34,
+              "TIER_2": 0.42,
+              "TIER_3": 0.24
+            }
+          }
+        },
+        {
+          "path": "controls.statement_cycle_day",
+          "generator": {
+            "type": "int_range",
+            "min": 1,
+            "max": 28
+          }
+        },
+        {
+          "path": "controls.overdraft_enabled",
+          "generator": {
+            "type": "conditional_map",
+            "source_key": "account_type",
+            "map": {
+              "credit_line": true
+            },
+            "default": false
+          }
+        },
+        {
+          "path": "controls.cross_border_enabled",
+          "generator": {
+            "type": "bool_probability",
+            "p_true": 0.28
+          }
+        }
+      ]
+    },
+    "transaction_details_pack": {
+      "description": "Transaction details JSON reusing channel/currency enums from field packs.",
+      "fields": [
+        {
+          "path": "purpose_code",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "BILL_PAY": 0.28,
+              "SALARY": 0.18,
+              "P2P": 0.24,
+              "FX_SETTLEMENT": 0.12,
+              "MERCHANT": 0.18
+            }
+          }
+        },
+        {
+          "path": "counterparty.type",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "INDIVIDUAL": 0.56,
+              "CORPORATE": 0.36,
+              "BANK": 0.08
+            }
+          }
+        },
+        {
+          "path": "counterparty.country",
+          "generator": {
+            "type": "from_context",
+            "key": "country",
+            "transform": "upper",
+            "default": "CN"
+          }
+        },
+        {
+          "path": "settlement.currency",
+          "generator": {
+            "type": "from_context",
+            "key": "currency",
+            "transform": "upper",
+            "default": "CNY"
+          }
+        },
+        {
+          "path": "settlement.sla_bucket",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "INSTANT": 0.42,
+              "T0": 0.36,
+              "T1": 0.22
+            }
+          }
+        },
+        {
+          "path": "flags.is_reversal",
+          "generator": {
+            "type": "bool_probability",
+            "p_true": 0.03
+          }
+        },
+        {
+          "path": "flags.is_suspected_fraud",
+          "generator": {
+            "type": "bool_probability",
+            "p_true": 0.01
+          }
+        }
+      ]
+    },
+    "customer_segment_payload_pack": {
+      "description": "Customer segment descriptor payload for business segmentation semantics.",
+      "fields": [
+        {
+          "path": "segment_model",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "retail_value_model_v2": 0.62,
+              "wealth_behavior_scorecard": 0.28,
+              "rm_judgement_overlay": 0.1
+            }
+          }
+        },
+        {
+          "path": "primary_objective",
+          "generator": {
+            "type": "weighted_enum",
+            "weights": {
+              "deposit_growth": 0.34,
+              "aum_growth": 0.28,
+              "credit_uplift": 0.2,
+              "cross_sell": 0.18
+            }
+          }
+        },
+        {
+          "path": "service_level",
+          "generator": {
+            "type": "conditional_map",
+            "source_key": "segment_tier",
+            "map": {
+              "TIER_1": "concierge",
+              "TIER_2": "advisory",
+              "TIER_3": "assisted",
+              "TIER_4": "self_service"
+            },
+            "default": {
+              "type": "weighted_enum",
+              "weights": {
+                "self_service": 0.22,
+                "assisted": 0.46,
+                "advisory": 0.24,
+                "concierge": 0.08
+              }
+            }
+          }
+        },
+        {
+          "path": "review_cycle_days",
+          "generator": {
+            "type": "int_range",
+            "min": 30,
+            "max": 180
+          }
+        },
+        {
+          "path": "pricing_profile",
+          "generator": {
+            "type": "conditional_map",
+            "source_key": "segment_tier",
+            "map": {
+              "TIER_1": "relationship_pricing",
+              "TIER_2": "preferential",
+              "TIER_3": "preferential",
+              "TIER_4": "standard"
+            },
+            "default": {
+              "type": "weighted_enum",
+              "weights": {
+                "standard": 0.48,
+                "preferential": 0.34,
+                "relationship_pricing": 0.18
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

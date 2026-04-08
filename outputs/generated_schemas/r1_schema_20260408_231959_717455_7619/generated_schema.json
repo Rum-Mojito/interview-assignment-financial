@@ -1,0 +1,1018 @@
+{
+  "tables": [
+    {
+      "name": "customers",
+      "columns": [
+        {
+          "name": "customer_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "customer_segment_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "customer_segments",
+            "referenced_column": "customer_segment_id"
+          }
+        },
+        {
+          "name": "full_name",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "age",
+          "type": "integer",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "country",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "profile_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "kyc_xml",
+          "type": "xml",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "risk_note_text",
+          "type": "text",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "journey_stage",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "onboarding",
+            "first_purchase",
+            "repeat",
+            "loyal",
+            "advocate"
+          ]
+        },
+        {
+          "name": "total_aum",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "customer_360_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "accounts",
+      "columns": [
+        {
+          "name": "account_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "customer_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "customers",
+            "referenced_column": "customer_id"
+          }
+        },
+        {
+          "name": "bank_product_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "bank_products",
+            "referenced_column": "bank_product_id"
+          }
+        },
+        {
+          "name": "account_type",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "checking",
+            "savings",
+            "credit_line",
+            "investment",
+            "other"
+          ]
+        },
+        {
+          "name": "balance",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "status",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "open",
+            "active",
+            "closed",
+            "frozen",
+            "dormant",
+            "pending"
+          ]
+        },
+        {
+          "name": "opened_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "metadata_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "leads",
+      "columns": [
+        {
+          "name": "lead_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "customer_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "customers",
+            "referenced_column": "customer_id"
+          }
+        },
+        {
+          "name": "marketing_campaign_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "marketing_campaigns",
+            "referenced_column": "marketing_campaign_id"
+          }
+        },
+        {
+          "name": "lead_source",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "web",
+            "mobile_app",
+            "branch",
+            "referral",
+            "campaign",
+            "api",
+            "other"
+          ]
+        },
+        {
+          "name": "lead_score",
+          "type": "integer",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "lead_status",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "new",
+            "contacted",
+            "qualified",
+            "converted",
+            "lost",
+            "recycled"
+          ]
+        },
+        {
+          "name": "created_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "assigned_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "lead_payload_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "sales_opportunities",
+      "columns": [
+        {
+          "name": "sales_opportunity_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "customer_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "customers",
+            "referenced_column": "customer_id"
+          }
+        },
+        {
+          "name": "pipeline_stage",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "prospecting",
+            "needs_analysis",
+            "solution_presentation",
+            "negotiation",
+            "closed_won",
+            "closed_lost"
+          ]
+        },
+        {
+          "name": "expected_amount",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "expected_close_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "actual_close_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "opportunity_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "bank_products",
+      "columns": [
+        {
+          "name": "bank_product_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "product_name",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "Classic Demand Deposit",
+            "Step-Up Time Deposit 12M",
+            "Wealth Dual-Currency Note",
+            "Retail Mortgage Prime",
+            "Revolving Working Capital Line",
+            "Platinum Rewards Card",
+            "Money Market Liquidity Fund",
+            "FX Forward Contract Pack",
+            "Structured Deposit Series A",
+            "Junior Savings Starter",
+            "Private Banking Cash Sweep",
+            "Trade Finance Import LC",
+            "Green Loan Facility",
+            "Custody Omnibus Service",
+            "Bancassurance Term Life"
+          ]
+        },
+        {
+          "name": "product_category",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "deposit",
+            "wealth",
+            "lending",
+            "insurance",
+            "cards",
+            "other"
+          ]
+        },
+        {
+          "name": "risk_tier",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "r1",
+            "r2",
+            "r3",
+            "r4",
+            "r5"
+          ]
+        },
+        {
+          "name": "product_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "transactions",
+      "columns": [
+        {
+          "name": "transaction_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "account_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "accounts",
+            "referenced_column": "account_id"
+          }
+        },
+        {
+          "name": "amount",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "currency",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "CNY",
+            "USD",
+            "EUR",
+            "HKD",
+            "SGD"
+          ]
+        },
+        {
+          "name": "transaction_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "details_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "customer_interactions",
+      "columns": [
+        {
+          "name": "interaction_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "customer_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "customers",
+            "referenced_column": "customer_id"
+          }
+        },
+        {
+          "name": "channel",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "branch",
+            "mobile_app",
+            "web",
+            "call_center",
+            "atm",
+            "other"
+          ]
+        },
+        {
+          "name": "sentiment_score",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "interaction_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "interaction_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "interaction_note_text",
+          "type": "text",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "servicing_cases",
+      "columns": [
+        {
+          "name": "servicing_case_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "customer_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "customers",
+            "referenced_column": "customer_id"
+          }
+        },
+        {
+          "name": "case_type",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "complaint",
+            "inquiry",
+            "request",
+            "dispute",
+            "other"
+          ]
+        },
+        {
+          "name": "status",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "open",
+            "in_progress",
+            "resolved",
+            "closed"
+          ]
+        },
+        {
+          "name": "priority",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "low",
+            "medium",
+            "high",
+            "urgent"
+          ]
+        },
+        {
+          "name": "opened_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "closed_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "case_summary_text",
+          "type": "text",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "case_payload_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "customer_segments",
+      "columns": [
+        {
+          "name": "customer_segment_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "segment_code",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "segment_name",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "emerging_affluent",
+            "mass_affluent",
+            "high_net_worth",
+            "private_banking",
+            "small_business_owner"
+          ]
+        },
+        {
+          "name": "segment_tier",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "TIER_1",
+            "TIER_2",
+            "TIER_3",
+            "TIER_4"
+          ]
+        },
+        {
+          "name": "risk_band",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "LOW",
+            "MEDIUM",
+            "HIGH",
+            "VERY_HIGH"
+          ]
+        },
+        {
+          "name": "tier_rank",
+          "type": "integer",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "segment_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "employees",
+      "columns": [
+        {
+          "name": "employee_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "employee_code",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "job_title",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "relationship_manager",
+            "team_head",
+            "support",
+            "other"
+          ]
+        },
+        {
+          "name": "branch_code",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "hire_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "employee_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "relationship_assignments",
+      "columns": [
+        {
+          "name": "relationship_assignment_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "customer_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "customers",
+            "referenced_column": "customer_id"
+          }
+        },
+        {
+          "name": "employee_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "employees",
+            "referenced_column": "employee_id"
+          }
+        },
+        {
+          "name": "assignment_role",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "primary_rm",
+            "secondary_rm",
+            "support"
+          ]
+        },
+        {
+          "name": "effective_from",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "effective_until",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "assignment_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "investment_holdings",
+      "columns": [
+        {
+          "name": "investment_holding_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "account_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "accounts",
+            "referenced_column": "account_id"
+          }
+        },
+        {
+          "name": "quantity",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "market_value",
+          "type": "decimal",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "currency",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "CNY",
+            "USD",
+            "EUR",
+            "HKD",
+            "SGD"
+          ]
+        },
+        {
+          "name": "as_of_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "holding_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "marketing_campaigns",
+      "columns": [
+        {
+          "name": "marketing_campaign_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "campaign_name",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "new_to_bank_onboarding_drive",
+            "salary_account_activation_wave",
+            "wealth_upgrade_advisory_month",
+            "mortgage_cross_sell_sprint",
+            "credit_card_reactivation_nudge",
+            "retention_winback_program"
+          ]
+        },
+        {
+          "name": "campaign_channel",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "email",
+            "sms",
+            "push",
+            "branch",
+            "multi",
+            "other"
+          ]
+        },
+        {
+          "name": "start_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "end_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "campaign_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "client_tasks",
+      "columns": [
+        {
+          "name": "client_task_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "customer_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "customers",
+            "referenced_column": "customer_id"
+          }
+        },
+        {
+          "name": "task_type",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "follow_up",
+            "review",
+            "reminder",
+            "onboarding",
+            "other"
+          ]
+        },
+        {
+          "name": "due_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "task_status",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "open",
+            "done",
+            "cancelled"
+          ]
+        },
+        {
+          "name": "task_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "appointments",
+      "columns": [
+        {
+          "name": "appointment_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "customer_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "customers",
+            "referenced_column": "customer_id"
+          }
+        },
+        {
+          "name": "employee_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "employees",
+            "referenced_column": "employee_id"
+          }
+        },
+        {
+          "name": "appointment_channel",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "branch",
+            "video",
+            "phone",
+            "other"
+          ]
+        },
+        {
+          "name": "start_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "end_time",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "appointment_status",
+          "type": "categorical",
+          "is_primary_key": false,
+          "foreign_key": null,
+          "allowed_values": [
+            "scheduled",
+            "completed",
+            "no_show",
+            "cancelled"
+          ]
+        },
+        {
+          "name": "appointment_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    },
+    {
+      "name": "customer_entitlements",
+      "columns": [
+        {
+          "name": "customer_entitlement_id",
+          "type": "string",
+          "is_primary_key": true,
+          "foreign_key": null
+        },
+        {
+          "name": "customer_id",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": {
+            "referenced_table": "customers",
+            "referenced_column": "customer_id"
+          }
+        },
+        {
+          "name": "entitlement_code",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "tier_level",
+          "type": "string",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "valid_from",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "valid_until",
+          "type": "timestamp",
+          "is_primary_key": false,
+          "foreign_key": null
+        },
+        {
+          "name": "entitlement_json",
+          "type": "json",
+          "is_primary_key": false,
+          "foreign_key": null
+        }
+      ]
+    }
+  ]
+}

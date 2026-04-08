@@ -1,0 +1,1 @@
+The bank operates a customer relationship platform: each customer has a profile, one or more product accounts, posted transactions, and logged channel interactions; servicing teams open cases for complaints and track SLA until resolution.

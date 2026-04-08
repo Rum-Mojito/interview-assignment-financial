@@ -1,0 +1,1959 @@
+{
+  "packs": {
+    "pk_customer": [
+      {
+        "name": "customer_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_account": [
+      {
+        "name": "account_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_transaction": [
+      {
+        "name": "transaction_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_account_status_event": [
+      {
+        "name": "status_event_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_customer_identification": [
+      {
+        "name": "customer_identification_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_interaction": [
+      {
+        "name": "interaction_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_servicing_case": [
+      {
+        "name": "servicing_case_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "identification_core": [
+      {
+        "name": "document_type",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "passport",
+          "national_id",
+          "drivers_license",
+          "residence_permit",
+          "other"
+        ]
+      },
+      {
+        "name": "document_number",
+        "normalized_type": "string"
+      },
+      {
+        "name": "issuer_country",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "valid_until",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "identification_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_trading_account": [
+      {
+        "name": "trading_account_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_order": [
+      {
+        "name": "order_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_execution": [
+      {
+        "name": "execution_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_obligor": [
+      {
+        "name": "obligor_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_facility": [
+      {
+        "name": "facility_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_exposure": [
+      {
+        "name": "exposure_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_lead": [
+      {
+        "name": "lead_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_sales_opportunity": [
+      {
+        "name": "sales_opportunity_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_bank_product": [
+      {
+        "name": "bank_product_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "fk_bank_product": [
+      {
+        "name": "bank_product_id",
+        "normalized_type": "string"
+      }
+    ],
+    "lead_core": [
+      {
+        "name": "lead_source",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "web",
+          "mobile_app",
+          "branch",
+          "referral",
+          "campaign",
+          "api",
+          "other"
+        ]
+      },
+      {
+        "name": "lead_score",
+        "normalized_type": "integer"
+      },
+      {
+        "name": "lead_status",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "new",
+          "contacted",
+          "qualified",
+          "converted",
+          "lost",
+          "recycled"
+        ]
+      },
+      {
+        "name": "created_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "assigned_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "lead_payload_json",
+        "normalized_type": "json"
+      }
+    ],
+    "opportunity_core": [
+      {
+        "name": "pipeline_stage",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "prospecting",
+          "needs_analysis",
+          "solution_presentation",
+          "negotiation",
+          "closed_won",
+          "closed_lost"
+        ]
+      },
+      {
+        "name": "expected_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "expected_close_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "actual_close_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "opportunity_json",
+        "normalized_type": "json"
+      }
+    ],
+    "bank_product_core": [
+      {
+        "name": "product_name",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "Classic Demand Deposit",
+          "Step-Up Time Deposit 12M",
+          "Wealth Dual-Currency Note",
+          "Retail Mortgage Prime",
+          "Revolving Working Capital Line",
+          "Platinum Rewards Card",
+          "Money Market Liquidity Fund",
+          "FX Forward Contract Pack",
+          "Structured Deposit Series A",
+          "Junior Savings Starter",
+          "Private Banking Cash Sweep",
+          "Trade Finance Import LC",
+          "Green Loan Facility",
+          "Custody Omnibus Service",
+          "Bancassurance Term Life"
+        ]
+      },
+      {
+        "name": "product_category",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "deposit",
+          "wealth",
+          "lending",
+          "insurance",
+          "cards",
+          "other"
+        ]
+      },
+      {
+        "name": "risk_tier",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "r1",
+          "r2",
+          "r3",
+          "r4",
+          "r5"
+        ]
+      },
+      {
+        "name": "product_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_kyc_case": [
+      {
+        "name": "kyc_case_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "kyc_case_core": [
+      {
+        "name": "case_status",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "pending_doc",
+          "doc_received",
+          "under_review",
+          "cdd_approved",
+          "kyc_active",
+          "rejected",
+          "suspended",
+          "edd_required"
+        ]
+      },
+      {
+        "name": "workflow_stage",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "intake",
+          "cdd",
+          "edd",
+          "approval",
+          "active"
+        ]
+      },
+      {
+        "name": "aml_risk_tier",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "low",
+          "medium",
+          "high"
+        ]
+      },
+      {
+        "name": "case_opened_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "case_closed_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "kyc_case_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_sanctions_screening": [
+      {
+        "name": "sanctions_screening_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "sanctions_screening_core": [
+      {
+        "name": "watchlist_provider",
+        "normalized_type": "string"
+      },
+      {
+        "name": "screening_outcome",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "clear",
+          "potential_hit",
+          "confirmed_hit",
+          "manual_review"
+        ]
+      },
+      {
+        "name": "screened_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "screening_result_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_party_relationship": [
+      {
+        "name": "party_relationship_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "party_relationship_core": [
+      {
+        "name": "relationship_type",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "ubo",
+          "household",
+          "subsidiary",
+          "affiliate",
+          "spouse",
+          "other"
+        ]
+      },
+      {
+        "name": "related_customer_id",
+        "normalized_type": "string"
+      },
+      {
+        "name": "ownership_percent",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "relationship_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_customer_segment": [
+      {
+        "name": "customer_segment_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "segment_dimension_core": [
+      {
+        "name": "segment_code",
+        "normalized_type": "string"
+      },
+      {
+        "name": "segment_name",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "emerging_affluent",
+          "mass_affluent",
+          "high_net_worth",
+          "private_banking",
+          "small_business_owner"
+        ]
+      },
+      {
+        "name": "segment_tier",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "TIER_1",
+          "TIER_2",
+          "TIER_3",
+          "TIER_4"
+        ]
+      },
+      {
+        "name": "risk_band",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "LOW",
+          "MEDIUM",
+          "HIGH",
+          "VERY_HIGH"
+        ]
+      },
+      {
+        "name": "tier_rank",
+        "normalized_type": "integer"
+      },
+      {
+        "name": "segment_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_employee": [
+      {
+        "name": "employee_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "employee_core": [
+      {
+        "name": "employee_code",
+        "normalized_type": "string"
+      },
+      {
+        "name": "job_title",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "relationship_manager",
+          "team_head",
+          "support",
+          "other"
+        ]
+      },
+      {
+        "name": "branch_code",
+        "normalized_type": "string"
+      },
+      {
+        "name": "hire_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "employee_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_relationship_assignment": [
+      {
+        "name": "relationship_assignment_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "relationship_assignment_core": [
+      {
+        "name": "assignment_role",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "primary_rm",
+          "secondary_rm",
+          "support"
+        ]
+      },
+      {
+        "name": "effective_from",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "effective_until",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "assignment_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_investment_holding": [
+      {
+        "name": "investment_holding_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "investment_holding_core": [
+      {
+        "name": "quantity",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "market_value",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "currency",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "CNY",
+          "USD",
+          "EUR",
+          "HKD",
+          "SGD"
+        ]
+      },
+      {
+        "name": "as_of_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "holding_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_external_account_link": [
+      {
+        "name": "external_account_link_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "external_account_link_core": [
+      {
+        "name": "provider",
+        "normalized_type": "string"
+      },
+      {
+        "name": "external_ref",
+        "normalized_type": "string"
+      },
+      {
+        "name": "consent_status",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "active",
+          "revoked",
+          "pending"
+        ]
+      },
+      {
+        "name": "link_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_marketing_campaign": [
+      {
+        "name": "marketing_campaign_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "marketing_campaign_core": [
+      {
+        "name": "campaign_name",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "new_to_bank_onboarding_drive",
+          "salary_account_activation_wave",
+          "wealth_upgrade_advisory_month",
+          "mortgage_cross_sell_sprint",
+          "credit_card_reactivation_nudge",
+          "retention_winback_program"
+        ]
+      },
+      {
+        "name": "campaign_channel",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "email",
+          "sms",
+          "push",
+          "branch",
+          "multi",
+          "other"
+        ]
+      },
+      {
+        "name": "start_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "end_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "campaign_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_client_task": [
+      {
+        "name": "client_task_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "client_task_core": [
+      {
+        "name": "task_type",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "follow_up",
+          "review",
+          "reminder",
+          "onboarding",
+          "other"
+        ]
+      },
+      {
+        "name": "due_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "task_status",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "open",
+          "done",
+          "cancelled"
+        ]
+      },
+      {
+        "name": "task_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_appointment": [
+      {
+        "name": "appointment_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "appointment_core": [
+      {
+        "name": "appointment_channel",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "branch",
+          "video",
+          "phone",
+          "other"
+        ]
+      },
+      {
+        "name": "start_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "end_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "appointment_status",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "scheduled",
+          "completed",
+          "no_show",
+          "cancelled"
+        ]
+      },
+      {
+        "name": "appointment_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_customer_entitlement": [
+      {
+        "name": "customer_entitlement_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "entitlement_core": [
+      {
+        "name": "entitlement_code",
+        "normalized_type": "string"
+      },
+      {
+        "name": "tier_level",
+        "normalized_type": "string"
+      },
+      {
+        "name": "valid_from",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "valid_until",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "entitlement_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_audit_log": [
+      {
+        "name": "audit_log_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "audit_log_core": [
+      {
+        "name": "entity_type",
+        "normalized_type": "string"
+      },
+      {
+        "name": "entity_key",
+        "normalized_type": "string"
+      },
+      {
+        "name": "action_code",
+        "normalized_type": "string"
+      },
+      {
+        "name": "actor_employee_id",
+        "normalized_type": "string"
+      },
+      {
+        "name": "action_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "audit_payload_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_consent_record": [
+      {
+        "name": "consent_record_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "consent_record_core": [
+      {
+        "name": "purpose",
+        "normalized_type": "string"
+      },
+      {
+        "name": "consent_version",
+        "normalized_type": "string"
+      },
+      {
+        "name": "granted_flag",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "yes",
+          "no",
+          "withdrawn"
+        ]
+      },
+      {
+        "name": "consent_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "consent_json",
+        "normalized_type": "json"
+      }
+    ],
+    "pk_regulatory_submission": [
+      {
+        "name": "regulatory_submission_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "regulatory_submission_core": [
+      {
+        "name": "report_type",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "large_txn",
+          "str",
+          "ctr",
+          "other"
+        ]
+      },
+      {
+        "name": "submission_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "submission_payload_json",
+        "normalized_type": "json"
+      }
+    ],
+    "fk_marketing_campaign": [
+      {
+        "name": "marketing_campaign_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_employee": [
+      {
+        "name": "employee_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_customer_segment": [
+      {
+        "name": "customer_segment_id",
+        "normalized_type": "string"
+      }
+    ],
+    "client_engagement_extension": [
+      {
+        "name": "journey_stage",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "onboarding",
+          "first_purchase",
+          "repeat",
+          "loyal",
+          "advocate"
+        ]
+      },
+      {
+        "name": "total_aum",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "customer_360_json",
+        "normalized_type": "json"
+      }
+    ],
+    "fk_customer": [
+      {
+        "name": "customer_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_account": [
+      {
+        "name": "account_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_trading_account": [
+      {
+        "name": "trading_account_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_order": [
+      {
+        "name": "order_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_obligor": [
+      {
+        "name": "obligor_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_facility": [
+      {
+        "name": "facility_id",
+        "normalized_type": "string"
+      }
+    ],
+    "customer_identity": [
+      {
+        "name": "full_name",
+        "normalized_type": "string"
+      },
+      {
+        "name": "age",
+        "normalized_type": "integer"
+      },
+      {
+        "name": "country",
+        "normalized_type": "categorical"
+      }
+    ],
+    "customer_risk_semistructured": [
+      {
+        "name": "profile_json",
+        "normalized_type": "json"
+      },
+      {
+        "name": "kyc_xml",
+        "normalized_type": "xml"
+      },
+      {
+        "name": "risk_note_text",
+        "normalized_type": "text"
+      }
+    ],
+    "account_core": [
+      {
+        "name": "account_type",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "checking",
+          "savings",
+          "credit_line",
+          "investment",
+          "other"
+        ]
+      },
+      {
+        "name": "balance",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "status",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "open",
+          "active",
+          "closed",
+          "frozen",
+          "dormant",
+          "pending"
+        ]
+      },
+      {
+        "name": "opened_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "metadata_json",
+        "normalized_type": "json"
+      }
+    ],
+    "transaction_core": [
+      {
+        "name": "amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "currency",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "CNY",
+          "USD",
+          "EUR",
+          "HKD",
+          "SGD"
+        ]
+      },
+      {
+        "name": "transaction_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "details_json",
+        "normalized_type": "json"
+      }
+    ],
+    "account_status_scd_core": [
+      {
+        "name": "status",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "open",
+          "pending",
+          "active",
+          "dormant",
+          "frozen",
+          "closed"
+        ]
+      },
+      {
+        "name": "status_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "is_current",
+        "normalized_type": "categorical",
+        "allowed_values": ["Y", "N"]
+      }
+    ],
+    "servicing_case_core": [
+      {
+        "name": "case_type",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "complaint",
+          "inquiry",
+          "request",
+          "dispute",
+          "other"
+        ]
+      },
+      {
+        "name": "status",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "open",
+          "in_progress",
+          "resolved",
+          "closed"
+        ]
+      },
+      {
+        "name": "priority",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "low",
+          "medium",
+          "high",
+          "urgent"
+        ]
+      },
+      {
+        "name": "opened_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "closed_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "case_summary_text",
+        "normalized_type": "text"
+      },
+      {
+        "name": "case_payload_json",
+        "normalized_type": "json"
+      }
+    ],
+    "interaction_core": [
+      {
+        "name": "channel",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "branch",
+          "mobile_app",
+          "web",
+          "call_center",
+          "atm",
+          "other"
+        ]
+      },
+      {
+        "name": "sentiment_score",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "interaction_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "interaction_json",
+        "normalized_type": "json"
+      },
+      {
+        "name": "interaction_note_text",
+        "normalized_type": "text"
+      }
+    ],
+    "trading_account_core": [
+      {
+        "name": "customer_name",
+        "normalized_type": "string"
+      },
+      {
+        "name": "account_type",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "opened_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "profile_json",
+        "normalized_type": "json"
+      }
+    ],
+    "order_core": [
+      {
+        "name": "instrument_type",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "quantity",
+        "normalized_type": "integer"
+      },
+      {
+        "name": "price",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "order_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "order_xml",
+        "normalized_type": "xml"
+      }
+    ],
+    "execution_core": [
+      {
+        "name": "executed_quantity",
+        "normalized_type": "integer"
+      },
+      {
+        "name": "executed_price",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "currency",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "execution_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "execution_note_text",
+        "normalized_type": "text"
+      }
+    ],
+    "obligor_core": [
+      {
+        "name": "obligor_name",
+        "normalized_type": "string"
+      },
+      {
+        "name": "risk_grade",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "country",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "profile_json",
+        "normalized_type": "json"
+      }
+    ],
+    "facility_core": [
+      {
+        "name": "approved_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "available_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "facility_status",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "effective_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "exposure_core": [
+      {
+        "name": "ead_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "currency",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "as_of_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "exposure_note_text",
+        "normalized_type": "text"
+      }
+    ],
+    "pk_position": [
+      {
+        "name": "position_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_valuation": [
+      {
+        "name": "valuation_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_pnl_snapshot": [
+      {
+        "name": "pnl_snapshot_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_trading_limit": [
+      {
+        "name": "trading_limit_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_risk_alert": [
+      {
+        "name": "risk_alert_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_trade_reconciliation": [
+      {
+        "name": "trade_reconciliation_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_drawdown_event": [
+      {
+        "name": "drawdown_event_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_repayment_event": [
+      {
+        "name": "repayment_event_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_overdue_snapshot": [
+      {
+        "name": "overdue_snapshot_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_collection_task": [
+      {
+        "name": "collection_task_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_asset_classification": [
+      {
+        "name": "asset_classification_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_provision_entry": [
+      {
+        "name": "provision_entry_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_collateral_link": [
+      {
+        "name": "collateral_link_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "fk_execution": [
+      {
+        "name": "execution_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_position": [
+      {
+        "name": "position_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_trading_limit": [
+      {
+        "name": "trading_limit_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_exposure": [
+      {
+        "name": "exposure_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_overdue_snapshot": [
+      {
+        "name": "overdue_snapshot_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_asset_classification": [
+      {
+        "name": "asset_classification_id",
+        "normalized_type": "string"
+      }
+    ],
+    "position_core": [
+      {
+        "name": "trading_account_id",
+        "normalized_type": "string"
+      },
+      {
+        "name": "instrument_type",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "net_quantity",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "avg_cost",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "snapshot_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "valuation_core": [
+      {
+        "name": "mark_price",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "mark_currency",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "mark_value",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "mark_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "pnl_snapshot_core": [
+      {
+        "name": "realized_pnl",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "unrealized_pnl",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "total_pnl",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "calc_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "trading_limit_core": [
+      {
+        "name": "limit_scope",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "approved_limit",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "current_exposure",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "utilization_ratio",
+        "normalized_type": "decimal"
+      }
+    ],
+    "risk_alert_core": [
+      {
+        "name": "alert_level",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "alert_status",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "raised_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "alert_json",
+        "normalized_type": "json"
+      }
+    ],
+    "trade_reconciliation_core": [
+      {
+        "name": "recon_scope",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "recon_status",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "break_count",
+        "normalized_type": "integer"
+      },
+      {
+        "name": "reconciled_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "drawdown_event_core": [
+      {
+        "name": "drawdown_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "drawdown_currency",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "drawdown_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "drawdown_json",
+        "normalized_type": "json"
+      }
+    ],
+    "repayment_event_core": [
+      {
+        "name": "principal_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "interest_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "repayment_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "repayment_json",
+        "normalized_type": "json"
+      }
+    ],
+    "overdue_snapshot_core": [
+      {
+        "name": "dpd_days",
+        "normalized_type": "integer"
+      },
+      {
+        "name": "overdue_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "watchlist_level",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "snapshot_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "collection_task_core": [
+      {
+        "name": "task_priority",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "task_status",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "due_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "collection_note_text",
+        "normalized_type": "text"
+      }
+    ],
+    "asset_classification_core": [
+      {
+        "name": "asset_class",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "classification_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "classification_reason_text",
+        "normalized_type": "text"
+      }
+    ],
+    "provision_entry_core": [
+      {
+        "name": "provision_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "provision_currency",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "provision_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "provision_json",
+        "normalized_type": "json"
+      }
+    ],
+    "collateral_link_core": [
+      {
+        "name": "collateral_type",
+        "normalized_type": "categorical"
+      },
+      {
+        "name": "collateral_value",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "haircut_percent",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "valuation_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "pk_instrument_master": [
+      {
+        "name": "instrument_master_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_market_quote_snapshot": [
+      {
+        "name": "market_quote_snapshot_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_yield_curve_point": [
+      {
+        "name": "yield_curve_point_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_funding_deal": [
+      {
+        "name": "funding_deal_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_cashflow_ladder_point": [
+      {
+        "name": "cashflow_ladder_point_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_liquidity_bucket_snapshot": [
+      {
+        "name": "liquidity_bucket_snapshot_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_ftp_curve": [
+      {
+        "name": "ftp_curve_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "fk_instrument_master": [
+      {
+        "name": "instrument_master_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_funding_deal": [
+      {
+        "name": "funding_deal_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_cashflow_ladder_point": [
+      {
+        "name": "cashflow_ladder_point_id",
+        "normalized_type": "string"
+      }
+    ],
+    "fk_liquidity_bucket_snapshot": [
+      {
+        "name": "liquidity_bucket_snapshot_id",
+        "normalized_type": "string"
+      }
+    ],
+    "instrument_master_core": [
+      {
+        "name": "instrument_code",
+        "normalized_type": "string"
+      },
+      {
+        "name": "instrument_type",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "bond",
+          "equity",
+          "fx_pair",
+          "rate_index",
+          "derivative",
+          "other"
+        ]
+      },
+      {
+        "name": "currency",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "CNY",
+          "USD",
+          "EUR",
+          "HKD",
+          "SGD"
+        ]
+      },
+      {
+        "name": "listing_venue",
+        "normalized_type": "string"
+      },
+      {
+        "name": "instrument_json",
+        "normalized_type": "json"
+      }
+    ],
+    "market_quote_snapshot_core": [
+      {
+        "name": "bid_price",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "ask_price",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "last_price",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "quote_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "quote_source",
+        "normalized_type": "string"
+      }
+    ],
+    "yield_curve_point_core": [
+      {
+        "name": "curve_name",
+        "normalized_type": "string"
+      },
+      {
+        "name": "tenor_code",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "1D",
+          "1W",
+          "1M",
+          "3M",
+          "6M",
+          "1Y",
+          "2Y",
+          "5Y",
+          "10Y"
+        ]
+      },
+      {
+        "name": "zero_rate",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "as_of_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "funding_deal_core": [
+      {
+        "name": "funding_type",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "interbank_borrowing",
+          "interbank_lending",
+          "repo",
+          "term_funding",
+          "other"
+        ]
+      },
+      {
+        "name": "principal_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "rate_percent",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "start_time",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "maturity_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "cashflow_ladder_point_core": [
+      {
+        "name": "bucket_code",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "overnight",
+          "2_7d",
+          "8_30d",
+          "31_90d",
+          "91_365d",
+          "gt_1y"
+        ]
+      },
+      {
+        "name": "inflow_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "outflow_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "bucket_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "liquidity_bucket_snapshot_core": [
+      {
+        "name": "metric_type",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "lcr",
+          "nsfr",
+          "internal_gap",
+          "other"
+        ]
+      },
+      {
+        "name": "bucket_value",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "limit_value",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "snapshot_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "ftp_curve_core": [
+      {
+        "name": "curve_name",
+        "normalized_type": "string"
+      },
+      {
+        "name": "tenor_code",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "1M",
+          "3M",
+          "6M",
+          "1Y",
+          "2Y",
+          "5Y"
+        ]
+      },
+      {
+        "name": "ftp_rate_percent",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "as_of_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "pk_trading_calendar": [
+      {
+        "name": "trading_calendar_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_corporate_action_event": [
+      {
+        "name": "corporate_action_event_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_hqla_inventory": [
+      {
+        "name": "hqla_inventory_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "pk_funding_concentration_snapshot": [
+      {
+        "name": "funding_concentration_snapshot_id",
+        "normalized_type": "string",
+        "is_primary_key": true
+      }
+    ],
+    "trading_calendar_core": [
+      {
+        "name": "market_code",
+        "normalized_type": "string"
+      },
+      {
+        "name": "calendar_date",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "is_business_day",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "yes",
+          "no"
+        ]
+      },
+      {
+        "name": "holiday_type",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "none",
+          "exchange_holiday",
+          "settlement_holiday",
+          "other"
+        ]
+      }
+    ],
+    "corporate_action_event_core": [
+      {
+        "name": "action_type",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "dividend",
+          "stock_split",
+          "rights_issue",
+          "coupon",
+          "other"
+        ]
+      },
+      {
+        "name": "ex_date",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "record_date",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "pay_date",
+        "normalized_type": "timestamp"
+      },
+      {
+        "name": "action_json",
+        "normalized_type": "json"
+      }
+    ],
+    "hqla_inventory_core": [
+      {
+        "name": "hqla_level",
+        "normalized_type": "categorical",
+        "allowed_values": [
+          "level1",
+          "level2a",
+          "level2b",
+          "other"
+        ]
+      },
+      {
+        "name": "market_value",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "haircut_percent",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "as_of_time",
+        "normalized_type": "timestamp"
+      }
+    ],
+    "funding_concentration_snapshot_core": [
+      {
+        "name": "counterparty_group",
+        "normalized_type": "string"
+      },
+      {
+        "name": "funding_amount",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "concentration_ratio",
+        "normalized_type": "decimal"
+      },
+      {
+        "name": "snapshot_time",
+        "normalized_type": "timestamp"
+      }
+    ]
+  }
+}

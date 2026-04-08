@@ -1,0 +1,379 @@
+{
+  "description": "When scenario text matches signal_keywords on domain_taxonomy.json (Level-1 / Level-2), infer additional concepts before domain_extension_rules.json. Rules use set logic: when_domains_matched_all = every listed domain had ≥1 keyword hit; when_themes_match_any = at least one listed theme had ≥1 keyword hit (optional).",
+  "rules": [
+    {
+      "id": "kyc_documents_when_party_and_compliance_signals",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "compliance_surveillance_regulatory_reporting"
+      ],
+      "when_themes_match_any": [],
+      "append_concepts": ["customer_identification"],
+      "business_rationale": "Text signals both party and compliance domains; KYC/CDD identifier satellite is typically modeled separately from party master."
+    },
+    {
+      "id": "interaction_log_when_party_and_event_signals",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": [],
+      "append_concepts": ["customer_interaction"],
+      "business_rationale": "Party plus event/flow language suggests servicing and channel touch history beyond ledger postings."
+    },
+    {
+      "id": "servicing_case_when_party_product_and_event_domains",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "agreement_product_schedule",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": [],
+      "append_concepts": ["servicing_case"],
+      "business_rationale": "Party, product/agreement, and operational events together imply structured case/ticket tracking for SLA and complaints."
+    },
+    {
+      "id": "trading_execution_when_instrument_and_market_execution_theme",
+      "when_domains_matched_all": [
+        "instrument_reference_market_data",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": ["markets_execution"],
+      "append_concepts": ["order", "execution"],
+      "business_rationale": "Instrument reference plus execution theme signals brokerage/trading lifecycle (intent and fills)."
+    },
+    {
+      "id": "trading_book_controls_when_market_and_risk_themes",
+      "when_domains_matched_all": [
+        "instrument_reference_market_data",
+        "transaction_event_settlement",
+        "ledger_position_pnl_valuation",
+        "risk_limit_rating_collateral"
+      ],
+      "when_themes_match_any": ["trading_book", "market_risk"],
+      "append_concepts": ["position"],
+      "business_rationale": "Trading-book and market-risk themes first imply explicit position state beyond order/execution facts."
+    },
+    {
+      "id": "trading_valuation_when_book_theme_present",
+      "when_domains_matched_all": [
+        "instrument_reference_market_data",
+        "ledger_position_pnl_valuation",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": ["trading_book"],
+      "append_concepts": ["valuation"],
+      "business_rationale": "Trading-book wording typically requires valuation snapshots on top of position state."
+    },
+    {
+      "id": "trading_pnl_when_market_risk_theme_present",
+      "when_domains_matched_all": [
+        "instrument_reference_market_data",
+        "ledger_position_pnl_valuation",
+        "risk_limit_rating_collateral"
+      ],
+      "when_themes_match_any": ["market_risk", "trading_book"],
+      "append_concepts": ["pnl_snapshot"],
+      "business_rationale": "Market-risk/trading-book narratives usually include PnL snapshots for intraday and EOD controls."
+    },
+    {
+      "id": "trading_limit_when_market_risk_theme_present",
+      "when_domains_matched_all": [
+        "instrument_reference_market_data",
+        "risk_limit_rating_collateral",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": ["market_risk"],
+      "append_concepts": ["trading_limit"],
+      "business_rationale": "Explicit market-risk language implies limit utilization tracking."
+    },
+    {
+      "id": "trading_risk_alert_when_market_risk_theme_present",
+      "when_domains_matched_all": [
+        "instrument_reference_market_data",
+        "risk_limit_rating_collateral",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": ["market_risk"],
+      "append_concepts": ["risk_alert"],
+      "business_rationale": "Breach and threshold alerts are expected when market-risk monitoring is in scope."
+    },
+    {
+      "id": "trading_reconciliation_when_execution_theme_present",
+      "when_domains_matched_all": [
+        "instrument_reference_market_data",
+        "transaction_event_settlement",
+        "compliance_surveillance_regulatory_reporting"
+      ],
+      "when_themes_match_any": ["markets_execution"],
+      "append_concepts": ["trade_reconciliation"],
+      "business_rationale": "Execution-heavy narratives with governance context imply reconciliation/break-management rows."
+    },
+    {
+      "id": "lead_infer_when_party_product_and_wealth_or_corporate_theme",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "agreement_product_schedule"
+      ],
+      "when_themes_match_any": ["retail_wealth", "corporate_institutional"],
+      "append_concepts": ["lead"],
+      "business_rationale": "Retail or corporate institutional themes plus party and product/agreement language match typical acquisition stories (lead capture, scoring, routing) even when the user does not say the word 'lead'."
+    },
+    {
+      "id": "kyc_case_infer_when_party_compliance_and_due_diligence_theme",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "compliance_surveillance_regulatory_reporting"
+      ],
+      "when_themes_match_any": ["kyc_due_diligence_screening"],
+      "append_concepts": ["kyc_case", "sanctions_screening"],
+      "business_rationale": "CDD/EDD/sanctions vocabulary under the due-diligence screening theme implies a case file plus screening runs, not only identifier documents."
+    },
+    {
+      "id": "coverage_staff_infer_when_party_and_distribution_coverage_theme",
+      "when_domains_matched_all": ["party_legal_relationship"],
+      "when_themes_match_any": ["distribution_coverage"],
+      "append_concepts": ["employee", "relationship_assignment"],
+      "business_rationale": "Explicit relationship-manager / coverage vocabulary implies bank staff master plus customer–RM assignment, separate from the customer party row."
+    },
+    {
+      "id": "marketing_campaign_infer_when_party_product_and_acquisition_theme",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "agreement_product_schedule"
+      ],
+      "when_themes_match_any": ["client_acquisition_lifecycle"],
+      "append_concepts": ["marketing_campaign"],
+      "business_rationale": "Nurture/drip/campaign-attribution wording with party and product context supports a campaign dimension feeding leads."
+    },
+    {
+      "id": "servicing_touchpoints_infer_when_party_transaction_and_retention_theme",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": ["client_servicing_retention"],
+      "append_concepts": ["client_task", "appointment", "customer_entitlement"],
+      "business_rationale": "Retention-service keywords (appointments, entitlements, reminders) with party and operational-event signals imply tasks, scheduling, and tier benefits."
+    },
+    {
+      "id": "credit_stack_when_party_agreement_and_risk_signals",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "agreement_product_schedule",
+        "risk_limit_rating_collateral"
+      ],
+      "when_themes_match_any": ["lending_structured", "credit_risk"],
+      "append_concepts": ["obligor", "facility", "exposure"],
+      "business_rationale": "Three Level-1 domains alone can light from generic blurbs. Require at least one credit-specific theme: lending_structured (facility/loan-style wording) or credit_risk (credit risk / default / exposure-style wording) before inferring the obligor–facility–exposure chain."
+    },
+    {
+      "id": "credit_operations_when_lending_and_credit_risk_themes",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "agreement_product_schedule",
+        "risk_limit_rating_collateral",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": ["credit_risk"],
+      "append_concepts": ["drawdown_event", "repayment_event"],
+      "business_rationale": "Require explicit credit-risk theme before inferring drawdown and repayment lifecycle events."
+    },
+    {
+      "id": "credit_overdue_when_credit_risk_theme_present",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "risk_limit_rating_collateral",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": ["credit_risk"],
+      "append_concepts": ["overdue_snapshot"],
+      "business_rationale": "Credit-risk narratives commonly include delinquency/DPD snapshots."
+    },
+    {
+      "id": "credit_collection_when_credit_risk_theme_present",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "risk_limit_rating_collateral",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": ["credit_risk"],
+      "append_concepts": ["collection_task"],
+      "business_rationale": "When delinquency risk is discussed, collection workflow tasks are often part of operating data."
+    },
+    {
+      "id": "credit_classification_when_credit_risk_theme_present",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "risk_limit_rating_collateral",
+        "agreement_product_schedule"
+      ],
+      "when_themes_match_any": ["credit_risk"],
+      "append_concepts": ["asset_classification"],
+      "business_rationale": "Credit-risk reporting generally includes asset class staging outcomes."
+    },
+    {
+      "id": "credit_provision_when_credit_risk_theme_present",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "risk_limit_rating_collateral",
+        "ledger_position_pnl_valuation"
+      ],
+      "when_themes_match_any": ["credit_risk"],
+      "append_concepts": ["provision_entry"],
+      "business_rationale": "Credit-risk + valuation/accounting signals imply provision entry rows."
+    },
+    {
+      "id": "credit_collateral_when_lending_theme_present",
+      "when_domains_matched_all": [
+        "agreement_product_schedule",
+        "risk_limit_rating_collateral"
+      ],
+      "when_themes_match_any": ["lending_structured", "credit_risk"],
+      "append_concepts": ["collateral_link"],
+      "business_rationale": "Lending and credit-risk themes often require collateral-to-facility linkage."
+    },
+    {
+      "id": "instrument_master_when_market_reference_themes",
+      "when_domains_matched_all": ["instrument_reference_market_data"],
+      "when_themes_match_any": ["cash_equities_fi", "derivatives_fx_mm"],
+      "append_concepts": ["instrument_master"],
+      "business_rationale": "Instrument reference themes should first materialize a security/instrument master rather than expanding directly into downstream facts."
+    },
+    {
+      "id": "market_quote_snapshot_when_execution_theme",
+      "when_domains_matched_all": [
+        "instrument_reference_market_data",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": ["markets_execution"],
+      "append_concepts": ["market_quote_snapshot"],
+      "business_rationale": "Execution-oriented market narratives usually require quoted market snapshots for price provenance."
+    },
+    {
+      "id": "yield_curve_point_when_derivatives_or_trading_book_theme",
+      "when_domains_matched_all": [
+        "instrument_reference_market_data",
+        "ledger_position_pnl_valuation"
+      ],
+      "when_themes_match_any": ["derivatives_fx_mm", "trading_book"],
+      "append_concepts": ["yield_curve_point"],
+      "business_rationale": "Derivatives and trading-book valuation contexts commonly rely on curve tenor points."
+    },
+    {
+      "id": "trading_calendar_when_cash_equities_theme",
+      "when_domains_matched_all": ["instrument_reference_market_data"],
+      "when_themes_match_any": ["cash_equities_fi"],
+      "append_concepts": ["trading_calendar"],
+      "business_rationale": "Cash market instrument narratives usually require exchange/trading calendar reference."
+    },
+    {
+      "id": "corporate_action_when_cash_equities_theme",
+      "when_domains_matched_all": [
+        "instrument_reference_market_data",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": ["cash_equities_fi"],
+      "append_concepts": ["corporate_action_event"],
+      "business_rationale": "Cash-equity/fixed-income reference with event flow often includes corporate action lifecycle events."
+    },
+    {
+      "id": "liquidity_ladder_when_alm_theme",
+      "when_domains_matched_all": [
+        "treasury_alm_funding_liquidity",
+        "ledger_position_pnl_valuation"
+      ],
+      "when_themes_match_any": ["alm_policy"],
+      "append_concepts": ["cashflow_ladder_point", "liquidity_bucket_snapshot"],
+      "business_rationale": "ALM policy narratives commonly require cashflow ladder buckets and liquidity snapshots."
+    },
+    {
+      "id": "ftp_curve_when_alm_theme",
+      "when_domains_matched_all": [
+        "treasury_alm_funding_liquidity",
+        "agreement_product_schedule"
+      ],
+      "when_themes_match_any": ["alm_policy"],
+      "append_concepts": ["ftp_curve"],
+      "business_rationale": "ALM transfer-pricing context should materialize FTP curve points for internal funding allocation."
+    },
+    {
+      "id": "hqla_inventory_when_alm_theme",
+      "when_domains_matched_all": [
+        "treasury_alm_funding_liquidity",
+        "ledger_position_pnl_valuation"
+      ],
+      "when_themes_match_any": ["alm_policy"],
+      "append_concepts": ["hqla_inventory"],
+      "business_rationale": "ALM/liquidity policy narratives commonly require HQLA inventory snapshots."
+    },
+    {
+      "id": "funding_concentration_when_interbank_theme",
+      "when_domains_matched_all": [
+        "treasury_alm_funding_liquidity",
+        "risk_limit_rating_collateral"
+      ],
+      "when_themes_match_any": ["alm_policy"],
+      "append_concepts": ["funding_concentration_snapshot"],
+      "business_rationale": "Concentration snapshots are appended under explicit ALM policy context to avoid broad treasury keyword over-triggering."
+    },
+    {
+      "id": "transaction_when_party_event_and_electronic_payments_theme",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": ["electronic_payments"],
+      "append_concepts": ["transaction"],
+      "business_rationale": "RTGS/wire/remittance-style vocabulary under the electronic-payments theme, together with party and settlement-domain signals, implies posted payment/transfer facts rather than only abstract 'event' language."
+    },
+    {
+      "id": "valuation_when_instrument_ledger_and_banking_book_theme",
+      "when_domains_matched_all": [
+        "instrument_reference_market_data",
+        "ledger_position_pnl_valuation"
+      ],
+      "when_themes_match_any": ["banking_book"],
+      "append_concepts": ["valuation"],
+      "business_rationale": "Banking-book (accrual/NII) narratives for instruments on the balance sheet typically require periodic valuation or accrual marks distinct from trading-book MTM controls tied to the trading_book theme."
+    },
+    {
+      "id": "structured_wrap_when_agreement_instrument_and_markets_product_wrapper_theme",
+      "when_domains_matched_all": [
+        "agreement_product_schedule",
+        "instrument_reference_market_data"
+      ],
+      "when_themes_match_any": ["markets_product_wrapper"],
+      "append_concepts": ["bank_product", "instrument_master"],
+      "business_rationale": "Structured-product / wrapper wording links a client-facing product or agreement to an underlying instrument reference; both catalog and security master are usually materialized before downstream lifecycle facts."
+    },
+    {
+      "id": "funding_deal_when_treasury_and_interbank_mm_theme",
+      "when_domains_matched_all": ["treasury_alm_funding_liquidity"],
+      "when_themes_match_any": ["interbank_mm"],
+      "append_concepts": ["funding_deal"],
+      "business_rationale": "Interbank, repo, or money-market vocabulary under treasury domain signals wholesale funding deals (placements/borrowings) even when ALM policy or FTP wording is not yet explicit."
+    },
+    {
+      "id": "regulatory_submission_when_party_compliance_transaction_and_financial_crime_theme",
+      "when_domains_matched_all": [
+        "party_legal_relationship",
+        "compliance_surveillance_regulatory_reporting",
+        "transaction_event_settlement"
+      ],
+      "when_themes_match_any": ["financial_crime"],
+      "append_concepts": ["regulatory_submission"],
+      "business_rationale": "AML monitoring and suspicious-activity narratives combine party, compliance, and transaction-flow context; reporting artefacts (e.g. STR-style submissions) are modeled separately from raw screening rows."
+    },
+    {
+      "id": "regulatory_submission_when_compliance_ledger_and_prudential_returns_theme",
+      "when_domains_matched_all": [
+        "compliance_surveillance_regulatory_reporting",
+        "ledger_position_pnl_valuation"
+      ],
+      "when_themes_match_any": ["prudential_returns"],
+      "append_concepts": ["regulatory_submission"],
+      "business_rationale": "Basel/capital/large-exposure reporting language ties compliance reporting to ledger and valuation domains; submission rows represent the regulatory pack distinct from operational transactions."
+    }
+  ]
+}

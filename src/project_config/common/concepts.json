@@ -1,0 +1,893 @@
+{
+  "concepts": [
+    {
+      "concept_id": "customer",
+      "primary_domain_id": "party_legal_relationship",
+      "aliases": [
+        "customer",
+        "customers",
+        "client",
+        "customer profile",
+        "customer profiles",
+        "private banking",
+        "360 view",
+        "golden record",
+        "customer journey",
+        "aum"
+      ],
+      "default_table_name": "customers",
+      "required_packs": [
+        "pk_customer",
+        "fk_customer_segment",
+        "customer_identity",
+        "customer_risk_semistructured",
+        "client_engagement_extension"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "account",
+      "primary_domain_id": "agreement_product_schedule",
+      "aliases": [
+        "account",
+        "accounts",
+        "bank account",
+        "bank accounts"
+      ],
+      "default_table_name": "accounts",
+      "required_packs": [
+        "pk_account",
+        "fk_customer",
+        "fk_bank_product",
+        "account_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "lead",
+      "primary_domain_id": "party_legal_relationship",
+      "aliases": [
+        "lead",
+        "leads",
+        "sales lead",
+        "sales leads",
+        "prospect",
+        "prospects",
+        "lead management",
+        "lead capture",
+        "lead scoring",
+        "lead routing",
+        "nurture",
+        "conversion funnel"
+      ],
+      "default_table_name": "leads",
+      "required_packs": [
+        "pk_lead",
+        "fk_customer",
+        "fk_marketing_campaign",
+        "lead_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "sales_opportunity",
+      "primary_domain_id": "agreement_product_schedule",
+      "aliases": [
+        "opportunity",
+        "opportunities",
+        "sales opportunity",
+        "sales pipeline",
+        "pipeline",
+        "deal",
+        "deals",
+        "closed won",
+        "closed lost",
+        "next best action",
+        "cross sell"
+      ],
+      "default_table_name": "sales_opportunities",
+      "required_packs": [
+        "pk_sales_opportunity",
+        "fk_customer",
+        "opportunity_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "bank_product",
+      "primary_domain_id": "agreement_product_schedule",
+      "aliases": [
+        "product catalog",
+        "bank product",
+        "bank products",
+        "product offering",
+        "deposit product",
+        "wealth product",
+        "fund product",
+        "product eligibility",
+        "aum aggregate",
+        "holding product"
+      ],
+      "default_table_name": "bank_products",
+      "required_packs": [
+        "pk_bank_product",
+        "bank_product_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "transaction",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "transaction",
+        "transactions",
+        "payment",
+        "payments"
+      ],
+      "default_table_name": "transactions",
+      "required_packs": [
+        "pk_transaction",
+        "fk_account",
+        "transaction_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "account_status_event",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "account status history",
+        "account status scd",
+        "account status timeline",
+        "account status event",
+        "account status events",
+        "account lifecycle event"
+      ],
+      "default_table_name": "account_status_scd",
+      "required_packs": [
+        "pk_account_status_event",
+        "fk_account",
+        "account_status_scd_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "customer_identification",
+      "primary_domain_id": "compliance_surveillance_regulatory_reporting",
+      "aliases": [
+        "kyc",
+        "kyc document",
+        "cdd",
+        "edd",
+        "identity document",
+        "identification document",
+        "passport",
+        "national id",
+        "sanctions screening",
+        "aml risk",
+        "beneficial owner",
+        "ubo",
+        "pep screening"
+      ],
+      "default_table_name": "customer_identifications",
+      "required_packs": [
+        "pk_customer_identification",
+        "fk_customer",
+        "identification_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "customer_interaction",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "interaction",
+        "interactions",
+        "customer interaction",
+        "interaction history",
+        "customerinteractions",
+        "customer interactions",
+        "touchpoint",
+        "touchpoints",
+        "nps",
+        "outbound call",
+        "channel contact"
+      ],
+      "default_table_name": "customer_interactions",
+      "required_packs": [
+        "pk_interaction",
+        "fk_customer",
+        "interaction_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "servicing_case",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "case",
+        "cases",
+        "ticket",
+        "tickets",
+        "complaint",
+        "complaints",
+        "servicing case",
+        "service case",
+        "customer case",
+        "sla",
+        "helpdesk",
+        "case management",
+        "service request",
+        "complaint case",
+        "major complaint"
+      ],
+      "default_table_name": "servicing_cases",
+      "required_packs": [
+        "pk_servicing_case",
+        "fk_customer",
+        "servicing_case_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "trading_account",
+      "primary_domain_id": "ledger_position_pnl_valuation",
+      "aliases": [
+        "trading account",
+        "trading accounts",
+        "portfolio account"
+      ],
+      "default_table_name": "trading_accounts",
+      "required_packs": [
+        "pk_trading_account",
+        "trading_account_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "order",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "order",
+        "orders",
+        "trade order",
+        "trade orders"
+      ],
+      "default_table_name": "orders",
+      "required_packs": [
+        "pk_order",
+        "fk_trading_account",
+        "order_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "execution",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "execution",
+        "executions",
+        "trade execution",
+        "trade executions"
+      ],
+      "default_table_name": "executions",
+      "required_packs": [
+        "pk_execution",
+        "fk_order",
+        "execution_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "obligor",
+      "primary_domain_id": "party_legal_relationship",
+      "aliases": [
+        "obligor",
+        "obligors",
+        "borrower",
+        "borrowers"
+      ],
+      "default_table_name": "obligors",
+      "required_packs": [
+        "pk_obligor",
+        "obligor_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "facility",
+      "primary_domain_id": "agreement_product_schedule",
+      "aliases": [
+        "facility",
+        "facilities",
+        "loan contract",
+        "loan contracts"
+      ],
+      "default_table_name": "facilities",
+      "required_packs": [
+        "pk_facility",
+        "fk_obligor",
+        "facility_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "exposure",
+      "primary_domain_id": "risk_limit_rating_collateral",
+      "aliases": [
+        "exposure",
+        "exposures",
+        "risk indicator",
+        "risk indicators"
+      ],
+      "default_table_name": "exposures",
+      "required_packs": [
+        "pk_exposure",
+        "fk_facility",
+        "exposure_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "kyc_case",
+      "primary_domain_id": "compliance_surveillance_regulatory_reporting",
+      "aliases": [
+        "kyc case",
+        "cdd case",
+        "edd case",
+        "kyc workflow",
+        "aml case",
+        "due diligence case",
+        "kyc approval"
+      ],
+      "default_table_name": "kyc_cases",
+      "required_packs": ["pk_kyc_case", "fk_customer", "kyc_case_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "sanctions_screening",
+      "primary_domain_id": "compliance_surveillance_regulatory_reporting",
+      "aliases": [
+        "sanctions screening",
+        "ofac screening",
+        "watchlist screening",
+        "pep check",
+        "screening hit",
+        "screening result"
+      ],
+      "default_table_name": "sanctions_screenings",
+      "required_packs": ["pk_sanctions_screening", "fk_customer", "sanctions_screening_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "party_relationship",
+      "primary_domain_id": "party_legal_relationship",
+      "aliases": [
+        "party relationship",
+        "ubo graph",
+        "household",
+        "beneficial ownership",
+        "ownership graph",
+        "related party"
+      ],
+      "default_table_name": "party_relationships",
+      "required_packs": ["pk_party_relationship", "fk_customer", "party_relationship_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "customer_segment",
+      "primary_domain_id": "party_legal_relationship",
+      "aliases": [
+        "customer segment",
+        "segment tier",
+        "sub-segment",
+        "client tier",
+        "private client tier"
+      ],
+      "default_table_name": "customer_segments",
+      "required_packs": ["pk_customer_segment", "segment_dimension_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "employee",
+      "primary_domain_id": "party_legal_relationship",
+      "aliases": [
+        "employee",
+        "employees",
+        "relationship manager",
+        "rm",
+        "bank staff",
+        "rm portfolio",
+        "account manager",
+        "客户经理"
+      ],
+      "default_table_name": "employees",
+      "required_packs": ["pk_employee", "employee_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "relationship_assignment",
+      "primary_domain_id": "party_legal_relationship",
+      "aliases": [
+        "relationship assignment",
+        "rm coverage",
+        "portfolio assignment",
+        "primary rm",
+        "管户",
+        "coverage model"
+      ],
+      "default_table_name": "relationship_assignments",
+      "required_packs": [
+        "pk_relationship_assignment",
+        "fk_customer",
+        "fk_employee",
+        "relationship_assignment_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "investment_holding",
+      "primary_domain_id": "ledger_position_pnl_valuation",
+      "aliases": [
+        "investment holding",
+        "portfolio holding",
+        "portfolio position",
+        "aum position",
+        "market value",
+        "holding valuation"
+      ],
+      "default_table_name": "investment_holdings",
+      "required_packs": ["pk_investment_holding", "fk_account", "investment_holding_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "external_account_link",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "external account",
+        "open banking",
+        "account aggregation",
+        "linked external account",
+        "third party account link"
+      ],
+      "default_table_name": "external_account_links",
+      "required_packs": ["pk_external_account_link", "fk_customer", "external_account_link_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "marketing_campaign",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "marketing campaign",
+        "nurture campaign",
+        "drip campaign",
+        "event trigger",
+        "lifecycle campaign",
+        "campaign touch"
+      ],
+      "default_table_name": "marketing_campaigns",
+      "required_packs": ["pk_marketing_campaign", "marketing_campaign_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "client_task",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "client task",
+        "follow-up task",
+        "reminder task",
+        "todo",
+        "task alert",
+        "birthday reminder",
+        "maturity reminder",
+        "servicing task"
+      ],
+      "default_table_name": "client_tasks",
+      "required_packs": ["pk_client_task", "fk_customer", "client_task_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "appointment",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "appointment",
+        "appointments",
+        "branch appointment",
+        "video appointment",
+        "rm meeting",
+        "scheduling",
+        "no-show"
+      ],
+      "default_table_name": "appointments",
+      "required_packs": ["pk_appointment", "fk_customer", "fk_employee", "appointment_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "customer_entitlement",
+      "primary_domain_id": "agreement_product_schedule",
+      "aliases": [
+        "entitlement",
+        "customer entitlement",
+        "private banking privilege",
+        "fee waiver",
+        "tier benefit"
+      ],
+      "default_table_name": "customer_entitlements",
+      "required_packs": ["pk_customer_entitlement", "fk_customer", "entitlement_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "audit_log",
+      "primary_domain_id": "compliance_surveillance_regulatory_reporting",
+      "aliases": [
+        "audit log",
+        "audit trail",
+        "immutable audit",
+        "lineage record",
+        "field lineage"
+      ],
+      "default_table_name": "audit_logs",
+      "required_packs": ["pk_audit_log", "audit_log_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "consent_record",
+      "primary_domain_id": "compliance_surveillance_regulatory_reporting",
+      "aliases": [
+        "consent record",
+        "privacy consent",
+        "gdpr consent",
+        "data consent",
+        "consent withdrawal"
+      ],
+      "default_table_name": "consent_records",
+      "required_packs": ["pk_consent_record", "fk_customer", "consent_record_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "regulatory_submission",
+      "primary_domain_id": "compliance_surveillance_regulatory_reporting",
+      "aliases": [
+        "regulatory submission",
+        "regulatory report",
+        "str",
+        "suspicious transaction report",
+        "large transaction report"
+      ],
+      "default_table_name": "regulatory_submissions",
+      "required_packs": ["pk_regulatory_submission", "fk_customer", "regulatory_submission_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "position",
+      "primary_domain_id": "ledger_position_pnl_valuation",
+      "aliases": [
+        "position",
+        "positions",
+        "book position",
+        "trading position",
+        "net position"
+      ],
+      "default_table_name": "positions",
+      "required_packs": ["pk_position", "fk_execution", "position_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "valuation",
+      "primary_domain_id": "ledger_position_pnl_valuation",
+      "aliases": [
+        "valuation",
+        "mark to market",
+        "mtm",
+        "revaluation"
+      ],
+      "default_table_name": "valuations",
+      "required_packs": ["pk_valuation", "fk_position", "valuation_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "pnl_snapshot",
+      "primary_domain_id": "ledger_position_pnl_valuation",
+      "aliases": [
+        "pnl",
+        "p&l",
+        "profit and loss",
+        "pnl snapshot",
+        "realized pnl",
+        "unrealized pnl"
+      ],
+      "default_table_name": "pnl_snapshots",
+      "required_packs": ["pk_pnl_snapshot", "fk_position", "pnl_snapshot_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "trading_limit",
+      "primary_domain_id": "risk_limit_rating_collateral",
+      "aliases": [
+        "trading limit",
+        "desk limit",
+        "limit utilization",
+        "risk limit"
+      ],
+      "default_table_name": "trading_limits",
+      "required_packs": ["pk_trading_limit", "fk_position", "trading_limit_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "risk_alert",
+      "primary_domain_id": "risk_limit_rating_collateral",
+      "aliases": [
+        "risk alert",
+        "breach alert",
+        "limit breach",
+        "watchlist alert"
+      ],
+      "default_table_name": "risk_alerts",
+      "required_packs": ["pk_risk_alert", "fk_trading_limit", "risk_alert_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "trade_reconciliation",
+      "primary_domain_id": "compliance_surveillance_regulatory_reporting",
+      "aliases": [
+        "trade reconciliation",
+        "eod reconciliation",
+        "trade break",
+        "front back reconciliation"
+      ],
+      "default_table_name": "trade_reconciliations",
+      "required_packs": ["pk_trade_reconciliation", "fk_order", "trade_reconciliation_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "drawdown_event",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "drawdown",
+        "loan drawdown",
+        "utilization event",
+        "disbursement"
+      ],
+      "default_table_name": "drawdown_events",
+      "required_packs": ["pk_drawdown_event", "fk_facility", "drawdown_event_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "repayment_event",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "repayment",
+        "repayment event",
+        "principal repayment",
+        "interest repayment"
+      ],
+      "default_table_name": "repayment_events",
+      "required_packs": ["pk_repayment_event", "fk_facility", "repayment_event_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "overdue_snapshot",
+      "primary_domain_id": "risk_limit_rating_collateral",
+      "aliases": [
+        "dpd",
+        "days past due",
+        "overdue snapshot",
+        "delinquency"
+      ],
+      "default_table_name": "overdue_snapshots",
+      "required_packs": ["pk_overdue_snapshot", "fk_exposure", "overdue_snapshot_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "collection_task",
+      "primary_domain_id": "transaction_event_settlement",
+      "aliases": [
+        "collection task",
+        "collection action",
+        "recovery task",
+        "催收"
+      ],
+      "default_table_name": "collection_tasks",
+      "required_packs": ["pk_collection_task", "fk_overdue_snapshot", "collection_task_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "asset_classification",
+      "primary_domain_id": "risk_limit_rating_collateral",
+      "aliases": [
+        "asset classification",
+        "loan classification",
+        "npl classification",
+        "stage migration"
+      ],
+      "default_table_name": "asset_classifications",
+      "required_packs": ["pk_asset_classification", "fk_obligor", "asset_classification_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "provision_entry",
+      "primary_domain_id": "ledger_position_pnl_valuation",
+      "aliases": [
+        "provision",
+        "impairment",
+        "ecl",
+        "provision entry"
+      ],
+      "default_table_name": "provision_entries",
+      "required_packs": ["pk_provision_entry", "fk_asset_classification", "provision_entry_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "collateral_link",
+      "primary_domain_id": "risk_limit_rating_collateral",
+      "aliases": [
+        "collateral",
+        "collateral link",
+        "pledge",
+        "security collateral"
+      ],
+      "default_table_name": "collateral_links",
+      "required_packs": ["pk_collateral_link", "fk_facility", "collateral_link_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "instrument_master",
+      "primary_domain_id": "instrument_reference_market_data",
+      "aliases": [
+        "instrument",
+        "instruments",
+        "instrument master",
+        "security master",
+        "instrument reference",
+        "isin",
+        "listing reference"
+      ],
+      "default_table_name": "instrument_masters",
+      "required_packs": ["pk_instrument_master", "instrument_master_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "market_quote_snapshot",
+      "primary_domain_id": "instrument_reference_market_data",
+      "aliases": [
+        "market quote",
+        "quote snapshot",
+        "close price",
+        "bid ask",
+        "market data snapshot"
+      ],
+      "default_table_name": "market_quote_snapshots",
+      "required_packs": ["pk_market_quote_snapshot", "fk_instrument_master", "market_quote_snapshot_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "yield_curve_point",
+      "primary_domain_id": "instrument_reference_market_data",
+      "aliases": [
+        "yield curve",
+        "curve point",
+        "zero curve",
+        "discount curve",
+        "fixing curve"
+      ],
+      "default_table_name": "yield_curve_points",
+      "required_packs": ["pk_yield_curve_point", "fk_instrument_master", "yield_curve_point_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "funding_deal",
+      "primary_domain_id": "treasury_alm_funding_liquidity",
+      "aliases": [
+        "funding deal",
+        "interbank borrowing",
+        "repo funding",
+        "treasury funding",
+        "wholesale funding"
+      ],
+      "default_table_name": "funding_deals",
+      "required_packs": ["pk_funding_deal", "funding_deal_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "cashflow_ladder_point",
+      "primary_domain_id": "treasury_alm_funding_liquidity",
+      "aliases": [
+        "cashflow ladder",
+        "maturity bucket",
+        "liquidity ladder",
+        "cashflow bucket"
+      ],
+      "default_table_name": "cashflow_ladder_points",
+      "required_packs": ["pk_cashflow_ladder_point", "fk_funding_deal", "cashflow_ladder_point_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "liquidity_bucket_snapshot",
+      "primary_domain_id": "treasury_alm_funding_liquidity",
+      "aliases": [
+        "liquidity bucket",
+        "liquidity gap",
+        "lcr bucket",
+        "nsfr bucket",
+        "liquidity snapshot"
+      ],
+      "default_table_name": "liquidity_bucket_snapshots",
+      "required_packs": [
+        "pk_liquidity_bucket_snapshot",
+        "fk_cashflow_ladder_point",
+        "liquidity_bucket_snapshot_core"
+      ],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "ftp_curve",
+      "primary_domain_id": "treasury_alm_funding_liquidity",
+      "aliases": [
+        "ftp curve",
+        "funds transfer pricing",
+        "transfer pricing curve",
+        "internal funding curve"
+      ],
+      "default_table_name": "ftp_curves",
+      "required_packs": ["pk_ftp_curve", "ftp_curve_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "trading_calendar",
+      "primary_domain_id": "instrument_reference_market_data",
+      "aliases": [
+        "trading calendar",
+        "market holiday",
+        "settlement calendar",
+        "business day calendar"
+      ],
+      "default_table_name": "trading_calendars",
+      "required_packs": ["pk_trading_calendar", "fk_instrument_master", "trading_calendar_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "corporate_action_event",
+      "primary_domain_id": "instrument_reference_market_data",
+      "aliases": [
+        "corporate action",
+        "dividend event",
+        "stock split",
+        "rights issue",
+        "coupon event"
+      ],
+      "default_table_name": "corporate_action_events",
+      "required_packs": ["pk_corporate_action_event", "fk_instrument_master", "corporate_action_event_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "hqla_inventory",
+      "primary_domain_id": "treasury_alm_funding_liquidity",
+      "aliases": [
+        "hqla inventory",
+        "liquidity buffer",
+        "high quality liquid assets",
+        "liquid asset pool"
+      ],
+      "default_table_name": "hqla_inventories",
+      "required_packs": ["pk_hqla_inventory", "fk_liquidity_bucket_snapshot", "hqla_inventory_core"],
+      "optional_packs": []
+    },
+    {
+      "concept_id": "funding_concentration_snapshot",
+      "primary_domain_id": "treasury_alm_funding_liquidity",
+      "aliases": [
+        "funding concentration",
+        "counterparty concentration",
+        "funding source concentration",
+        "wholesale concentration"
+      ],
+      "default_table_name": "funding_concentration_snapshots",
+      "required_packs": [
+        "pk_funding_concentration_snapshot",
+        "fk_funding_deal",
+        "funding_concentration_snapshot_core"
+      ],
+      "optional_packs": []
+    }
+  ]
+}

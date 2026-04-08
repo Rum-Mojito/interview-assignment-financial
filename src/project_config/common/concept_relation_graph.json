@@ -1,0 +1,454 @@
+{
+  "description": "Concept relation graph for Requirement 1: nodes are concepts; edges are directed from parent concept to child concept (FK lives on the child table). Table names default from concepts.json default_table_name unless overridden on the edge.",
+  "nodes": [
+    { "concept_id": "customer", "label": "Party / customer master" },
+    { "concept_id": "account", "label": "Product account" },
+    { "concept_id": "transaction", "label": "Ledger / booking event" },
+    { "concept_id": "account_status_event", "label": "Account status lifecycle fact event" },
+    { "concept_id": "customer_identification", "label": "KYC document / identifier satellite" },
+    { "concept_id": "customer_interaction", "label": "Servicing / channel interaction" },
+    { "concept_id": "servicing_case", "label": "CRM servicing case / ticket" },
+    { "concept_id": "trading_account", "label": "Brokerage account" },
+    { "concept_id": "order", "label": "Trade order intent" },
+    { "concept_id": "execution", "label": "Fill / execution fact" },
+    { "concept_id": "obligor", "label": "Credit obligor" },
+    { "concept_id": "facility", "label": "Facility / limit container" },
+    { "concept_id": "exposure", "label": "EAD-style exposure fact" },
+    { "concept_id": "lead", "label": "Sales / marketing lead before conversion" },
+    { "concept_id": "sales_opportunity", "label": "CRM pipeline opportunity" },
+    { "concept_id": "bank_product", "label": "Bank product catalog entry" },
+    { "concept_id": "kyc_case", "label": "CDD/EDD KYC workflow case" },
+    { "concept_id": "sanctions_screening", "label": "Sanctions / watchlist screening run" },
+    { "concept_id": "party_relationship", "label": "UBO / household / related party edge" },
+    { "concept_id": "customer_segment", "label": "Client segment / tier dimension" },
+    { "concept_id": "employee", "label": "Bank employee / RM" },
+    { "concept_id": "relationship_assignment", "label": "RM coverage assignment" },
+    { "concept_id": "investment_holding", "label": "Investment position / AUM line" },
+    { "concept_id": "external_account_link", "label": "Open banking external account link" },
+    { "concept_id": "marketing_campaign", "label": "Marketing / nurture campaign" },
+    { "concept_id": "client_task", "label": "Client servicing task / reminder" },
+    { "concept_id": "appointment", "label": "Branch / video appointment" },
+    { "concept_id": "customer_entitlement", "label": "Tier benefit / entitlement" },
+    { "concept_id": "audit_log", "label": "Immutable audit trail row" },
+    { "concept_id": "consent_record", "label": "Privacy / data consent" },
+    { "concept_id": "regulatory_submission", "label": "Regulatory report submission" },
+    { "concept_id": "position", "label": "Trading book position snapshot" },
+    { "concept_id": "valuation", "label": "Mark-to-market valuation snapshot" },
+    { "concept_id": "pnl_snapshot", "label": "Profit and loss snapshot" },
+    { "concept_id": "trading_limit", "label": "Trading risk limit utilization" },
+    { "concept_id": "risk_alert", "label": "Risk alert / breach event" },
+    { "concept_id": "trade_reconciliation", "label": "Trade reconciliation result" },
+    { "concept_id": "drawdown_event", "label": "Credit drawdown event" },
+    { "concept_id": "repayment_event", "label": "Credit repayment event" },
+    { "concept_id": "overdue_snapshot", "label": "Overdue / DPD snapshot" },
+    { "concept_id": "collection_task", "label": "Collection workflow task" },
+    { "concept_id": "asset_classification", "label": "Asset classification decision" },
+    { "concept_id": "provision_entry", "label": "Provision accounting entry" },
+    { "concept_id": "collateral_link", "label": "Collateral to facility linkage" },
+    { "concept_id": "instrument_master", "label": "Instrument/security reference master" },
+    { "concept_id": "market_quote_snapshot", "label": "Market quote snapshot" },
+    { "concept_id": "yield_curve_point", "label": "Yield curve tenor point" },
+    { "concept_id": "funding_deal", "label": "Treasury/interbank funding deal" },
+    { "concept_id": "cashflow_ladder_point", "label": "ALM liquidity ladder bucket point" },
+    { "concept_id": "liquidity_bucket_snapshot", "label": "Liquidity metric bucket snapshot" },
+    { "concept_id": "ftp_curve", "label": "Funds transfer pricing curve point" },
+    { "concept_id": "trading_calendar", "label": "Instrument trading/settlement calendar" },
+    { "concept_id": "corporate_action_event", "label": "Corporate action lifecycle event" },
+    { "concept_id": "hqla_inventory", "label": "HQLA liquidity inventory snapshot" },
+    { "concept_id": "funding_concentration_snapshot", "label": "Funding source concentration snapshot" }
+  ],
+  "edges": [
+    {
+      "id": "customer_to_account",
+      "from_concept": "customer",
+      "to_concept": "account",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "account_to_transaction",
+      "from_concept": "account",
+      "to_concept": "transaction",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "account_id", "parent_column": "account_id" }
+    },
+    {
+      "id": "account_to_account_status_event",
+      "from_concept": "account",
+      "to_concept": "account_status_event",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "account_id", "parent_column": "account_id" }
+    },
+    {
+      "id": "customer_to_customer_identification",
+      "from_concept": "customer",
+      "to_concept": "customer_identification",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "customer_to_customer_interaction",
+      "from_concept": "customer",
+      "to_concept": "customer_interaction",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "transaction_to_customer_interaction",
+      "from_concept": "transaction",
+      "to_concept": "customer_interaction",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "transaction_id", "parent_column": "transaction_id" }
+    },
+    {
+      "id": "customer_to_servicing_case",
+      "from_concept": "customer",
+      "to_concept": "servicing_case",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "trading_account_to_order",
+      "from_concept": "trading_account",
+      "to_concept": "order",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "trading_account_id", "parent_column": "trading_account_id" }
+    },
+    {
+      "id": "order_to_execution",
+      "from_concept": "order",
+      "to_concept": "execution",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "order_id", "parent_column": "order_id" }
+    },
+    {
+      "id": "obligor_to_facility",
+      "from_concept": "obligor",
+      "to_concept": "facility",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "obligor_id", "parent_column": "obligor_id" }
+    },
+    {
+      "id": "facility_to_exposure",
+      "from_concept": "facility",
+      "to_concept": "exposure",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "facility_id", "parent_column": "facility_id" }
+    },
+    {
+      "id": "customer_to_lead",
+      "from_concept": "customer",
+      "to_concept": "lead",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "customer_to_sales_opportunity",
+      "from_concept": "customer",
+      "to_concept": "sales_opportunity",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "lead_to_sales_opportunity",
+      "from_concept": "lead",
+      "to_concept": "sales_opportunity",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "lead_id", "parent_column": "lead_id" }
+    },
+    {
+      "id": "sales_opportunity_to_account",
+      "from_concept": "sales_opportunity",
+      "to_concept": "account",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "sales_opportunity_id", "parent_column": "sales_opportunity_id" }
+    },
+    {
+      "id": "bank_product_to_account",
+      "from_concept": "bank_product",
+      "to_concept": "account",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "bank_product_id", "parent_column": "bank_product_id" }
+    },
+    {
+      "id": "customer_to_kyc_case",
+      "from_concept": "customer",
+      "to_concept": "kyc_case",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "customer_to_sanctions_screening",
+      "from_concept": "customer",
+      "to_concept": "sanctions_screening",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "customer_to_party_relationship",
+      "from_concept": "customer",
+      "to_concept": "party_relationship",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "customer_segment_to_customer",
+      "from_concept": "customer_segment",
+      "to_concept": "customer",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_segment_id", "parent_column": "customer_segment_id" }
+    },
+    {
+      "id": "customer_to_relationship_assignment",
+      "from_concept": "customer",
+      "to_concept": "relationship_assignment",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "employee_to_relationship_assignment",
+      "from_concept": "employee",
+      "to_concept": "relationship_assignment",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "employee_id", "parent_column": "employee_id" }
+    },
+    {
+      "id": "account_to_investment_holding",
+      "from_concept": "account",
+      "to_concept": "investment_holding",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "account_id", "parent_column": "account_id" }
+    },
+    {
+      "id": "customer_to_external_account_link",
+      "from_concept": "customer",
+      "to_concept": "external_account_link",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "marketing_campaign_to_lead",
+      "from_concept": "marketing_campaign",
+      "to_concept": "lead",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "marketing_campaign_id", "parent_column": "marketing_campaign_id" }
+    },
+    {
+      "id": "customer_to_client_task",
+      "from_concept": "customer",
+      "to_concept": "client_task",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "customer_interaction_to_client_task",
+      "from_concept": "customer_interaction",
+      "to_concept": "client_task",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "interaction_id", "parent_column": "interaction_id" }
+    },
+    {
+      "id": "customer_to_appointment",
+      "from_concept": "customer",
+      "to_concept": "appointment",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "client_task_to_appointment",
+      "from_concept": "client_task",
+      "to_concept": "appointment",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "client_task_id", "parent_column": "client_task_id" }
+    },
+    {
+      "id": "appointment_to_servicing_case",
+      "from_concept": "appointment",
+      "to_concept": "servicing_case",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "appointment_id", "parent_column": "appointment_id" }
+    },
+    {
+      "id": "employee_to_appointment",
+      "from_concept": "employee",
+      "to_concept": "appointment",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "employee_id", "parent_column": "employee_id" }
+    },
+    {
+      "id": "customer_to_customer_entitlement",
+      "from_concept": "customer",
+      "to_concept": "customer_entitlement",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "customer_to_consent_record",
+      "from_concept": "customer",
+      "to_concept": "consent_record",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "customer_to_regulatory_submission",
+      "from_concept": "customer",
+      "to_concept": "regulatory_submission",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "customer_id", "parent_column": "customer_id" }
+    },
+    {
+      "id": "execution_to_position",
+      "from_concept": "execution",
+      "to_concept": "position",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "execution_id", "parent_column": "execution_id" }
+    },
+    {
+      "id": "position_to_valuation",
+      "from_concept": "position",
+      "to_concept": "valuation",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "position_id", "parent_column": "position_id" }
+    },
+    {
+      "id": "position_to_pnl_snapshot",
+      "from_concept": "position",
+      "to_concept": "pnl_snapshot",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "position_id", "parent_column": "position_id" }
+    },
+    {
+      "id": "position_to_trading_limit",
+      "from_concept": "position",
+      "to_concept": "trading_limit",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "position_id", "parent_column": "position_id" }
+    },
+    {
+      "id": "trading_limit_to_risk_alert",
+      "from_concept": "trading_limit",
+      "to_concept": "risk_alert",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "trading_limit_id", "parent_column": "trading_limit_id" }
+    },
+    {
+      "id": "order_to_trade_reconciliation",
+      "from_concept": "order",
+      "to_concept": "trade_reconciliation",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "order_id", "parent_column": "order_id" }
+    },
+    {
+      "id": "facility_to_drawdown_event",
+      "from_concept": "facility",
+      "to_concept": "drawdown_event",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "facility_id", "parent_column": "facility_id" }
+    },
+    {
+      "id": "facility_to_repayment_event",
+      "from_concept": "facility",
+      "to_concept": "repayment_event",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "facility_id", "parent_column": "facility_id" }
+    },
+    {
+      "id": "exposure_to_overdue_snapshot",
+      "from_concept": "exposure",
+      "to_concept": "overdue_snapshot",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "exposure_id", "parent_column": "exposure_id" }
+    },
+    {
+      "id": "overdue_snapshot_to_collection_task",
+      "from_concept": "overdue_snapshot",
+      "to_concept": "collection_task",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "overdue_snapshot_id", "parent_column": "overdue_snapshot_id" }
+    },
+    {
+      "id": "obligor_to_asset_classification",
+      "from_concept": "obligor",
+      "to_concept": "asset_classification",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "obligor_id", "parent_column": "obligor_id" }
+    },
+    {
+      "id": "asset_classification_to_provision_entry",
+      "from_concept": "asset_classification",
+      "to_concept": "provision_entry",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "asset_classification_id", "parent_column": "asset_classification_id" }
+    },
+    {
+      "id": "facility_to_collateral_link",
+      "from_concept": "facility",
+      "to_concept": "collateral_link",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "facility_id", "parent_column": "facility_id" }
+    },
+    {
+      "id": "instrument_master_to_market_quote_snapshot",
+      "from_concept": "instrument_master",
+      "to_concept": "market_quote_snapshot",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "instrument_master_id", "parent_column": "instrument_master_id" }
+    },
+    {
+      "id": "instrument_master_to_yield_curve_point",
+      "from_concept": "instrument_master",
+      "to_concept": "yield_curve_point",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "instrument_master_id", "parent_column": "instrument_master_id" }
+    },
+    {
+      "id": "funding_deal_to_cashflow_ladder_point",
+      "from_concept": "funding_deal",
+      "to_concept": "cashflow_ladder_point",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "funding_deal_id", "parent_column": "funding_deal_id" }
+    },
+    {
+      "id": "cashflow_ladder_point_to_liquidity_bucket_snapshot",
+      "from_concept": "cashflow_ladder_point",
+      "to_concept": "liquidity_bucket_snapshot",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "cashflow_ladder_point_id", "parent_column": "cashflow_ladder_point_id" }
+    },
+    {
+      "id": "funding_deal_to_ftp_curve",
+      "from_concept": "funding_deal",
+      "to_concept": "ftp_curve",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "funding_deal_id", "parent_column": "funding_deal_id" }
+    },
+    {
+      "id": "instrument_master_to_trading_calendar",
+      "from_concept": "instrument_master",
+      "to_concept": "trading_calendar",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "instrument_master_id", "parent_column": "instrument_master_id" }
+    },
+    {
+      "id": "instrument_master_to_corporate_action_event",
+      "from_concept": "instrument_master",
+      "to_concept": "corporate_action_event",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "instrument_master_id", "parent_column": "instrument_master_id" }
+    },
+    {
+      "id": "liquidity_bucket_snapshot_to_hqla_inventory",
+      "from_concept": "liquidity_bucket_snapshot",
+      "to_concept": "hqla_inventory",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "liquidity_bucket_snapshot_id", "parent_column": "liquidity_bucket_snapshot_id" }
+    },
+    {
+      "id": "funding_deal_to_funding_concentration_snapshot",
+      "from_concept": "funding_deal",
+      "to_concept": "funding_concentration_snapshot",
+      "cardinality": "1_to_many",
+      "fk": { "child_column": "funding_deal_id", "parent_column": "funding_deal_id" }
+    }
+  ]
+}

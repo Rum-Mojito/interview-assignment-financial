@@ -1,0 +1,27 @@
+{
+  "description": "Generation behavior rules: FSM bindings + behavior pack toggles.",
+  "generation_behavior_pack_ids": [
+    "categorical_sample_from_allowed"
+  ],
+  "state_machines": [],
+  "column_to_state_machine": [
+    {
+      "table_name": "accounts",
+      "column_name": "status",
+      "lifecycle_rule_id": "HARD_ACCOUNT_STATUS_LIFECYCLE",
+      "requires_ordered_rows_by": "event_time"
+    },
+    {
+      "table_name": "account_status_scd",
+      "column_name": "status",
+      "lifecycle_rule_id": "HARD_ACCOUNT_STATUS_SCD_LIFECYCLE",
+      "requires_ordered_rows_by": "status_time"
+    }
+  ],
+  "behavior_packs": {
+    "categorical_sample_from_allowed": {
+      "description": "When column has allowed_values from the parsed schema, sample only from that set.",
+      "type": "enforce_allowed_values_on_generate"
+    }
+  }
+}

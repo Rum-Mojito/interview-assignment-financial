@@ -1,0 +1,1627 @@
+{
+  "description": "Unified column generation semantics + evaluation baselines.",
+  "default_profile_id": "main_profile",
+  "profiles": {
+    "agreement_story": {
+      "description": "Agreement domain with account type and contract amount layering.",
+      "merge_strategy_default": "prefer_schema_enum_then_semantic",
+      "columns": {
+        "loan_facilities.limit_amount": {
+          "distribution": {
+            "type": "mixture_log_uniform_money_fx",
+            "components": [
+              {
+                "min_base": 5000,
+                "max_base": 500000,
+                "weight": 0.65
+              },
+              {
+                "min_base": 500000,
+                "max_base": 20000000,
+                "weight": 0.35
+              }
+            ]
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_AMOUNT_POSITIVE"
+          ]
+        }
+      },
+      "cross_column_constraints": [],
+      "evaluation_baselines": {
+        "columns": {}
+      }
+    },
+    "compliance_story": {
+      "description": "Compliance profile with alert lifecycle and case outcome balance.",
+      "merge_strategy_default": "prefer_schema_enum_then_semantic",
+      "columns": {
+        "aml_alerts.status": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "pending": 0.42,
+              "active": 0.34,
+              "closed": 0.24
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "aml_alerts.event_time": {
+          "distribution": {
+            "type": "weekday_timestamp",
+            "max_days": 60,
+            "min_minutes": 480,
+            "max_minutes": 1260
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "screening_cases.outcome": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "clear": 0.62,
+              "escalate": 0.23,
+              "suspicious": 0.15
+            }
+          },
+          "aligned_validation_rule_ids": []
+        }
+      },
+      "cross_column_constraints": [],
+      "evaluation_baselines": {
+        "columns": {}
+      }
+    },
+    "credit_story": {
+      "description": "Credit story profile aligned with obligor/facility/exposure risk semantics.",
+      "merge_strategy_default": "prefer_schema_enum_then_semantic",
+      "columns": {
+        "obligors.country": {
+          "distribution": {
+            "type": "uniform_from_rule_catalog",
+            "rule_id": "SOFT_COUNTRY_ENUM"
+          },
+          "aligned_validation_rule_ids": [
+            "SOFT_COUNTRY_ENUM"
+          ]
+        },
+        "obligors.segment": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "corporate": 0.62,
+              "retail": 0.28,
+              "fi": 0.1
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "facilities.limit_amount": {
+          "distribution": {
+            "type": "log_uniform_money_fx",
+            "min_base": 10000,
+            "max_base": 20000000
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_AMOUNT_POSITIVE"
+          ]
+        },
+        "exposures.ead_amount": {
+          "distribution": {
+            "type": "log_uniform_money_fx",
+            "min_base": 5000,
+            "max_base": 18000000
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_AMOUNT_POSITIVE"
+          ]
+        },
+        "exposures.currency": {
+          "distribution": {
+            "type": "uniform_from_rule_catalog",
+            "rule_id": "HARD_TRANSACTION_CURRENCY_ENUM"
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_CURRENCY_ENUM"
+          ]
+        },
+        "facilities.status": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "pending": 0.1,
+              "active": 0.75,
+              "closed": 0.15
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "exposures.overdue_days": {
+          "distribution": {
+            "type": "uniform_int",
+            "min": 0,
+            "max": 180
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "obligors.age": {
+          "distribution": {
+            "type": "uniform_int",
+            "min": 18,
+            "max": 85
+          },
+          "aligned_validation_rule_ids": [
+            "SOFT_CUSTOMER_AGE_RANGE"
+          ]
+        }
+      },
+      "cross_column_constraints": [],
+      "evaluation_baselines": {
+        "columns": {
+          "obligors.age": {
+            "type": "numeric_buckets",
+            "edges": [
+              18,
+              30,
+              40,
+              50,
+              65,
+              86
+            ],
+            "probs": [
+              0.16,
+              0.24,
+              0.24,
+              0.22,
+              0.14
+            ]
+          },
+          "obligors.country": {
+            "type": "categorical_probs",
+            "probs": {
+              "CN": 0.4,
+              "US": 0.2,
+              "SG": 0.14,
+              "HK": 0.14,
+              "GB": 0.12
+            }
+          },
+          "facilities.limit_amount": {
+            "type": "numeric_buckets",
+            "edges": [
+              0,
+              100000,
+              1000000,
+              10000000,
+              100000000,
+              100000000000
+            ],
+            "probs": [
+              0.12,
+              0.24,
+              0.3,
+              0.22,
+              0.12
+            ]
+          },
+          "exposures.ead_amount": {
+            "type": "numeric_buckets",
+            "edges": [
+              0,
+              50000,
+              500000,
+              5000000,
+              50000000,
+              100000000000
+            ],
+            "probs": [
+              0.14,
+              0.26,
+              0.3,
+              0.2,
+              0.1
+            ]
+          },
+          "exposures.currency": {
+            "type": "categorical_probs",
+            "probs": {
+              "CNY": 0.5,
+              "USD": 0.22,
+              "EUR": 0.12,
+              "HKD": 0.1,
+              "SGD": 0.06
+            }
+          }
+        }
+      }
+    },
+    "main_profile": {
+      "description": "Distributions aligned with validation rule_id in rule_catalog / rule_engine.",
+      "merge_strategy_default": "prefer_schema_enum_then_semantic",
+      "columns": {
+        "customers.age": {
+          "distribution": {
+            "type": "bucketed_int",
+            "buckets": [
+              {
+                "min": 18,
+                "max": 24,
+                "weight": 0.18
+              },
+              {
+                "min": 25,
+                "max": 34,
+                "weight": 0.24
+              },
+              {
+                "min": 35,
+                "max": 44,
+                "weight": 0.22
+              },
+              {
+                "min": 45,
+                "max": 59,
+                "weight": 0.2
+              },
+              {
+                "min": 60,
+                "max": 85,
+                "weight": 0.16
+              }
+            ]
+          },
+          "aligned_validation_rule_ids": [
+            "SOFT_CUSTOMER_AGE_RANGE"
+          ]
+        },
+        "customers.country": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "CN": 0.45,
+              "US": 0.2,
+              "SG": 0.12,
+              "HK": 0.13,
+              "GB": 0.1
+            }
+          },
+          "aligned_validation_rule_ids": [
+            "SOFT_COUNTRY_ENUM"
+          ]
+        },
+        "transactions.amount": {
+          "distribution": {
+            "type": "log_uniform_money_fx",
+            "min_base": 100,
+            "max_base": 500000
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_AMOUNT_POSITIVE"
+          ]
+        },
+        "transactions.currency": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "CNY": 0.55,
+              "USD": 0.2,
+              "EUR": 0.1,
+              "SGD": 0.08,
+              "HKD": 0.07
+            }
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_CURRENCY_ENUM"
+          ]
+        },
+        "marketing_campaigns.campaign_name": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "new_to_bank_onboarding_drive": 0.2,
+              "salary_account_activation_wave": 0.22,
+              "wealth_upgrade_advisory_month": 0.16,
+              "mortgage_cross_sell_sprint": 0.16,
+              "credit_card_reactivation_nudge": 0.14,
+              "retention_winback_program": 0.12
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "marketing_campaigns.channel": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "email": 0.3,
+              "sms": 0.18,
+              "push": 0.16,
+              "branch": 0.12,
+              "multi": 0.18,
+              "other": 0.06
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "leads.lead_status": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "new": 0.3,
+              "contacted": 0.24,
+              "qualified": 0.2,
+              "converted": 0.1,
+              "lost": 0.1,
+              "recycled": 0.06
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "leads.campaign_source": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "email": 0.3,
+              "sms": 0.18,
+              "push": 0.16,
+              "branch": 0.12,
+              "multi": 0.18,
+              "other": 0.06
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "leads.product_interest": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "deposit": 0.34,
+              "wealth": 0.24,
+              "lending": 0.16,
+              "cards": 0.18,
+              "insurance": 0.04,
+              "other": 0.04
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "leads.lead_score": {
+          "distribution": {
+            "type": "uniform_int",
+            "min": 0,
+            "max": 100
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_LEAD_SCORE_REASONABLE_RANGE"
+          ]
+        },
+        "sales_opportunities.opportunity_stage": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "prospecting": 0.2,
+              "needs_analysis": 0.24,
+              "solution_presentation": 0.2,
+              "negotiation": 0.16,
+              "closed_won": 0.12,
+              "closed_lost": 0.08
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "sales_opportunities.expected_value": {
+          "distribution": {
+            "type": "ordinal_by_anchor_softmax",
+            "anchor_column": "opportunity_stage",
+            "anchor_scores": {
+              "prospecting": 1.7,
+              "needs_analysis": 2.6,
+              "solution_presentation": 3.5,
+              "negotiation": 4.3,
+              "closed_won": 4.9,
+              "closed_lost": 2.2
+            },
+            "enum_scores": {
+              "10000": 1,
+              "25000": 2,
+              "50000": 3,
+              "100000": 4,
+              "250000": 5,
+              "500000": 6,
+              "1000000": 7,
+              "3000000": 8,
+              "8000000": 9
+            },
+            "jitter_stddev": 0.24,
+            "decay": 1.8
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_OPPORTUNITY_VALUE_POSITIVE"
+          ]
+        },
+        "sales_opportunities.win_probability": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "0.10": 0.1,
+              "0.25": 0.18,
+              "0.40": 0.26,
+              "0.55": 0.22,
+              "0.70": 0.16,
+              "0.85": 0.08
+            }
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_OPPORTUNITY_WIN_PROBABILITY_RANGE"
+          ]
+        },
+        "bank_products.product_name": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "Classic Demand Deposit": 0.08,
+              "Step-Up Time Deposit 12M": 0.08,
+              "Wealth Dual-Currency Note": 0.07,
+              "Retail Mortgage Prime": 0.09,
+              "Revolving Working Capital Line": 0.07,
+              "Platinum Rewards Card": 0.08,
+              "Money Market Liquidity Fund": 0.07,
+              "FX Forward Contract Pack": 0.06,
+              "Structured Deposit Series A": 0.07,
+              "Junior Savings Starter": 0.07,
+              "Private Banking Cash Sweep": 0.06,
+              "Trade Finance Import LC": 0.06,
+              "Green Loan Facility": 0.06,
+              "Custody Omnibus Service": 0.06,
+              "Bancassurance Term Life": 0.06
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "bank_products.product_category": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "deposit": 0.35,
+              "wealth": 0.22,
+              "lending": 0.18,
+              "insurance": 0.08,
+              "cards": 0.12,
+              "other": 0.05
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "bank_products.risk_tier": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "r1": 0.35,
+              "r2": 0.28,
+              "r3": 0.2,
+              "r4": 0.12,
+              "r5": 0.05
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "customer_segments.segment_name": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "emerging_affluent": 0.22,
+              "mass_affluent": 0.38,
+              "high_net_worth": 0.2,
+              "private_banking": 0.1,
+              "small_business_owner": 0.1
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "customer_segments.segment_tier": {
+          "distribution": {
+            "type": "ordinal_by_anchor_softmax",
+            "anchor_column": "segment_name",
+            "anchor_scores": {
+              "private_banking": 1.2,
+              "high_net_worth": 1.7,
+              "mass_affluent": 2.8,
+              "small_business_owner": 3.1,
+              "emerging_affluent": 3.4
+            },
+            "enum_scores": {
+              "TIER_1": 1,
+              "TIER_2": 2,
+              "TIER_3": 3,
+              "TIER_4": 4
+            },
+            "jitter_stddev": 0.2,
+            "decay": 1.8
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "customer_segments.risk_band": {
+          "distribution": {
+            "type": "ordinal_by_anchor_softmax",
+            "anchor_column": "segment_tier",
+            "anchor_scores": {
+              "TIER_1": 1.3,
+              "TIER_2": 2.0,
+              "TIER_3": 2.9,
+              "TIER_4": 3.6
+            },
+            "enum_scores": {
+              "LOW": 1,
+              "MEDIUM": 2,
+              "HIGH": 3,
+              "VERY_HIGH": 4
+            },
+            "jitter_stddev": 0.2,
+            "decay": 1.9
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "customers.journey_stage": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "onboarding": 0.22,
+              "activation": 0.26,
+              "growth": 0.24,
+              "retention": 0.2,
+              "advocacy": 0.08
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "customers.total_aum": {
+          "distribution": {
+            "type": "mixture_log_uniform_money_fx",
+            "components": [
+              {
+                "min_base": 5000,
+                "max_base": 150000,
+                "weight": 0.28
+              },
+              {
+                "min_base": 150000,
+                "max_base": 1500000,
+                "weight": 0.46
+              },
+              {
+                "min_base": 1500000,
+                "max_base": 12000000,
+                "weight": 0.26
+              }
+            ]
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "customers.profile_json": {
+          "distribution": {
+            "type": "structured_json_object",
+            "pack_id": "customer_profile_pack"
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "accounts.metadata_json": {
+          "distribution": {
+            "type": "structured_json_object",
+            "pack_id": "account_metadata_pack"
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "accounts.account_type": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "checking": 0.28,
+              "savings": 0.32,
+              "credit_line": 0.12,
+              "investment": 0.18,
+              "other": 0.1
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "accounts.status": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "open": 0.12,
+              "pending": 0.1,
+              "active": 0.48,
+              "dormant": 0.08,
+              "frozen": 0.06,
+              "closed": 0.16
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "account_status_scd.status": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "open": 0.12,
+              "pending": 0.1,
+              "active": 0.48,
+              "dormant": 0.08,
+              "frozen": 0.06,
+              "closed": 0.16
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "transactions.details_json": {
+          "distribution": {
+            "type": "structured_json_object",
+            "pack_id": "transaction_details_pack"
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "customer_segments.segment_payload_json": {
+          "distribution": {
+            "type": "structured_json_object",
+            "pack_id": "customer_segment_payload_pack"
+          },
+          "aligned_validation_rule_ids": []
+        }
+      },
+      "cross_column_constraints": [
+        {
+          "constraint_id": "lead_score_given_new",
+          "table": "leads",
+          "when": {
+            "column": "lead_status",
+            "equals": "new"
+          },
+          "then": {
+            "column": "lead_score",
+            "distribution": {
+              "type": "bucketed_int",
+              "buckets": [
+                { "min": 5, "max": 24, "weight": 0.38 },
+                { "min": 25, "max": 40, "weight": 0.42 },
+                { "min": 41, "max": 55, "weight": 0.2 }
+              ]
+            }
+          }
+        },
+        {
+          "constraint_id": "lead_score_given_contacted",
+          "table": "leads",
+          "when": {
+            "column": "lead_status",
+            "equals": "contacted"
+          },
+          "then": {
+            "column": "lead_score",
+            "distribution": {
+              "type": "bucketed_int",
+              "buckets": [
+                { "min": 20, "max": 44, "weight": 0.34 },
+                { "min": 45, "max": 64, "weight": 0.46 },
+                { "min": 65, "max": 79, "weight": 0.2 }
+              ]
+            }
+          }
+        },
+        {
+          "constraint_id": "lead_score_given_qualified",
+          "table": "leads",
+          "when": {
+            "column": "lead_status",
+            "equals": "qualified"
+          },
+          "then": {
+            "column": "lead_score",
+            "distribution": {
+              "type": "bucketed_int",
+              "buckets": [
+                { "min": 55, "max": 74, "weight": 0.34 },
+                { "min": 75, "max": 89, "weight": 0.46 },
+                { "min": 90, "max": 100, "weight": 0.2 }
+              ]
+            }
+          }
+        },
+        {
+          "constraint_id": "lead_score_given_converted",
+          "table": "leads",
+          "when": {
+            "column": "lead_status",
+            "equals": "converted"
+          },
+          "then": {
+            "column": "lead_score",
+            "distribution": {
+              "type": "bucketed_int",
+              "buckets": [
+                { "min": 70, "max": 84, "weight": 0.34 },
+                { "min": 85, "max": 94, "weight": 0.44 },
+                { "min": 95, "max": 100, "weight": 0.22 }
+              ]
+            }
+          }
+        },
+        {
+          "constraint_id": "lead_score_given_lost",
+          "table": "leads",
+          "when": {
+            "column": "lead_status",
+            "equals": "lost"
+          },
+          "then": {
+            "column": "lead_score",
+            "distribution": {
+              "type": "bucketed_int",
+              "buckets": [
+                { "min": 0, "max": 14, "weight": 0.36 },
+                { "min": 15, "max": 29, "weight": 0.42 },
+                { "min": 30, "max": 45, "weight": 0.22 }
+              ]
+            }
+          }
+        },
+        {
+          "constraint_id": "lead_score_given_recycled",
+          "table": "leads",
+          "when": {
+            "column": "lead_status",
+            "equals": "recycled"
+          },
+          "then": {
+            "column": "lead_score",
+            "distribution": {
+              "type": "bucketed_int",
+              "buckets": [
+                { "min": 25, "max": 44, "weight": 0.34 },
+                { "min": 45, "max": 64, "weight": 0.46 },
+                { "min": 65, "max": 80, "weight": 0.2 }
+              ]
+            }
+          }
+        },
+        {
+          "constraint_id": "product_interest_given_campaign_source_branch",
+          "table": "leads",
+          "when": {
+            "column": "campaign_source",
+            "equals": "branch"
+          },
+          "then": {
+            "column": "product_interest",
+            "distribution": {
+              "type": "weighted_enum",
+              "weights": {
+                "wealth": 0.3,
+                "lending": 0.24,
+                "deposit": 0.2,
+                "cards": 0.14,
+                "insurance": 0.08,
+                "other": 0.04
+              }
+            }
+          }
+        },
+        {
+          "constraint_id": "product_interest_given_campaign_source_email",
+          "table": "leads",
+          "when": {
+            "column": "campaign_source",
+            "equals": "email"
+          },
+          "then": {
+            "column": "product_interest",
+            "distribution": {
+              "type": "weighted_enum",
+              "weights": {
+                "cards": 0.28,
+                "deposit": 0.24,
+                "wealth": 0.2,
+                "lending": 0.14,
+                "insurance": 0.08,
+                "other": 0.06
+              }
+            }
+          }
+        },
+        {
+          "constraint_id": "product_interest_given_campaign_source_push",
+          "table": "leads",
+          "when": {
+            "column": "campaign_source",
+            "equals": "push"
+          },
+          "then": {
+            "column": "product_interest",
+            "distribution": {
+              "type": "weighted_enum",
+              "weights": {
+                "cards": 0.34,
+                "deposit": 0.24,
+                "wealth": 0.16,
+                "lending": 0.14,
+                "insurance": 0.06,
+                "other": 0.06
+              }
+            }
+          }
+        },
+        {
+          "constraint_id": "win_probability_given_stage_prospecting",
+          "table": "sales_opportunities",
+          "when": {
+            "column": "opportunity_stage",
+            "equals": "prospecting"
+          },
+          "then": {
+            "column": "win_probability",
+            "distribution": {
+              "type": "weighted_enum",
+              "weights": {
+                "0.10": 0.44,
+                "0.25": 0.36,
+                "0.40": 0.2
+              }
+            }
+          }
+        },
+        {
+          "constraint_id": "win_probability_given_stage_needs_analysis",
+          "table": "sales_opportunities",
+          "when": {
+            "column": "opportunity_stage",
+            "equals": "needs_analysis"
+          },
+          "then": {
+            "column": "win_probability",
+            "distribution": {
+              "type": "weighted_enum",
+              "weights": {
+                "0.25": 0.34,
+                "0.40": 0.4,
+                "0.55": 0.26
+              }
+            }
+          }
+        },
+        {
+          "constraint_id": "win_probability_given_stage_solution_presentation",
+          "table": "sales_opportunities",
+          "when": {
+            "column": "opportunity_stage",
+            "equals": "solution_presentation"
+          },
+          "then": {
+            "column": "win_probability",
+            "distribution": {
+              "type": "weighted_enum",
+              "weights": {
+                "0.40": 0.28,
+                "0.55": 0.42,
+                "0.70": 0.3
+              }
+            }
+          }
+        },
+        {
+          "constraint_id": "win_probability_given_stage_negotiation",
+          "table": "sales_opportunities",
+          "when": {
+            "column": "opportunity_stage",
+            "equals": "negotiation"
+          },
+          "then": {
+            "column": "win_probability",
+            "distribution": {
+              "type": "weighted_enum",
+              "weights": {
+                "0.55": 0.2,
+                "0.70": 0.44,
+                "0.85": 0.36
+              }
+            }
+          }
+        },
+        {
+          "constraint_id": "win_probability_given_stage_closed_won",
+          "table": "sales_opportunities",
+          "when": {
+            "column": "opportunity_stage",
+            "equals": "closed_won"
+          },
+          "then": {
+            "column": "win_probability",
+            "distribution": {
+              "type": "weighted_enum",
+              "weights": {
+                "0.70": 0.18,
+                "0.85": 0.5,
+                "0.95": 0.32
+              }
+            }
+          }
+        },
+        {
+          "constraint_id": "win_probability_given_stage_closed_lost",
+          "table": "sales_opportunities",
+          "when": {
+            "column": "opportunity_stage",
+            "equals": "closed_lost"
+          },
+          "then": {
+            "column": "win_probability",
+            "distribution": {
+              "type": "weighted_enum",
+              "weights": {
+                "0.05": 0.42,
+                "0.15": 0.4,
+                "0.25": 0.18
+              }
+            }
+          }
+        }
+      ],
+      "evaluation_baselines": {
+        "columns": {
+          "customers.age": {
+            "type": "numeric_buckets",
+            "edges": [
+              18,
+              25,
+              35,
+              45,
+              60,
+              86
+            ],
+            "probs": [
+              0.18,
+              0.24,
+              0.22,
+              0.2,
+              0.16
+            ]
+          },
+          "customers.country": {
+            "type": "categorical_probs",
+            "probs": {
+              "CN": 0.45,
+              "US": 0.2,
+              "SG": 0.12,
+              "HK": 0.13,
+              "GB": 0.1
+            }
+          },
+          "transactions.amount": {
+            "type": "numeric_buckets",
+            "edges": [
+              0,
+              1000,
+              5000,
+              20000,
+              100000,
+              1000000000
+            ],
+            "probs": [
+              0.22,
+              0.28,
+              0.24,
+              0.18,
+              0.08
+            ]
+          },
+          "transactions.currency": {
+            "type": "categorical_probs",
+            "probs": {
+              "CNY": 0.55,
+              "USD": 0.2,
+              "EUR": 0.1,
+              "SGD": 0.08,
+              "HKD": 0.07
+            }
+          }
+        }
+      }
+    },
+    "instrument_story": {
+      "description": "Instrument domain profile with asset-class and weekday market cadence.",
+      "merge_strategy_default": "prefer_schema_enum_then_semantic",
+      "columns": {
+        "instrument_masters.asset_class": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "bond": 0.42,
+              "equity": 0.36,
+              "fx": 0.14,
+              "derivative": 0.08
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "market_quote_snapshots.as_of_time": {
+          "distribution": {
+            "type": "weekday_timestamp",
+            "max_days": 45,
+            "min_minutes": 540,
+            "max_minutes": 960
+          },
+          "aligned_validation_rule_ids": []
+        }
+      },
+      "cross_column_constraints": [],
+      "evaluation_baselines": {
+        "columns": {}
+      }
+    },
+    "ledger_story": {
+      "description": "Ledger profile with conservative balance and valuation bands.",
+      "merge_strategy_default": "prefer_schema_enum_then_semantic",
+      "columns": {
+        "accounts.balance": {
+          "distribution": {
+            "type": "mixture_log_uniform_money_fx",
+            "components": [
+              {
+                "min_base": 100,
+                "max_base": 80000,
+                "weight": 0.7
+              },
+              {
+                "min_base": 80000,
+                "max_base": 2000000,
+                "weight": 0.3
+              }
+            ]
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_AMOUNT_POSITIVE"
+          ]
+        },
+        "valuation_snapshots.valuation_amount": {
+          "distribution": {
+            "type": "log_uniform_money_fx",
+            "min_base": 1000,
+            "max_base": 5000000
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_AMOUNT_POSITIVE"
+          ]
+        }
+      },
+      "cross_column_constraints": [],
+      "evaluation_baselines": {
+        "columns": {}
+      }
+    },
+    "minimal": {
+      "description": "No per-column overrides; fall back to legacy heuristics.",
+      "merge_strategy_default": "prefer_schema_enum_then_semantic",
+      "columns": {},
+      "cross_column_constraints": [],
+      "evaluation_baselines": {}
+    },
+    "party_story": {
+      "description": "Party domain profile with segment-country-age coupling.",
+      "merge_strategy_default": "prefer_schema_enum_then_semantic",
+      "columns": {},
+      "cross_column_constraints": [],
+      "evaluation_baselines": {
+        "columns": {}
+      }
+    },
+    "risk_story": {
+      "description": "Risk profile with limit/exposure scale and collateral haircut defaults.",
+      "merge_strategy_default": "prefer_schema_enum_then_semantic",
+      "columns": {
+        "risk_limits.limit_amount": {
+          "distribution": {
+            "type": "log_uniform_money_fx",
+            "min_base": 50000,
+            "max_base": 20000000
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_AMOUNT_POSITIVE"
+          ]
+        },
+        "crd_exposures.ead_amount": {
+          "distribution": {
+            "type": "log_uniform_money_fx",
+            "min_base": 5000,
+            "max_base": 15000000
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_AMOUNT_POSITIVE"
+          ]
+        },
+        "crd_exposures.overdue_days": {
+          "distribution": {
+            "type": "bucketed_int",
+            "buckets": [
+              {
+                "min": 0,
+                "max": 7,
+                "weight": 0.52
+              },
+              {
+                "min": 8,
+                "max": 30,
+                "weight": 0.28
+              },
+              {
+                "min": 31,
+                "max": 90,
+                "weight": 0.15
+              },
+              {
+                "min": 91,
+                "max": 180,
+                "weight": 0.05
+              }
+            ]
+          },
+          "aligned_validation_rule_ids": []
+        }
+      },
+      "cross_column_constraints": [],
+      "evaluation_baselines": {
+        "columns": {
+          "crd_exposures.overdue_days": {
+            "type": "numeric_buckets",
+            "edges": [
+              0,
+              8,
+              31,
+              91,
+              181
+            ],
+            "probs": [
+              0.52,
+              0.28,
+              0.15,
+              0.05
+            ]
+          }
+        }
+      }
+    },
+    "trading_story": {
+      "description": "Trading story profile aligned with order/execution semantics and hard currency rule.",
+      "merge_strategy_default": "prefer_schema_enum_then_semantic",
+      "columns": {
+        "orders.side": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "buy": 0.52,
+              "sell": 0.48
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "orders.amount": {
+          "distribution": {
+            "type": "log_uniform_money_fx",
+            "min_base": 500,
+            "max_base": 3000000
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_AMOUNT_POSITIVE"
+          ]
+        },
+        "executions.amount": {
+          "distribution": {
+            "type": "log_uniform_money_fx",
+            "min_base": 100,
+            "max_base": 1200000
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_AMOUNT_POSITIVE"
+          ]
+        },
+        "trading_accounts.currency": {
+          "distribution": {
+            "type": "uniform_from_rule_catalog",
+            "rule_id": "HARD_TRANSACTION_CURRENCY_ENUM"
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_CURRENCY_ENUM"
+          ]
+        },
+        "orders.order_time": {
+          "distribution": {
+            "type": "uniform_timestamp_days",
+            "max_days": 30,
+            "max_minutes": 720
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "executions.execution_time": {
+          "distribution": {
+            "type": "uniform_timestamp_days",
+            "max_days": 30,
+            "max_minutes": 1440
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "positions.position_amount": {
+          "distribution": {
+            "type": "log_uniform_money_fx",
+            "min_base": 1000,
+            "max_base": 5000000
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_AMOUNT_POSITIVE"
+          ]
+        }
+      },
+      "cross_column_constraints": [],
+      "evaluation_baselines": {
+        "columns": {
+          "orders.side": {
+            "type": "categorical_probs",
+            "probs": {
+              "buy": 0.52,
+              "sell": 0.48
+            }
+          },
+          "orders.amount": {
+            "type": "numeric_buckets",
+            "edges": [
+              0,
+              5000,
+              50000,
+              500000,
+              5000000,
+              10000000000
+            ],
+            "probs": [
+              0.08,
+              0.2,
+              0.34,
+              0.26,
+              0.12
+            ]
+          },
+          "executions.amount": {
+            "type": "numeric_buckets",
+            "edges": [
+              0,
+              2000,
+              20000,
+              200000,
+              2000000,
+              10000000000
+            ],
+            "probs": [
+              0.1,
+              0.22,
+              0.33,
+              0.25,
+              0.1
+            ]
+          },
+          "trading_accounts.currency": {
+            "type": "categorical_probs",
+            "probs": {
+              "USD": 0.35,
+              "CNY": 0.3,
+              "EUR": 0.15,
+              "HKD": 0.1,
+              "SGD": 0.1
+            }
+          }
+        }
+      }
+    },
+    "transaction_story": {
+      "description": "Transaction domain profile with currency-country and mixed amount regimes.",
+      "merge_strategy_default": "prefer_schema_enum_then_semantic",
+      "columns": {
+        "leads.lead_status": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "new": 0.32,
+              "contacted": 0.26,
+              "qualified": 0.18,
+              "lost": 0.1,
+              "recycled": 0.08,
+              "converted": 0.06
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "leads.campaign_source": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "web": 0.34,
+              "mobile_app": 0.18,
+              "branch": 0.16,
+              "referral": 0.14,
+              "campaign": 0.12,
+              "api": 0.06
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "leads.product_interest": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "deposit": 0.4,
+              "wealth": 0.22,
+              "loan": 0.18,
+              "card": 0.14,
+              "fx": 0.06
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "leads.lead_score": {
+          "distribution": {
+            "type": "uniform_int",
+            "min": 0,
+            "max": 100
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_LEAD_SCORE_REASONABLE_RANGE"
+          ]
+        },
+        "leads.captured_time": {
+          "distribution": {
+            "type": "weekday_timestamp",
+            "max_days": 45,
+            "min_minutes": 540,
+            "max_minutes": 1200
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "sales_opportunities.opportunity_stage": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "prospecting": 0.22,
+              "needs_analysis": 0.24,
+              "solution_presentation": 0.18,
+              "negotiation": 0.16,
+              "closed_won": 0.12,
+              "closed_lost": 0.08
+            }
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "sales_opportunities.expected_value": {
+          "distribution": {
+            "type": "mixture_log_uniform_money_fx",
+            "components": [
+              {
+                "min_base": 5000,
+                "max_base": 50000,
+                "weight": 0.42
+              },
+              {
+                "min_base": 50000,
+                "max_base": 500000,
+                "weight": 0.4
+              },
+              {
+                "min_base": 500000,
+                "max_base": 20000000,
+                "weight": 0.18
+              }
+            ]
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_OPPORTUNITY_VALUE_POSITIVE"
+          ]
+        },
+        "sales_opportunities.win_probability": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "0.15": 0.12,
+              "0.30": 0.2,
+              "0.45": 0.28,
+              "0.60": 0.24,
+              "0.75": 0.12,
+              "0.90": 0.04
+            }
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_OPPORTUNITY_WIN_PROBABILITY_RANGE"
+          ]
+        },
+        "sales_opportunities.expected_close_date": {
+          "distribution": {
+            "type": "uniform_timestamp_days",
+            "max_days": 120,
+            "max_minutes": 600
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "transactions.transaction_time": {
+          "distribution": {
+            "type": "weekday_timestamp",
+            "max_days": 30,
+            "min_minutes": 480,
+            "max_minutes": 1200
+          },
+          "aligned_validation_rule_ids": []
+        },
+        "transactions.channel": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "mobile_app": 0.36,
+              "web": 0.24,
+              "branch": 0.16,
+              "atm": 0.14,
+              "call_center": 0.1
+            }
+          },
+          "aligned_validation_rule_ids": []
+        }
+      },
+      "cross_column_constraints": [],
+      "evaluation_baselines": {
+        "columns": {
+          "leads.lead_status": {
+            "type": "categorical_probs",
+            "probs": {
+              "new": 0.32,
+              "contacted": 0.26,
+              "qualified": 0.18,
+              "lost": 0.1,
+              "recycled": 0.08,
+              "converted": 0.06
+            }
+          },
+          "leads.campaign_source": {
+            "type": "categorical_probs",
+            "probs": {
+              "web": 0.34,
+              "mobile_app": 0.18,
+              "branch": 0.16,
+              "referral": 0.14,
+              "campaign": 0.12,
+              "api": 0.06
+            }
+          },
+          "leads.product_interest": {
+            "type": "categorical_probs",
+            "probs": {
+              "deposit": 0.4,
+              "wealth": 0.22,
+              "loan": 0.18,
+              "card": 0.14,
+              "fx": 0.06
+            }
+          },
+          "leads.lead_score": {
+            "type": "numeric_buckets",
+            "edges": [
+              0,
+              20,
+              40,
+              60,
+              80,
+              101
+            ],
+            "probs": [
+              0.16,
+              0.24,
+              0.26,
+              0.2,
+              0.14
+            ]
+          },
+          "sales_opportunities.opportunity_stage": {
+            "type": "categorical_probs",
+            "probs": {
+              "prospecting": 0.22,
+              "needs_analysis": 0.24,
+              "solution_presentation": 0.18,
+              "negotiation": 0.16,
+              "closed_won": 0.12,
+              "closed_lost": 0.08
+            }
+          },
+          "sales_opportunities.expected_value": {
+            "type": "numeric_buckets",
+            "edges": [
+              0,
+              50000,
+              200000,
+              1000000,
+              5000000,
+              50000000
+            ],
+            "probs": [
+              0.12,
+              0.26,
+              0.3,
+              0.2,
+              0.12
+            ]
+          },
+          "sales_opportunities.win_probability": {
+            "type": "numeric_buckets",
+            "edges": [
+              0,
+              0.2,
+              0.4,
+              0.6,
+              0.8,
+              1.01
+            ],
+            "probs": [
+              0.2,
+              0.24,
+              0.24,
+              0.2,
+              0.12
+            ]
+          },
+          "transactions.channel": {
+            "type": "categorical_probs",
+            "probs": {
+              "mobile_app": 0.36,
+              "web": 0.24,
+              "branch": 0.16,
+              "atm": 0.14,
+              "call_center": 0.1
+            }
+          }
+        }
+      }
+    },
+    "treasury_story": {
+      "description": "Treasury profile with funding tenor and bucket flow gradients.",
+      "merge_strategy_default": "prefer_schema_enum_then_semantic",
+      "columns": {
+        "funding_deals.currency": {
+          "distribution": {
+            "type": "weighted_enum",
+            "weights": {
+              "USD": 0.34,
+              "CNY": 0.3,
+              "EUR": 0.14,
+              "HKD": 0.12,
+              "SGD": 0.1
+            }
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_CURRENCY_ENUM"
+          ]
+        },
+        "funding_deals.amount": {
+          "distribution": {
+            "type": "mixture_log_uniform_money_fx",
+            "components": [
+              {
+                "min_base": 50000,
+                "max_base": 3000000,
+                "weight": 0.65
+              },
+              {
+                "min_base": 3000000,
+                "max_base": 30000000,
+                "weight": 0.35
+              }
+            ]
+          },
+          "aligned_validation_rule_ids": [
+            "HARD_TRANSACTION_AMOUNT_POSITIVE"
+          ]
+        }
+      },
+      "cross_column_constraints": [],
+      "evaluation_baselines": {
+        "columns": {}
+      }
+    }
+  }
+}

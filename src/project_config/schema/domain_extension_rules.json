@@ -1,0 +1,131 @@
+{
+  "description": "When initial concept hits satisfy when_matched_contains_all, append append_concepts (must exist in concepts.json). Expresses typical banking satellites and dependent facts not always named in a short scenario sentence.",
+  "rules": [
+    {
+      "id": "servicing_case_when_interaction_signal",
+      "when_matched_contains_all": ["customer", "customer_interaction"],
+      "append_concepts": ["servicing_case"],
+      "business_rationale": "Structured case/ticket records (SLA, status) complement free-form interaction logs for CRM servicing and complaint handling."
+    },
+    {
+      "id": "exposure_when_credit_facility",
+      "when_matched_contains_all": ["obligor", "facility"],
+      "append_concepts": ["exposure"],
+      "business_rationale": "Measured exposure is only appended when both obligor and facility are present, reducing single-keyword credit over-inference."
+    },
+    {
+      "id": "execution_when_order_and_trading_account",
+      "when_matched_contains_all": ["order", "trading_account"],
+      "append_concepts": ["execution"],
+      "business_rationale": "Orders are intent; fills/executions are market facts. Schema completeness usually requires both for brokerage and best-execution audit."
+    },
+    {
+      "id": "position_when_execution_present",
+      "when_matched_contains_all": ["trading_account", "order", "execution"],
+      "append_concepts": ["position"],
+      "business_rationale": "Position state is appended only after full account-order-execution chain is present."
+    },
+    {
+      "id": "relationship_assignment_when_customer_and_employee",
+      "when_matched_contains_all": ["customer", "employee"],
+      "append_concepts": ["relationship_assignment"],
+      "business_rationale": "When both party master and bank staff exist in scope, RM coverage is usually modeled as an assignment row (primary/secondary RM), not only embedded text on the customer."
+    },
+    {
+      "id": "investment_holding_when_customer_account_and_product",
+      "when_matched_contains_all": ["customer", "account", "bank_product"],
+      "append_concepts": ["investment_holding"],
+      "business_rationale": "AUM/holding lines for private banking stories attach to accounts and products; positions are separate facts from account balance snapshots."
+    },
+    {
+      "id": "consent_record_when_kyc_case_present",
+      "when_matched_contains_all": ["customer", "kyc_case"],
+      "append_concepts": ["consent_record"],
+      "business_rationale": "CDD/EDD cases in regulated CRM typically pair with consent and purpose-of-use records for GDPR/privacy programs."
+    },
+    {
+      "id": "audit_log_when_customer_and_consent_record",
+      "when_matched_contains_all": ["customer", "consent_record"],
+      "append_concepts": ["audit_log"],
+      "business_rationale": "Consent changes are auditable events; an immutable audit row store supports lineage queries alongside consent snapshots."
+    },
+    {
+      "id": "pipeline_tasks_when_opportunity_account_customer",
+      "when_matched_contains_all": ["customer", "account", "sales_opportunity"],
+      "append_concepts": ["client_task", "customer_entitlement"],
+      "business_rationale": "Pipeline plus onboarded account (deepening stage) typically carries RM tasks and tier entitlements in private banking CRM."
+    },
+    {
+      "id": "regulatory_submission_when_sanctions_screening_present",
+      "when_matched_contains_all": ["customer", "sanctions_screening"],
+      "append_concepts": ["regulatory_submission"],
+      "business_rationale": "Screening outcomes in AML programs often feed STR/large-txn regulatory submissions as separate submission rows."
+    },
+    {
+      "id": "drawdown_event_when_facility_and_exposure",
+      "when_matched_contains_all": ["obligor", "facility", "exposure"],
+      "append_concepts": ["drawdown_event"],
+      "business_rationale": "Facility utilization is captured as drawdown events once exposure tracking exists."
+    },
+    {
+      "id": "repayment_event_when_drawdown_present",
+      "when_matched_contains_all": ["facility", "exposure", "drawdown_event"],
+      "append_concepts": ["repayment_event"],
+      "business_rationale": "Repayment events complement drawdown lifecycle to support balance replay."
+    },
+    {
+      "id": "market_quote_snapshot_when_instrument_master_present",
+      "when_matched_contains_all": ["instrument_master"],
+      "append_concepts": ["market_quote_snapshot"],
+      "business_rationale": "Instrument master in scope usually needs at least one quote snapshot for valuation linkage."
+    },
+    {
+      "id": "yield_curve_point_when_instrument_and_quote_present",
+      "when_matched_contains_all": ["instrument_master", "market_quote_snapshot"],
+      "append_concepts": ["yield_curve_point"],
+      "business_rationale": "Curve points are added after instrument and quote context to keep instrument inference incremental."
+    },
+    {
+      "id": "trading_calendar_when_instrument_master_present",
+      "when_matched_contains_all": ["instrument_master"],
+      "append_concepts": ["trading_calendar"],
+      "business_rationale": "Instrument master records typically require calendar linkage for trading and settlement day semantics."
+    },
+    {
+      "id": "corporate_action_when_instrument_and_calendar_present",
+      "when_matched_contains_all": ["instrument_master", "trading_calendar"],
+      "append_concepts": ["corporate_action_event"],
+      "business_rationale": "Corporate action events are modeled after instrument and calendar context are established."
+    },
+    {
+      "id": "cashflow_ladder_when_funding_deal_present",
+      "when_matched_contains_all": ["funding_deal", "ftp_curve"],
+      "append_concepts": ["cashflow_ladder_point"],
+      "business_rationale": "Ladder points are appended when funding deals are in scope together with FTP context, reducing broad treasury auto-expansion."
+    },
+    {
+      "id": "liquidity_bucket_when_cashflow_ladder_present",
+      "when_matched_contains_all": ["cashflow_ladder_point", "funding_deal"],
+      "append_concepts": ["liquidity_bucket_snapshot"],
+      "business_rationale": "Liquidity monitoring snapshots are built on top of ladderized cashflow points."
+    },
+    {
+      "id": "funding_deal_when_ftp_curve_present",
+      "when_matched_contains_all": ["ftp_curve"],
+      "append_concepts": ["funding_deal"],
+      "business_rationale": "Transfer-pricing curve context is tied to underlying treasury funding deals."
+    },
+    {
+      "id": "hqla_inventory_when_liquidity_snapshot_present",
+      "when_matched_contains_all": ["liquidity_bucket_snapshot"],
+      "append_concepts": ["hqla_inventory"],
+      "business_rationale": "Liquidity metric snapshots commonly map to HQLA inventory details for governance views."
+    },
+    {
+      "id": "funding_concentration_when_funding_deal_present",
+      "when_matched_contains_all": ["funding_deal", "ftp_curve"],
+      "append_concepts": ["funding_concentration_snapshot"],
+      "business_rationale": "Funding concentration monitoring is appended when core funding and FTP context are both present."
+    }
+  ]
+}

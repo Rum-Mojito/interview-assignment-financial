@@ -1,0 +1,1 @@
+The wholesale credit data mart links each obligor to committed facilities and measured exposure; drawdown and repayment events are stored for limit and capital monitoring.
