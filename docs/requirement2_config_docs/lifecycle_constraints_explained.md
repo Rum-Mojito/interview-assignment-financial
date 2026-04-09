@@ -32,9 +32,11 @@
 ## `state_machine_rules`
 
 ### 作用
+
 约束某个实体（如一个 `account_id`）在时间序列上的状态演进，只能走 `allowed_transitions` 定义的边。
 
 ### 关键字段
+
 - `rule_id`: 规则唯一标识（建议稳定不变）  
 - `table_name`: 作用表
 - `entity_key_columns`: 实体主键（可组合键）
@@ -45,6 +47,7 @@
 - `allowed_transitions`: 状态机边（from -> [to...]）
 
 ### 典型场景
+
 - 账户状态：`open -> pending -> active -> dormant/frozen -> closed`
 - 线索状态：`new/contacted -> qualified -> converted/lost`
 - KYC case 生命周期、服务工单生命周期、预约状态生命周期。
@@ -54,9 +57,11 @@
 ## `temporal_order_rules`
 
 ### 作用
+
 校验同一行内两个时间列的先后关系（`<=` 或 `<`）。
 
 ### 关键字段
+
 - `table_name`
 - `constraints`（数组）：
   - `left_column`
@@ -65,6 +70,7 @@
   - `apply_when_column` + `apply_when_in`（可选，条件生效）
 
 ### 典型场景
+
 - `opened_time <= event_time`
 - `case_opened_time <= case_closed_time`
 - 仅在机会关闭阶段时，要求 `expected_close_date <= actual_close_time`。
@@ -74,15 +80,18 @@
 ## `cross_table_temporal_rules`
 
 ### 作用
+
 约束跨表父子/前后事件的时间先后关系（例如订单先于执行）。
 
 ### 关键字段
+
 - `left_table_name` / `right_table_name`
 - `left_key_columns` / `right_foreign_key_columns`（长度必须一致）
 - `left_time_column` / `right_time_column`
 - `operator`（`<=` 或 `<`）
 
 ### 典型场景
+
 - `orders.order_time <= executions.execution_time`
 - `accounts.opened_time <= transactions.transaction_time`
 - `accounts.opened_time <= account_status_scd.status_time`。
@@ -92,6 +101,7 @@
 ## `business_conservation_rules`
 
 ### 作用
+
 表达非纯时序的业务硬约束，当前支持 7 种 `type`：
 
 - `intra_row_numeric_compare`  
@@ -110,6 +120,7 @@
   - 子状态受父表 JSON 字段值约束（通过 `parent_json_path` 读取）
 
 ### 典型场景
+
 - 授信额度与提款累计一致性；
 - SCD current 行唯一性 + 最新性；
 - “账户 open/active 需客户 KYC=VERIFIED”。
@@ -119,6 +130,7 @@
 ## 4. 运行时怎么生效（生成 vs 校验）
 
 ## 4.1 生成阶段（修正）
+
 在 `src/synth/generator.py` 的 `_apply_lifecycle_constraints_for_generation` 里依次应用四类规则：
 
 - temporal -> cross-table temporal -> state machine -> business conservation
@@ -135,6 +147,7 @@
 也就是说，`business_conservation_rules` 的其余类型目前在生成阶段**不自动修正**，主要靠校验阶段兜底发现问题。
 
 ## 4.2 校验阶段（判定）
+
 在 `src/validation/rule_engine.py` 的 `_evaluate_lifecycle_constraints` 中，四类规则都会被完整评估：
 
 - 统计 `hard_checks_total` / `hard_checks_failed`
