@@ -1,4 +1,4 @@
-# Requirement2 清单 - `r2_customer_lead_opportunity_account_txn_scd.sql`
+# Requirement 2：金融业务贴合策略与规则清单（CRM 生命周期 + SCD）
 
 > 目标 schema：`examples/test_schemas/r2_customer_lead_opportunity_account_txn_scd.sql`  
 > 当前仓库说明：Streamlit 默认引用了这个路径；对应优化逻辑落在 `src/project_config/**` 与 `src/synth/generator.py`。

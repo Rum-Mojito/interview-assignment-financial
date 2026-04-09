@@ -138,7 +138,7 @@
 
 ---
 
-## 5. 串起来的一小段「故事」（对应上面文件）
+## 5. 串起来的一小段「故事」
 
 1. **`concepts` + 别名** 从话里捞出 `customer`、`account`、`transaction`。  
 2. **`concept_relation_graph`** 闭包补齐父概念，避免断链。  

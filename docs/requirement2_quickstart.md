@@ -45,7 +45,7 @@
 
 **入口编排**（`src/interfaces/cli_synth.py` 的 `run_requirement2()`）只做：解析 Schema → 规划表顺序 → 表→概念→拓扑 → `generate_dataset` → 写 CSV；**业务策略由上述 JSON 注入**，代码不承载具体银行条款。
 
-下面按 **流水线顺序**，对 **每个关键配置文件** 给一个 **mini 用例**，帮助把 workflow 串起来（路径均相对于 `src/project_config/`）。
+以下为按 **流水线顺序**，对 **每个关键配置文件** 给一个 **mini 用例**，帮助把 workflow 串起来（路径均相对于 `src/project_config/`）。
 
 ---
 
@@ -140,7 +140,7 @@
 
 ---
 
-## 5. 串起来的一小段「故事」（对应上面文件）
+## 5. 串起来的一小段「故事」
 
 1. 表名对上 `**concepts`** → 选中 `**crm_deposit_graph**` 拓扑与 `**party_deposit_ledger**` 基数。
 2. `**manifest**` 选定列语义 profile；`**column_profiles_unified**` 决定金额/时间形态。
@@ -151,7 +151,7 @@
 
 ---
 
-## 6. 配置驱动的业务落地示例（摘自 `requirement2_config_driven_business_guide` §4）
+## 6. 配置驱动的业务落地示例
 
 **示例目标**：让「中国零售储蓄账户」场景下，交易 **更偏向人民币**，且金额 **偏小额长尾**。
 
@@ -166,7 +166,7 @@
 
 ---
 
-## 7. 工程取舍与可迁移价值（摘自 `requirement2_config_driven_business_guide` §6–7，摘要）
+## 7. 工程取舍与可迁移价值
 
 **取舍**
 
@@ -196,8 +196,6 @@
 | CLI    | `python -m src.interfaces.cli_synth`                |
 | Web    | `src/interfaces/streamlit_app.py`（R2 页）             |
 | 生成核心   | `src/synth/generator.py`                            |
-| 配置驱动长文 | `docs/requirement2_config_driven_business_guide.md` |
-| 总体设计   | `docs/data_synthesizer_design.md` §3.2              |
 
 
 执行入口示例：
@@ -206,11 +204,8 @@
 python -m src.interfaces.cli_synth \
   --schema-path requirement/sample_schema.sql \
   --output-dir outputs \
-  --record-count 500 \
+  --record-count 100 \
   --seed 42
 ```
-
-可选：`--graph-path-id` 与 `synth/topology/generation_topology.json` 中 `path_id` 对齐。
-
 ---
 
